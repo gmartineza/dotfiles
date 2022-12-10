@@ -4,31 +4,35 @@ local vnoremap = require("gmartineza.keymap").vnoremap
 local nmap = require("gmartineza.keymap").nmap
 local xnoremap = require("gmartineza.keymap").xnoremap
 
-nnoremap("<leader>e", "<cmd>Le<CR>")
-
---heresy
+-- Heressy
 inoremap("<C-c>", "<ESC>")
 
+-- Explorer
+nnoremap("<leader>e", "<cmd>Ex<CR>jj")
+nnoremap("<leader>c", "<cmd>Ex ~/.config/nvim<CR>jj")
+
+-- Buffer remaps
 nnoremap('<leader>bD','<cmd>%bdelete|edit #|normal `"<CR>')
-nnoremap("<leader>i","<cmd>bn<CR>")
-nnoremap("<leader>o","<cmd>bp<CR>")
-nnoremap("<leader>l","<cmd>ls<CR>")
+nnoremap("<leader>bi","<cmd>bn<CR>")
+nnoremap("<leader>bo","<cmd>bp<CR>")
+nnoremap("<leader>bl",":ls<CR>:b ")
 
 nnoremap("<C-h>","<C-w>h")
 nnoremap("<C-j>","<C-w>j")
 nnoremap("<C-k>","<C-w>k")
 nnoremap("<C-l>","<C-w>l")
 
-nnoremap("<leader>f",":find ")
+-- Find files
+nnoremap("<C-f>",":find ")
 
-nnoremap("<leader>r+",":w|!g++ %<CR>:term ./a.out")
-nnoremap("<leader>r.", ":w|so %")
+-- Run files
+nnoremap("<leader>r.", "<cmd>w|so %<CR>")
 
--- Prime's greatest remaps ever
-nnoremap("<leader>p", "\"*p")
-vnoremap("<leader>p", "\"*p")
-nnoremap("<leader>P", "\"*P")
-vnoremap("<leader>P", "\"*P")
+-- Prime's greatest remaps ever(disambiguation of yank and clipboard)
+--nnoremap("<leader>p", "\"_p")
+vnoremap("<leader>p", '"0P')
+xnoremap("<leader>p", '"0P')
+--nnoremap("<leader>P", "\"_P")
 
 nnoremap("<leader>y", "\"+y")
 vnoremap("<leader>y", "\"+y")
