@@ -9,7 +9,6 @@
     "workbench.startupEditor": "none",
     "window.menuBarVisibility": "compact",
     "workbench.layoutControl.enabled": false,
-    "window.commandCenter": true,
     "workbench.colorTheme": "Gruvbox Material Dark",
     "vim.leader": "<space>",
     "vim.visualModeKeyBindingsNonRecursive": [
@@ -62,5 +61,9 @@
     ],
     "breadcrumbs.enabled": false,
     "editor.scrollbar.horizontal": "hidden",
-    "editor.scrollbar.verticalScrollbarSize": 0
+    "editor.scrollbar.verticalScrollbarSize": 0,
+    "editor.quickSuggestions": {
+        "other": "off"
+    },
+    "editor.suggestOnTriggerCharacters": false
 }
