@@ -1,0 +1,66 @@
+{
+    "redhat.telemetry.enabled": false,
+    "editor.minimap.enabled": false,
+    "editor.lineNumbers": "relative",
+    "workbench.activityBar.visible": false,
+    "editor.hideCursorInOverviewRuler": true,
+    "editor.overviewRulerBorder": false,
+    "editor.occurrencesHighlight": false,
+    "workbench.startupEditor": "none",
+    "window.menuBarVisibility": "compact",
+    "workbench.layoutControl.enabled": false,
+    "window.commandCenter": true,
+    "workbench.colorTheme": "Gruvbox Material Dark",
+    "vim.leader": "<space>",
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+        "before": ["<leader>", "p"],
+        "after": ["\"","_", "d", "P"]
+        },
+        {
+        "before": ["<leader>", "y"],
+        "after": ["\"","*", "y"]
+        },
+        {
+        "before": ["<leader>", "d"],
+        "after": ["\"","_", "d", "d"]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+        "before": ["<leader>", "y"],
+        "after": ["\"","*", "y"]
+        },
+        {
+        "before": ["<leader>", "Y"],
+        "after": ["\"","*", "Y"]
+        },
+        {
+        "before": ["<leader>", "d"],
+        "after": ["\"","_", "d"]
+        },
+        {
+            "before": ["<C-d>"],
+            "after": ["<C-d>", "z", "z"]
+        },
+        {
+            "before": ["<C-u>"],
+            "after": ["<C-u>", "z", "z"]
+        },
+        {
+            "before": ["<C-d>"],
+            "after": ["<C-d>", "z", "z"]
+        },
+        {
+            "before": ["n"],
+            "after": ["n", "z", "z", "z", "v"]
+        },
+        {
+            "before": ["N"],
+            "after": ["N", "z", "z", "z", "v"]
+        }
+    ],
+    "breadcrumbs.enabled": false,
+    "editor.scrollbar.horizontal": "hidden",
+    "editor.scrollbar.verticalScrollbarSize": 0
+}
