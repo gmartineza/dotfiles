@@ -47,12 +47,22 @@
         "after": ["\"","_", "d"]
         }
     ],
-    "breadcrumbs.enabled": false,
     "editor.scrollbar.horizontal": "hidden",
     "editor.scrollbar.verticalScrollbarSize": 0,
-    "editor.quickSuggestions": {
-        "other": "off"
-    },
     "editor.suggestOnTriggerCharacters": false,
-    "workbench.layoutControl.enabled": false
+    "workbench.layoutControl.enabled": false,
+    "editor.quickSuggestions": {
+        "other": "inline"
+    },
+    "editor.wordWrap": "on",
+    "breadcrumbs.enabled": false,
+    "vim.normalModeKeyBindings": [
+        {
+            "before": ["g", "r"],
+            "commands": [
+                "editor.action.rename",
+            ],
+            "silent": true
+        }
+    ]
 }
