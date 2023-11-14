@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 vim.g.mapleader=' '
-=======
+
 -- Sets
 vim.cmd.set('path+=**')
 vim.o.number = true
@@ -17,7 +16,6 @@ vim.o.smartcase = true
 vim.o.termguicolors = true
 vim.o.scrolloff = 1
 vim.o.wrap = false
->>>>>>> ca2d5ab (update vim configs)
 
 -- Netrw
 vim.g.netrw_banner = 0
@@ -144,7 +142,7 @@ vim.keymap.set('n', '<leader>n', vim.cmd.cnext, {silent = true})--          Find
 vim.keymap.set('n', '<leader>N', vim.cmd.cprevious, {silent = true})--      Find previous grep match
 vim.keymap.set('i', '<c-c>', '<esc>')--                                     Ctrl+c > Esc > Ctrl+[
 vim.keymap.set('n', '<c-s>', vim.cmd.write, {silent = true})--              Ctrl+s > :w
-=======
+
  require('lspconfig').lua_ls.setup{settings={Lua={diagnostics={globals={'vim'}}}}}
 
  local mark = require("harpoon.mark")
@@ -159,4 +157,3 @@ vim.keymap.set('n', '<c-s>', vim.cmd.write, {silent = true})--              Ctrl
 
 require('Comment').setup()
 --]]
->>>>>>> ca2d5ab (update vim configs)
