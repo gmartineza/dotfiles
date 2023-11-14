@@ -1,5 +1,40 @@
+<<<<<<< HEAD
 vim.g.mapleader=' '
+=======
+-- Sets
+vim.cmd.set('path+=**')
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.tabstop = 4
+vim.o.softtabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
+vim.o.smartindent = true
+vim.o.swapfile = false
+vim.o.hlsearch = false
+vim.o.ignorecase = true
+vim.o.smartcase = true
+vim.o.termguicolors = true
+vim.o.scrolloff = 1
+vim.o.wrap = false
+>>>>>>> ca2d5ab (update vim configs)
 
+-- Netrw
+vim.g.netrw_banner = 0
+
+-- Remaps
+vim.g.mapleader=' '
+vim.keymap.set('n', '<leader>e', ':Lex<cr>j', {silent = true})--            Open explorer (Netrw)   
+vim.keymap.set('n', '<leader>,', ':e $MYVIMRC<cr>', {silent = true})--      Edit config
+vim.keymap.set('n', '<leader>f', ':find ')--                                Find files in cwd
+vim.keymap.set('n', '<leader>g',':vimgrep // **<left><left><left><left>')-- Find word in files in cwd recursively
+vim.keymap.set('n', '<leader>n', vim.cmd.cnext, {silent = true})--          Find next grep match
+vim.keymap.set('n', '<leader>N', vim.cmd.cprevious, {silent = true})--      Find previous grep match
+vim.keymap.set('n', '<leader>t', ':terminal<cr>', {silent = true})--        Open an integrated terminal
+vim.keymap.set('i', '<c-c>', '<esc>')--                                     Ctrl+c > Esc > Ctrl+[
+vim.keymap.set('n', '<c-s>', vim.cmd.write, {silent = true})--              Ctrl+s > :w
+
+--[[
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -61,6 +96,7 @@ require('mason-lspconfig').setup({
   },
 })
 
+<<<<<<< HEAD
 -- require('lspconfig').lua_ls.setup{settings={Lua={diagnostics={globals={'vim'}}}}}
 --
 -- local mark = require("harpoon.mark")
@@ -108,3 +144,19 @@ vim.keymap.set('n', '<leader>n', vim.cmd.cnext, {silent = true})--          Find
 vim.keymap.set('n', '<leader>N', vim.cmd.cprevious, {silent = true})--      Find previous grep match
 vim.keymap.set('i', '<c-c>', '<esc>')--                                     Ctrl+c > Esc > Ctrl+[
 vim.keymap.set('n', '<c-s>', vim.cmd.write, {silent = true})--              Ctrl+s > :w
+=======
+ require('lspconfig').lua_ls.setup{settings={Lua={diagnostics={globals={'vim'}}}}}
+
+ local mark = require("harpoon.mark")
+ local ui = require("harpoon.ui")
+
+ vim.keymap.set("n", "<leader>h", mark.add_file)
+ vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
+ vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
+ vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end)
+ vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end)
+ vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end)
+
+require('Comment').setup()
+--]]
+>>>>>>> ca2d5ab (update vim configs)
