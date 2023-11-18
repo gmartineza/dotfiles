@@ -22,7 +22,7 @@ vim.g.netrw_banner = 0
 
 -- Remaps
 vim.g.mapleader=' '
-vim.keymap.set('n', '<leader>e', ':Lex<cr>j', {silent = true})--            Open explorer (Netrw)   
+vim.keymap.set('n', '<leader>e', ':Ex<cr>j', {silent = true})--            Open explorer (Netrw)   
 vim.keymap.set('n', '<leader>,', ':e $MYVIMRC<cr>', {silent = true})--      Edit config
 vim.keymap.set('n', '<leader>f', ':find ')--                                Find files in cwd
 vim.keymap.set('n', '<leader>g',':vimgrep // **<left><left><left><left>')-- Find word in files in cwd recursively
@@ -31,6 +31,14 @@ vim.keymap.set('n', '<leader>N', vim.cmd.cprevious, {silent = true})--      Find
 vim.keymap.set('n', '<leader>t', ':terminal<cr>', {silent = true})--        Open an integrated terminal
 vim.keymap.set('i', '<c-c>', '<esc>')--                                     Ctrl+c > Esc > Ctrl+[
 vim.keymap.set('n', '<c-s>', vim.cmd.write, {silent = true})--              Ctrl+s > :w
+vim.keymap.set('n', '<leader>p', '"*P')
+vim.keymap.set('n', '<leader>y', '"*y')
+vim.keymap.set('n', '<leader>Y', '"*Y')
+vim.keymap.set('n', '<leader>d', '"_d')
+vim.keymap.set('n', 'n', 'nzz')
+vim.keymap.set('n', 'N', 'Nzz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
 
 --[[
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

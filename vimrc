@@ -38,12 +38,11 @@ nnoremap <LEADER>N :cprevious<CR>
 nnoremap <LEADER>t :terminal<CR>
 inoremap <C-c> <Esc>
 nnoremap <C-s> :w<CR>
-"noremap <leader>p "*P
-"noremap <leader>y "*y
-"nnoremap <leader>Y "*Y
-"noremap <leader>d "_d
-"nnoremap n nzz
-"nnoremap N Nzz
-"nnoremap <C-u> <C-u>zz
-"nnoremap <C-d> <C-d>zz
-
+noremap <leader>p "*P
+noremap <leader>y "*y
+nnoremap <leader>Y "*Y
+noremap <leader>d "_d
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap <C-u> <C-u>zz
+nnoremap <C-d> <C-d>zz
