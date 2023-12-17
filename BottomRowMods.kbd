@@ -1,0 +1,25 @@
+(defcfg
+	input (low-level-hook)
+	output (send-event-sink)
+	fallthrough true
+)
+
+(defsrc
+	; q j k x b m w v z
+)
+
+(defalias
+	home_; (tap-hold-next-release 200 ; lmet)
+	home_q (tap-hold-next-release 200 q lalt)
+	home_j (tap-hold-next-release 200 j lsft)
+	home_k (tap-hold-next-release 200 k lctl)
+
+	home_m (tap-hold-next-release 200 m rctl)
+	home_w (tap-hold-next-release 200 w rsft)
+	home_v (tap-hold-next-release 200 v lalt)
+	home_z (tap-hold-next-release 200 z rmet)
+)
+
+(deflayer bottomrowmods
+	@home_; @home_q @home_j @home_k x b @home_m @home_w @home_v @home_z
+)
