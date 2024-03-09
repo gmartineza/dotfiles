@@ -3,10 +3,6 @@ vim.g.maplocalleader = " "
 
 -- [[ Setting options ]]
 
-vim.cmd.colorscheme[[slate]]
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-
 vim.opt.number = true
 vim.opt.relativenumber = true
 
@@ -66,6 +62,8 @@ vim.opt.rtp:prepend(lazypath)
 -- [[ Configure and install plugins ]]
 
 require("lazy").setup({
+  { "akinsho/horizon.nvim", version = "*" },
+
 	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 
 	-- Use `opts = {}` to force a plugin to be loaded.
@@ -522,6 +520,13 @@ require("lazy").setup({
 	--    For additional information see: :help lazy.nvim-lazy.nvim-structuring-your-plugins
 	-- { import = 'custom.plugins' },
 })
+
+-- [[ Setting colorscheme ]]
+
+vim.opt.termguicolors = true
+vim.cmd.colorscheme('horizon')
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
