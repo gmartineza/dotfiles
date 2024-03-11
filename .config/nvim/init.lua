@@ -16,7 +16,6 @@ vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
 
 vim.opt.splitright = true
-vim.opt.splitbelow = true
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = "split"
@@ -25,7 +24,7 @@ vim.opt.cursorline = true
 
 vim.opt.scrolloff = 2
 
--- [[ Basic Keymaps ]]
+-- [[ Basic Keymaps/mappings ]]
 
 vim.keymap.set("n", "<leader>.", "<cmd>e $MYVIMRC<CR>", { desc = "Open init.lua" })
 vim.keymap.set("n", "<leader>e", "<cmd>Explore<CR>", { desc = "Open file explorer (netrw)" })
@@ -49,6 +48,10 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
+vim.keymap.set("n", "<leader>y", "\"+y")
+vim.keymap.set("v", "<leader>y", "\"+y")
+vim.keymap.set("n", "<leader>Y", "\"+Y")
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -64,7 +67,16 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   { "akinsho/horizon.nvim", version = "*" },
 
-	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
+  { "ggandor/leap.nvim",
+    dependencies = {
+      "tpope/vim-repeat",
+    },
+    config = function()
+      vim.keymap.set('n', 's', function ()
+        require('leap').leap { target_windows = { vim.api.nvim_get_current_win() } }
+      end)
+    end
+  },
 
 	-- Use `opts = {}` to force a plugin to be loaded.
 	--
@@ -473,9 +485,6 @@ require("lazy").setup({
 			})
 		end,
 	},
-
-	-- Highlight todo, notes, etc in comments
-	{ "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = { signs = false } },
 
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
