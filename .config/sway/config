@@ -32,22 +32,26 @@ set $menu dmenu_path | wmenu | xargs swaymsg exec --
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
 ### Idle configuration
-#
 # Example configuration:
-#
-exec swayidle -w \
-         timeout 300 'swaylock -f -c f3f3f3' \
-         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep 'swaylock -f -c f3f3f3'
-#
+# exec swayidle -w \
+# 	timeout 300 'swaylock -f -c 000000' \
+# 	timeout 600 'swaymsg "output * dpms off"' \
+# 		resume 'swaymsg "output * dpms on"' \
+# 	before-seep 'swaylock -f -c 000000'
+
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
+exec swayidle -w \
+	timeout 600 'swaymsg "output * dpms off"' \
+		resume 'swaymsg "output * dpms on"' \
+	before-seep 'swaylock -f -c 3f3f3f'
+
 ### Input configuration
-#
+
 # Example configuration:
-#
+
   input "type:touchpad" {
       dwt enabled
       tap enabled
@@ -75,9 +79,12 @@ exec swayidle -w \
 
     # Kill focused window
     bindsym $mod+q kill
+    bindsym $mod+x kill
+    bindsym Mod1+F4 kill
 
     # Start your launcher
-    bindsym $mod+d exec $menu
+    # bindsym $mod+d exec $menu
+    bindsym $mod+d exec wofi --gkt-dark --show drun
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -92,16 +99,19 @@ exec swayidle -w \
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 
-    bindsym --locked XF86MonBrightnessUp exec light -T 1.4
-    bindsym --locked XF86MonBrightnessDown exec light -T 0.72
+    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+    bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+    bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+    bindsym XF86AudioPlay exec playerctl play-pause
+    bindsym XF86AudioNext exec playerctl next
+    bindsym XF86AudioPrev exec playerctl previous
 
-    bindsym $mod+F3 exec systemctl suspend
-    bindsym $mod+F4 exec poweroff 
-    bindsym $mod+F5 exec systemctl reboot
-
-    bindsym XF86AudioRaiseVolume exec pamixer -ui 5
-    bindsym XF86AudioLowerVolume exec pamixer -ud 5
-    bindsym XF86AudioMute exec pamixer --toggle-mute
+    bindsym $mod+F3 exec loginctl suspend
+    bindsym $mod+F4 exec loginctl poweroff 
+    bindsym $mod+F5 exec loginctl reboot
 
 # Moving around:
 #
@@ -221,24 +231,29 @@ bindsym $mod+r mode "resize"
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
-
+    mode hide
 # When the status_command prints a new line to stdout, swaybar updates.
 # The default just shows the current date and time.
-        # status_command while date +'%Y-%m-%d %H:%M'; do sleep 1; done
+# status_command while date +'%Y-%m-%d %H:%M'; do sleep 1; done
 
-        status_command i3blocks
+    status_command i3blocks
 
-        colors {
-            statusline #ffffff
-            background #0f0f0f
-            inactive_workspace #32323200 #32323200 #5c5c5c
-        }
+    colors {
+        statusline #ffffff
+        background #0f0f0f
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
 }
 
 # Aesthetics
 # No titlebar
 default_border pixel 2
+smart_borders on
 client.focused #ffffff #7f7f7f #ffffff #7f7f7f
 client.unfocused #ffffff #3f3f3f #ffffff #3f3f3f
+
+# Autostart applications
+exec --no-startup-id pipewire
+exec --no-startup-id tlp start
 
 include @sysconfdir@/sway/config.d/*

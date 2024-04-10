@@ -85,10 +85,10 @@ require("lazy").setup({
   },
 
   { "ggandor/leap.nvim",
-    lazy = true,
     dependencies = {
       "tpope/vim-repeat",
     },
+
     config = function()
       vim.keymap.set('n', 's', function ()
         require('leap').leap { target_windows = { vim.api.nvim_get_current_win() } }
