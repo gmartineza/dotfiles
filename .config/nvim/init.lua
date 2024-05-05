@@ -1,3 +1,5 @@
+vim.opt.cursorline = true
+vim.opt.termguicolors = true
 vim.opt.wrap = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -6,10 +8,13 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 vim.keymap.set("n", "<leader>g", ":vim /")
+vim.keymap.set("n", "<leader>e", ":E<CR>")
+vim.keymap.set("n", "<leader>.", ":e $MYVIMRC<CR>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
+vim.keymap.set("v", "<leader>p", "\"_dP")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -28,8 +33,8 @@ require("lazy").setup({
     {
         "kylechui/nvim-surround",
         version = "*", -- For stability
-        event = "VeryLazy",
-        opts = {}
+        opts = {},
+        -- event = "VeryLazy",
     },
     {
         "numToStr/Comment.nvim",
@@ -38,30 +43,19 @@ require("lazy").setup({
     },
     {
         "ggandor/leap.nvim",
-        dependencies = "tpope/vim-repeat",
+        -- dependencies = "tpope/vim-repeat",
         config = function()
-            require('leap').opts.case_sensitive = true
-            vim.keymap.set('n',        's', '<Plug>(leap)')
+            -- require('leap').opts.case_sensitive = true
+            vim.keymap.set({'n', 'x'},        's', '<Plug>(leap)')
             vim.keymap.set('n',        'S', '<Plug>(leap-from-window)')
-            vim.keymap.set({'x', 'o'}, 's', '<Plug>(leap-forward)')
-            vim.keymap.set({'x', 'o'}, 'S', '<Plug>(leap-backward)')
         end,
     },
-    {"VonHeikemen/lsp-zero.nvim",
-    cond = not vim.g.vscode,
-    branch = "v3.x",
-    dependencies = 
     {
-        "neovim/nvim-lspconfig",
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/nvim-cmp",
-        "hrsh7th/cmp-buffer",
-        {
-            "L3MON4D3/LuaSnip",
-        }
+        "Darazaki/indent-o-matic",
+        opts = {}
     }
-}
 })
+
 if not vim.g.vscode then
     vim.opt.tabstop = 4
     vim.opt.shiftwidth = 4
@@ -69,23 +63,5 @@ if not vim.g.vscode then
     vim.opt.number = true
     vim.opt.relativenumber = true
 
-    local lsp_zero = require('lsp-zero')
-
-    require('cmp').setup({
-        sources = {
-            { name = 'nvim_lsp' },
-            { name = 'buffer' }
-        },
-    })
-
-
-    lsp_zero.on_attach(function(client, bufnr)
-        -- :help lsp-zero-keybindings
-        lsp_zero.default_keymaps({buffer = bufnr})
-    end)
-
-    -- Replace the language servers listed here
-	-- with the ones you have installed
-    lsp_zero.setup_servers({"jedi_language_server"})
-    -- :h lspconfig-all
+    -- vim.keymap.set("n", "<leader>g", ":vim /")
 end
