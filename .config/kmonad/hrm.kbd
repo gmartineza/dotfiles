@@ -1,0 +1,39 @@
+(defcfg
+ ;; ** For Linux **
+ ;;input  (device-file "/dev/input/by-id/usb-Dell_Dell_USB_Keyboard-event-kbd")
+ input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+ output (uinput-sink "KMonad seniply-iso-wide")
+ cmp-seq cmp
+
+ ;; ** For Windows **
+ ;; input  (low-level-hook)
+ ;; output (send-event-sink)
+
+ ;; ** For MacOS **
+ ;; input  (iokit-name "my-keyboard-product-string")
+ ;; output (kext)
+
+ fallthrough true
+ )
+
+(defsrc
+    a     s     d     f     g     h     j     k     l     ;
+ )
+
+(defalias
+    mod_a (tap-hold-next-release 200 a lalt)
+    mod_s (tap-hold-next-release 200 s lmet)
+    mod_d (tap-hold-next-release 200 d lsft)
+    mod_f (tap-hold-next-release 200 f lctl)
+    mod_g (tap-hold-next-release 200 g ralt)
+
+    mod_h (tap-hold-next-release 200 h ralt)
+    mod_j (tap-hold-next-release 200 j lctl)
+    mod_k (tap-hold-next-release 200 k lsft)
+    mod_l (tap-hold-next-release 200 l lmet)
+    mod_; (tap-hold-next-release 200 ; lalt)
+)
+
+(deflayer base
+    @mod_a   @mod_s   @mod_d   @mod_f   @mod_g   @mod_h   @mod_j   @mod_k   @mod_l   @mod_;
+)
