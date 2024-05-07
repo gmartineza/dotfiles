@@ -24,6 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 enum layers {
     DEF,
+    QWE,
     SYM,
     NAV,
     FUN,
@@ -42,73 +43,66 @@ enum keycodes {
 // Combos
 const uint16_t PROGMEM z_combo[] = {KC_W, KC_M, COMBO_END};
 const uint16_t PROGMEM q_combo[] = {KC_W, KC_G, COMBO_END};
-const uint16_t PROGMEM q_combo2[] = {KC_M, KC_G, COMBO_END};
+const uint16_t PROGMEM r_combo[] = {KC_S, KC_C, COMBO_END};
 combo_t key_combos[] = {
     COMBO(z_combo, KC_Z),
     COMBO(q_combo, KC_Q),
-    COMBO(q_combo2, KC_Q),
+    COMBO(r_combo, RSFT(KC_R)),
 };
 
 // Key overrides (custom shift keys)
 const key_override_t dub_quote_override = ko_make_basic(MOD_MASK_SHIFT, KC_DQT,   S(KC_1));
-const key_override_t hash_override =      ko_make_basic(MOD_MASK_SHIFT, KC_HASH,  S(KC_2));
+// const key_override_t hash_override =      ko_make_basic(MOD_MASK_SHIFT, KC_HASH,  S(KC_2));
 const key_override_t dot_override =       ko_make_basic(MOD_MASK_SHIFT, KC_DOT,   KC_COLN);
 const key_override_t quote_override =     ko_make_basic(MOD_MASK_SHIFT, KC_QUOTE, S(KC_SLASH));
 const key_override_t comma_override =     ko_make_basic(MOD_MASK_SHIFT, KC_COMMA, KC_SEMICOLON);
 const key_override_t slash_override =     ko_make_basic(MOD_MASK_SHIFT, KC_SLASH, S(KC_8));
-const key_override_t dash_override =      ko_make_basic(MOD_MASK_SHIFT, KC_MINUS, S(KC_EQUAL));
+// const key_override_t dash_override =      ko_make_basic(MOD_MASK_SHIFT, KC_MINUS, S(KC_EQUAL));
 
 // This globally defines all key overrides to be used
 const key_override_t **key_overrides = (const key_override_t *[]){
     &dub_quote_override,
-    &hash_override,
+    // &hash_override,
     &dot_override,
     &quote_override,
     &comma_override,
     &slash_override,
-    &dash_override,
+    // &dash_override,
     NULL // Null terminate the array of overrides!
 };
 
+// LAYERS! You get it!
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [DEF] = LAYOUT_split_3x5_3(
-    //------------------------------------------|------------------------------------------
-        KC_X, KC_W, KC_M,         KC_G, KC_DQT,  KC_HASH, KC_DOT, KC_QUOT,      KC_J, KC_B,
-        KC_S, KC_C, LSFT_T(KC_N), CTL_T(KC_T), KC_K,    KC_COMM, CTL_T(KC_A),   LSFT_T(KC_E), KC_I, KC_H,
-        KC_V, KC_P, KC_L,         KC_D, KC_SLSH, KC_MINS, KC_U,   KC_O,         KC_Y, KC_F,
-
-        QK_REP, KC_R, LA_SYM, LA_NAV, KC_SPC, KC_LCTL),
+        KC_X,      KC_W,      KC_M,      KC_G,      KC_DQT,    KC_EQUAL,   KC_DOT,    KC_QUOT,   KC_J,      KC_B,
+        KC_S,      KC_C,      KC_N,      KC_T,      KC_K,      KC_COMM,   KC_A,      KC_E,      KC_I,      KC_H,
+        KC_V,      KC_P,      KC_L,      KC_D,      KC_SLSH,   KC_MINS,   KC_U,      KC_O,      KC_Y,      KC_F,
+                              QK_REP,    SFT_T(KC_R),LA_SYM,   LA_NAV,    KC_SPC,    XXXXXXX),
 
     [SYM] = LAYOUT_split_3x5_3(
-    //---------------------------------------------------------------------------|--------------------------------------------
-        KC_EXLM,       KC_AT,         KC_HASH,       KC_DLR,        KC_PERC,       KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,
-        OS_ALT, OS_GUI, OS_SHFT, OS_CTRL, OS_RALT, KC_TRNS, KC_UNDS, KC_EQL,  KC_LCBR, KC_RCBR,
-        KC_GRV,        KC_BSLS,       KC_PIPE,       KC_TILD,       QK_REP,       KC_TRNS, KC_BSPC, KC_TRNS, KC_LBRC, KC_RBRC,
-
-        TO(NUM), TO(NAV), KC_TRNS, KC_TRNS, KC_ENT, KC_TRNS),
+        KC_EXLM,   KC_AT,     KC_HASH,   KC_DLR,    KC_PERC,   KC_CIRC,   KC_AMPR,   KC_ASTR,   KC_LPRN,   KC_RPRN,
+        OS_ALT,    OS_GUI,    OS_SHFT,   OS_CTRL,   OS_RALT,   KC_TILD,   KC_LT,     KC_GT,     KC_LCBR,   KC_RCBR,
+        _______,   _______,   KC_PIPE,   QK_REP,    KC_BSLS,    KC_GRV,   KC_BSPC,   KC_PIPE,   KC_LBRC,   KC_RBRC,
+                              TO(NUM),   TO(NAV),   _______,   _______,   KC_ENT,    _______),
 
     [NAV] = LAYOUT_split_3x5_3(
-    //---------------------------------------------|--------------------------------------------------------------------------
-        KC_ESC,  KC_HOME, KC_UP,   KC_END,  KC_PGUP, KC_TRNS,       KC_MPLY,       KC_MPRV,       KC_MNXT,       KC_PSCR,
-        KC_TAB,  KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, OS_RALT, OS_CTRL, OS_SHFT, OS_GUI, OS_ALT,
-        KC_LSFT, KC_INS,  KC_DEL,  KC_BSPC, KC_CAPS, QK_BOOT,       KC_VOLD,       KC_VOLU,       KC_MUTE,       KC_APP,
-
-        KC_LCTL, KC_ENT, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
+        KC_ESC,    KC_HOME,   KC_UP,     KC_END,    KC_PGUP,   _______,   KC_MPLY,   KC_MPRV,   KC_MNXT,   KC_PSCR,
+        KC_TAB,    KC_LEFT,   KC_DOWN,   KC_RGHT,   KC_PGDN,   OS_RALT,   OS_CTRL,   OS_SHFT,   OS_GUI,    OS_ALT,
+        KC_LSFT,   KC_INS,    KC_DEL,    KC_BSPC,   KC_CAPS,   QK_BOOT,   KC_VOLD,   KC_VOLU,   KC_MUTE,   KC_APP,
+                              KC_LCTL,   KC_ENT,    _______,   _______,   _______,   _______),
 
     [FUN] = LAYOUT_split_3x5_3(
-        KC_1,          KC_2,          KC_3,          KC_4,          KC_5,   KC_6,   KC_7,          KC_8,          KC_9,          KC_0,
-        OS_ALT, OS_GUI, OS_SHFT, OS_CTRL, KC_F11, KC_F12, OS_CTRL, OS_SHFT, OS_GUI, OS_ALT,
-        KC_F1,         KC_F2,         KC_F3,         KC_F4,         KC_F5,  KC_F6,  KC_F7,         KC_F8,         KC_F9,         KC_F10,
-
-        KC_TRNS, KC_ENT, KC_TRNS, KC_TRNS, KC_ENT, KC_TRNS),
+        KC_1,      KC_2,      KC_3,      KC_4,      KC_5,      KC_6,      KC_7,      KC_8,      KC_9,      KC_0,
+        OS_ALT,    OS_GUI,    OS_SHFT,   OS_CTRL,   KC_F11,    KC_F12,    OS_CTRL,   OS_SHFT,   OS_GUI,    OS_ALT,
+        KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,     KC_F6,     KC_F7,     KC_F8,     KC_F9,     KC_F10,
+                              _______,   KC_ENT,    _______,   _______,   KC_ENT,    _______),
 
     [NUM] = LAYOUT_split_3x5_3(
-        KC_F2, KC_7, KC_8, KC_9, KC_PMNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-        KC_EQL, KC_4, KC_5, KC_6, KC_PPLS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-        KC_PSLS, KC_1, KC_2, KC_3, KC_PAST, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-        KC_PDOT, KC_0, KC_TRNS, MO(NUM), KC_TRNS, KC_TRNS)
-
+        KC_F2,     KC_7,      KC_8,      KC_9,      KC_PMNS,   _______,   _______,   _______,   _______,   _______,
+        KC_EQL,    KC_4,      KC_5,      KC_6,      KC_PPLS,   _______,   _______,   _______,   _______,   _______,
+        KC_PSLS,   KC_1,      KC_2,      KC_3,      KC_PAST,   _______,   _______,   _______,   _______,   _______,
+                              KC_PDOT,   KC_0,      MO(NAV),   MO(NUM),   _______,   _______),
 };
 
 bool is_oneshot_cancel_key(uint16_t keycode) {
