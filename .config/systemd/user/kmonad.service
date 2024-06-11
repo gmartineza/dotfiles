@@ -1,0 +1,9 @@
+[Unit]
+Description=KMonad service
+
+[Service]
+Type=simple
+ExecStart=/home/g/.local/bin/kmonad /home/g/.config/kmonad/hrm.kbd
+
+[Install]
+WantedBy=default.target
