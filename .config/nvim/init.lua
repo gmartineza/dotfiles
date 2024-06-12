@@ -1,3 +1,4 @@
+-- Opts
 vim.opt.cursorline = true
 vim.opt.termguicolors = true
 vim.opt.wrap = false
@@ -7,10 +8,14 @@ vim.opt.smartcase = true
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Key mappings
+vim.keymap.set("n", "<C-s>", "<cmd>write<CR>")
+vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<leader>g", ":vim /")
 vim.keymap.set("n", "<leader>e", ":E<CR>")
 vim.keymap.set("n", "<leader>.", ":e $MYVIMRC<CR>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+vim.keymap.set("n", "<C-c>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
@@ -43,11 +48,15 @@ require("lazy").setup({
     },
     {
         "ggandor/leap.nvim",
-        -- dependencies = "tpope/vim-repeat",
+        -- Dependencies = "tpope/vim-repeat",
         config = function()
-            -- require('leap').opts.case_sensitive = true
-            vim.keymap.set({'n', 'x'},        's', '<Plug>(leap)')
-            vim.keymap.set('n',        'S', '<Plug>(leap-from-window)')
+            local leap = require('leap')
+            leap.create_default_mappings()
+            -- vim.keymap.set('n',        's', '<Plug>(leap)')
+            -- vim.keymap.set('n',        'S', '<Plug>(leap-from-window)')
+            -- vim.keymap.set({'x', 'o'}, 's', '<Plug>(leap-forward)')
+            -- vim.keymap.set({'x', 'o'}, 'S', '<Plug>(leap-backward)')
+            leap.opts.case_sensitive = true
         end,
     },
     {
