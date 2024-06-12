@@ -30,7 +30,7 @@ cmp-seq cmp
     lctl (tap-hold-next-release 200 f lctl)
     laltgr (tap-hold-next-release 180 c ralt)
 
-    raltgr (tap-hold-next-release 180 m ralt)
+    raltgr (tap-hold-next-release 170 m ralt)
     rctl (tap-hold-next-release 200 j rctl)
     rsft (tap-hold-next-release 200 k rsft)
     rmet (tap-hold-next-release 300 l rmet)
@@ -57,7 +57,7 @@ cmp-seq cmp
 
 (deflayer mediacontrol
     _
-    Mute VolumeUp pause
+    Mute VolumeUp PlayPause
     _ previoussong VolumeDown nextsong _ _ _ _
     _ _ capslock _
 )
