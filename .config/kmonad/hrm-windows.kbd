@@ -18,9 +18,9 @@
 
 (defsrc
     f6
-    ' , .
+             ' , .   g c r
     capslock a o e u h t n
-    ; j m v
+             ; q j   m   v
  )
 
 (defalias
@@ -38,26 +38,26 @@
 
     trns (layer-switch transparent)
     hrm (layer-switch base)
-    media (layer-toggle mediacontrol)
+    ext (layer-toggle extend)
 )
 
 (deflayer base
     @trns
-    _ _ _
-    @media _ @lmet @lsft @lctl @rctl @rsft @rmet
-    @lalt @laltgr @raltgr @ralt
+    _ _ _ _ _ _
+    @ext  _ @lmet @lsft @lctl @rctl @rsft @rmet
+    @lalt _ @laltgr            @raltgr @ralt
 )
 
 (deflayer transparent
     @hrm
-    _ _ _
+    _ _ _ _ _ _
     _ _ _ _ _ _ _ _
-    _ _ _ _
+    _ _ _ _ _
 )
 
-(deflayer mediacontrol
+(deflayer extend
     _
-    Mute VolumeUp PlayPause
-    _ previoussong VolumeDown nextsong _ _ _ _
-    _ _ capslock _
+      Mute         VolumeUp   PlayPause   Home Up   End
+    _ previoussong VolumeDown nextsong  _ Left Down Right
+      rmet rsft rctl                      capslock _
 )
