@@ -18,46 +18,47 @@
 
 (defsrc
     f6
-             ' , .   g c r
-    capslock a o e u h t n
-             ; q j   m   v
+             '            ,         .
+    capslock a            o         e         u         h         t         n         s
+                                              j         m
  )
 
 (defalias
-    lalt (tap-hold-next-release 300 ; lalt)
-    lmet (tap-hold-next-release 300 o lmet)
-    lsft (tap-hold-next-release 200 e lsft)
-    lctl (tap-hold-next-release 200 u lctl)
-    laltgr (tap-hold-next-release 180 j ralt)
+    laltgr (tap-hold-next-release 200 a ralt)
+    lmet   (tap-hold-next-release 300 o lmet)
+    lsft   (tap-hold-next-release 200 e lsft)
+    lctl   (tap-hold-next-release 200 u lctl)
 
-    raltgr (tap-hold-next-release 170 m ralt)
-    rctl (tap-hold-next-release 200 h rctl)
-    rsft (tap-hold-next-release 200 t rsft)
-    rmet (tap-hold-next-release 300 n rmet)
-    ralt (tap-hold-next-release 300 v lalt)
+    lalt   (tap-hold-next-release 300 j lalt)
+    ralt   (tap-hold-next-release 300 m lalt)
+
+    rctl   (tap-hold-next-release 200 h rctl)
+    rsft   (tap-hold-next-release 200 t rsft)
+    rmet   (tap-hold-next-release 300 n rmet)
+    raltgr (tap-hold-next-release 170 s ralt)
 
     trns (layer-switch transparent)
-    hrm (layer-switch base)
-    ext (layer-toggle extend)
+    hrm  (layer-switch base)
+    ext  (layer-toggle extend)
 )
 
 (deflayer base
     @trns
-    _ _ _ _ _ _
-    @ext  _ @lmet @lsft @lctl @rctl @rsft @rmet
-    @lalt _ @laltgr            @raltgr @ralt
+             _            _         _
+    @ext     @laltgr      @lmet     @lsft     @lctl     @rctl     @rsft     @rmet     @raltgr
+                                              @lalt     @ralt             
 )
 
 (deflayer transparent
     @hrm
-    _ _ _ _ _ _
-    _ _ _ _ _ _ _ _
-    _ _ _ _ _
+             _            _         _
+    _        _            _         _         _         _         _         _         _
+                                              _         _
 )
 
 (deflayer extend
-    _
-      Mute         VolumeUp   PlayPause   Home Up   End
-    _ previoussong VolumeDown nextsong  _ Left Down Right
-      rmet rsft rctl                      capslock _
+    XX
+             Mute         volu      PlayPause
+    _        PreviousSong vold      NextSong  _         _         _         _         _
+                                              _         caps
 )
