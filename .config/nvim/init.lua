@@ -12,8 +12,8 @@ vim.g.maplocalleader = " "
 vim.keymap.set("n", "<C-s>", "<cmd>write<CR>")
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<leader>g", ":vim /")
-vim.keymap.set("n", "<leader>e", ":E<CR>")
-vim.keymap.set("n", "<leader>.", ":e $MYVIMRC<CR>")
+vim.keymap.set("n", "<leader>e", ":Explore<CR>")
+vim.keymap.set("n", "<leader>,", ":e $MYVIMRC<CR>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<C-c>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<leader>y", "\"+y")
@@ -51,17 +51,12 @@ require("lazy").setup({
         -- Dependencies = "tpope/vim-repeat",
         config = function()
             local leap = require('leap')
-            leap.create_default_mappings()
-            -- vim.keymap.set('n',        's', '<Plug>(leap)')
-            -- vim.keymap.set('n',        'S', '<Plug>(leap-from-window)')
-            -- vim.keymap.set({'x', 'o'}, 's', '<Plug>(leap-forward)')
-            -- vim.keymap.set({'x', 'o'}, 'S', '<Plug>(leap-backward)')
+            vim.keymap.set({'n', 'x', 'o'}, 's',  '<Plug>(leap-forward)')
+            -- vim.keymap.set({'n', 'x', 'o'}, 'S',  '<Plug>(leap-backward)')
+            vim.keymap.set('n', 'S',  '<Plug>(leap-backward)')
+            vim.keymap.set({'n', 'x', 'o'}, 'gs', '<Plug>(leap-from-window)')
             leap.opts.case_sensitive = true
         end,
-    },
-    {
-        "Darazaki/indent-o-matic",
-        opts = {}
     }
 })
 

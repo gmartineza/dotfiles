@@ -65,6 +65,7 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
 
 input "type:keyboard" {
     xkb_layout us,latam
+    xkb_model pc105
     xkb_variant dvorak-alt-intl,
     xkb_options grp:win_space_toggle
 }
@@ -81,6 +82,7 @@ input "type:keyboard" {
 
     # Kill focused window
     bindsym $mod+q kill
+    bindsym Mod1+F4 kill
 
     # Start your launcher
     bindsym $mod+d exec $menu
@@ -110,6 +112,9 @@ input "type:keyboard" {
     bindsym $mod+Down focus down
     bindsym $mod+Up focus up
     bindsym $mod+Right focus right
+    # Or use alt+tab|alt+shift+tab in tabbed mode
+    bindsym mod1+tab focus left
+    bindsym mod1+Shift+tab focus right
 
     # Move the focused window with the same, but add Shift
     bindsym $mod+Shift+$left move left
@@ -158,18 +163,18 @@ input "type:keyboard" {
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
+    # bindsym $mod+s layout stacking
+    bindsym $mod+t layout tabbed
+    bindsym $mod+w layout toggle split
 
     # Make the current focus fullscreen
-    bindsym $mod+f fullscreen
+    bindsym $mod+m fullscreen
 
     # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+    bindsym $mod+f floating toggle
 
     # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+    bindsym $mod+Shift+f focus mode_toggle
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
@@ -211,9 +216,16 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 bindsym $mod+b exec firefox
+bindsym $mod+e exec thunar
+bindsym $mod+F3 exec systemctl suspend
+bindsym $mod+F4 exec systemctl poweroff
+bindsym $mod+F5 exec systemctl reboot
 
 default_border pixel 2
 smart_borders on
+
+assign [class="Firefox"] 1
+assign [class="Foot"] 2
 
 # Include configs from 3 locations:
 #  - /usr/share/sway/config.d

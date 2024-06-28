@@ -1,13 +1,13 @@
 (defcfg
  ;; ** For Linux **
  ;;input  (device-file "/dev/input/by-id/usb-Dell_Dell_USB_Keyboard-event-kbd")
- input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
- output (uinput-sink "KMonad hrm")
- cmp-seq cmp
+ ;;input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+ ;;output (uinput-sink "KMonad hrm")
+ ;;cmp-seq cmp
 
  ;; ** For Windows **
- ;;input  (low-level-hook)
- ;;output (send-event-sink)
+  input  (low-level-hook)
+  output (send-event-sink)
 
  ;; ** For MacOS **
  ;; input  (iokit-name "my-keyboard-product-string")
@@ -37,31 +37,28 @@
     rmet   (tap-hold-next-release 300 n rmet)
     raltgr (tap-hold-next-release 170 s ralt)
 
-    ;; hrm:f6->media_only:f6->hrm
-    ;; hrm:media+f6->trans
-    hrm (layer-switch home_row_mods)
-    ext (layer-toggle extend)
     trns (layer-switch transparent)
-    extesc (tap-hold-next-release 300 esc @ext)
+    hrm  (layer-switch base)
+    ext  (layer-toggle extend)
 )
 
-(deflayer home_row_mods
+(deflayer base
     @trns
              _            _         _
-    @extesc  @laltgr      @lmet     @lsft     @lctl     @rctl     @rsft     @rmet     @raltgr
+    @ext     @laltgr      @lmet     @lsft     @lctl     @rctl     @rsft     @rmet     @raltgr
                                               @lalt     @ralt             
-)
-
-(deflayer extend
-    XX
-             Mute         volu      PlayPause
-    _        PreviousSong vold      NextSong  _         caps      _         _         _
-                                              _         _
 )
 
 (deflayer transparent
     @hrm
              _            _         _
-    @ext     _            _         _         _         _         _         _         _
+    _        _            _         _         _         _         _         _         _
                                               _         _
+)
+
+(deflayer extend
+    XX
+             Mute         volu      PlayPause
+    _        PreviousSong vold      NextSong  _         _         _         _         _
+                                              _         caps
 )
