@@ -220,6 +220,7 @@ bindsym $mod+e exec thunar
 bindsym $mod+F3 exec systemctl suspend
 bindsym $mod+F4 exec systemctl poweroff
 bindsym $mod+F5 exec systemctl reboot
+bindsym $mod+Shift+s exec flameshot gui
 
 default_border pixel 2
 smart_borders on
