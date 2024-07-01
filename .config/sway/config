@@ -217,9 +217,9 @@ bindsym $mod+r mode "resize"
 
 bindsym $mod+b exec firefox
 bindsym $mod+e exec thunar
-bindsym $mod+F3 exec systemctl suspend
-bindsym $mod+F4 exec systemctl poweroff
-bindsym $mod+F5 exec systemctl reboot
+bindsym $mod+Shift+F3 exec systemctl suspend
+bindsym $mod+Shift+F4 exec systemctl poweroff
+bindsym $mod+Shift+F5 exec systemctl reboot
 bindsym $mod+Shift+s exec flameshot gui
 
 default_border pixel 2
