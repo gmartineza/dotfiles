@@ -54,8 +54,8 @@
 
 (deflayer extend
     XX
-             volu     NextSong     PlayPause                     up
-    _        vold     PreviousSong lsft      lctl      left      down         right         delete
+             volu     PreviousSong PlayPause                     up
+    _        vold     NextSong lsft      lctl      left      down         right         delete
                                               lalt      caps
 )
 
