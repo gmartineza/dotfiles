@@ -18,7 +18,8 @@
 
 (defsrc
     f6
-             '            ,         .
+             1 2 3 4 5 6
+             c
     capslock a            o         e         u         h         t         n         s
                                               j         m
  )
@@ -47,21 +48,24 @@
 
 (deflayer home_row_mods
     @trns
-             _            _         _                   _
+             _ _ _ _ _ _
+             _
     @extesc  @laltgr      @lmet     @lsft     @lctl     @rctl     @rsft     @rmet     @raltgr
                                               @lalt     @ralt             
 )
 
 (deflayer extend
     XX
-             volu     PreviousSong PlayPause                     up
-    _        vold     NextSong lsft      lctl      left      down         right         delete
+             volu vold PlayPause NextSong PreviousSong Mute
+             up
+    _        _            lmet      lsft      lctl      left      down         right         delete
                                               lalt      caps
 )
 
 (deflayer transparent
     @hrm
-             _            _         _                   _
-    @ext     _            _         _         _         _         _         _         _
+             _ _ _ _ _ _
+             _
+    _     _            _         _         _         _         _         _         _
                                               _         _
 )
