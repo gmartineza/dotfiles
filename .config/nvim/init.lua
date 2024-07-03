@@ -1,4 +1,5 @@
 -- Opts
+vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.termguicolors = true
 vim.opt.wrap = false
@@ -65,7 +66,6 @@ if not vim.g.vscode then
     vim.opt.shiftwidth = 4
     vim.opt.expandtab = true
     vim.opt.number = true
-    vim.opt.relativenumber = true
 
     -- vim.keymap.set("n", "<leader>g", ":vim /")
 end
