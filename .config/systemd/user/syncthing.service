@@ -1,0 +1,9 @@
+[Unit]
+Description=KMonad service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/syncthing
+
+[Install]
+WantedBy=default.target

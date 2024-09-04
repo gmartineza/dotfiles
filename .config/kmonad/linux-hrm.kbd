@@ -19,24 +19,24 @@
 (defsrc
     f6
              1 2 3 4 5 6
-             i
+             w
     capslock a            s         d         f         j         k         l         ;
                                               c         m
  )
 
 (defalias
-    laltgr (tap-hold-next-release 200 a ralt)
+    lalt (tap-hold-next-release 200 a lalt)
     lmet   (tap-hold-next-release 300 s lmet)
     lsft   (tap-hold-next-release 200 d lsft)
     lctl   (tap-hold-next-release 200 f lctl)
 
-    lalt   (tap-hold-next-release 300 c lalt)
-    ralt   (tap-hold-next-release 300 m lalt)
+    laltgr   (tap-hold-next-release 300 c ralt)
+    raltgr   (tap-hold-next-release 170 m ralt)
 
     rctl   (tap-hold-next-release 200 j rctl)
     rsft   (tap-hold-next-release 200 k rsft)
     rmet   (tap-hold-next-release 300 l rmet)
-    raltgr (tap-hold-next-release 170 ; ralt)
+    ralt (tap-hold-next-release 200 ; lalt)
 
     ;; hrm:f6->media_only:f6->hrm
     ;; hrm:media+f6->trans
@@ -50,16 +50,16 @@
     @trns
              _ _ _ _ _ _
              _
-    @extesc  @laltgr      @lmet     @lsft     @lctl     @rctl     @rsft     @rmet     @raltgr
-                                              @lalt     @ralt             
+    @ext     @lalt      @lmet     @lsft     @lctl     @rctl     @rsft     @rmet     @ralt
+                                              @laltgr     @raltgr             
 )
 
 (deflayer extend
     XX
              volu vold PlayPause NextSong PreviousSong Mute
              up
-    _        _            lmet      lsft      lctl      left      down         right         delete
-                                              lalt      caps
+    _        left         down      right      lctl      left      down         right         delete
+                                              ralt      caps
 )
 
 (deflayer transparent
