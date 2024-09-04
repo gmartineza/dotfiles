@@ -2,13 +2,9 @@
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.termguicolors = true
--- vim.opt.wrap = false
-vim.opt.hlsearch = false
+vim.opt.wrap = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.scrolloff = 4
-vim.opt.breakindent = true
--- vim.opt.conceallevel = 2
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -16,7 +12,8 @@ vim.g.maplocalleader = " "
 -- Key mappings
 vim.keymap.set("n", "<C-s>", "<cmd>write<CR>")
 vim.keymap.set("i", "<C-c>", "<Esc>")
-vim.keymap.set("n", "<leader>e", "<cmd>Ex<CR>")
+vim.keymap.set("n", "<leader>g", ":vim /")
+vim.keymap.set("n", "<leader>e", ":Explore<CR>")
 vim.keymap.set("n", "<leader>,", ":e $MYVIMRC<CR>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<C-c>", "<cmd>nohlsearch<CR>")
@@ -26,6 +23,8 @@ vim.keymap.set("n", "<leader>Y", "\"+Y")
 vim.keymap.set("v", "<leader>p", "\"_dP")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-b>", "<C-b>zz")
+vim.keymap.set("n", "<C-f>", "<C-f>zz")
 vim.keymap.set("n", "n", "nzz")
 vim.keymap.set("n", "N", "Nzz")
 
@@ -54,51 +53,18 @@ require("lazy").setup({
         opts = {},
         lazy = false,
     },
-
     {
-        "windwp/nvim-autopairs",
-        event = "InsertEnter",
-        config = true
-    },
-
-    {
-        "calind/selenized.nvim",
+        "ggandor/leap.nvim",
+        -- Dependencies = "tpope/vim-repeat",
         config = function()
-            vim.cmd.colorscheme "selenized"
+            local leap = require('leap')
+            vim.keymap.set({'n', 'x', 'o'}, 's',  '<Plug>(leap-forward)')
+            -- vim.keymap.set({'n', 'x', 'o'}, 'S',  '<Plug>(leap-backward)')
+            vim.keymap.set('n', 'S',  '<Plug>(leap-backward)')
+            vim.keymap.set({'n', 'x', 'o'}, 'gs', '<Plug>(leap-from-window)')
+            leap.opts.case_sensitive = true
         end,
-    },
-
-    {
-        "nvim-treesitter/nvim-treesitter",
-        build = ":TSUpdate",
-        config = function () 
-            local configs = require("nvim-treesitter.configs")
-
-            configs.setup({
-                highlight = { enable = true },
-                indent = { enable = true },  
-            })
-        end
-    },
-
-    {
-        "tadmccorkle/markdown.nvim",
-        ft = "markdown", -- or 'event = "VeryLazy"'
-        config = function()
-                require("markdown").setup({
-                on_attach = function(bufnr)
-                    local map = vim.keymap.set
-                    local opts = { buffer = bufnr }
-                    map({ 'n', 'i' }, '<M-o>', '<Cmd>MDListItemBelow<CR>', opts)
-                    map({ 'n', 'i' }, '<M-O>', '<Cmd>MDListItemAbove<CR>', opts)
-                    map({ 'n', 'i' }, '<M-l><M-r>', '<Cmd>MDResetListNumbering<CR>', opts)
-                    map('n', '<M-l><M-t>', '<Cmd>MDTaskToggle<CR>', opts)
-                    map('x', '<M-l><M-t>', ':MDTaskToggle<CR>', opts)
-                end,
-            })
-    end
-    },
-    { import = 'obsidian' }
+    }
 })
 
 if not vim.g.vscode then
