@@ -16,11 +16,17 @@
  fallthrough true
  )
 
+;;(defsrc
+;;    f6
+;;             1 2 3 4 5 6
+;;             w
+;;    capslock a            s         d         f         j         k         l         ;
+;;                                              c         m
+;; )
+
 (defsrc
     f6
-             1 2 3 4 5 6
-             w
-    capslock a            s         d         f         j         k         l         ;
+    a            s         d         f         j         k         l         ;
                                               c         m
  )
 
@@ -41,31 +47,25 @@
     ;; hrm:f6->media_only:f6->hrm
     ;; hrm:media+f6->trans
     hrm (layer-switch home_row_mods)
-    ext (layer-toggle extend)
+    ;;ext (layer-toggle extend)
     trns (layer-switch transparent)
-    extesc (tap-hold-next-release 300 esc @ext)
+    ;;extesc (tap-hold-next-release 300 esc @ext)
 )
 
 (deflayer home_row_mods
     @trns
-             _ _ _ _ _ _
-             _
-    @ext     @lalt      @lmet     @lsft     @lctl     @rctl     @rsft     @rmet     @ralt
+    @lalt      @lmet     @lsft     @lctl     @rctl     @rsft     @rmet     @ralt
                                               @laltgr     @raltgr             
 )
 
 (deflayer extend
     XX
-             volu vold PlayPause NextSong PreviousSong Mute
-             up
-    _        left         down      right      lctl      left      down         right         delete
+    left         down      right      lctl      left      down         right         delete
                                               ralt      caps
 )
 
 (deflayer transparent
     @hrm
-             _ _ _ _ _ _
-             _
-    _     _            _         _         _         _         _         _         _
+    _            _         _         _         _         _         _         _
                                               _         _
 )
