@@ -3,6 +3,9 @@ set relativenumber
 set noswapfile
 set ignorecase
 set smartcase
+set tabstop=4
+set shiftwidth=4
+set expandtab
 
 let mapleader = " "
 inoremap <c-c> <Esc>

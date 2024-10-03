@@ -38,7 +38,6 @@ exec --no-startup-id nm-applet
 
 # Other custom autostart apps
 exec --no-startup-id kmonad /home/g/dotfiles/.config/kmonad/brm-linux.kbd
-exec --no-startup-id picom
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
