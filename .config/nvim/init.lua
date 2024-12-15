@@ -3,8 +3,8 @@ vim.opt.relativenumber = true
 vim.opt.swapfile = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
--- vim.opt.tabstop = 4
--- vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.undofile = true
 
@@ -36,6 +36,16 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+    {
+        "kylechui/nvim-surround",
+        version = "*", -- Use for stability; omit to use `main` branch for the latest features
+        event = "VeryLazy",
+        config = function()
+            require("nvim-surround").setup({
+                -- Configuration here, or leave empty to use defaults
+            })
+        end
+    },
     {
         'folke/flash.nvim',
         event = 'VeryLazy',
