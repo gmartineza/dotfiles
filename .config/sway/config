@@ -80,7 +80,7 @@ input "type:keyboard" {
     bindsym $mod+Return exec $term
 
     # Kill focused window
-    bindsym $mod+x kill
+    bindsym $mod+q kill
     bindsym Mod1+F4 kill
 
     # Start your launcher
@@ -231,6 +231,10 @@ assign [class="Foot"] 2
 assign [class="Visual Studio Code"] 4
 assign [class="Spotify"] 3
 assign [class="Discord"] 3
+
+bar {
+    swaybar_command waybar
+}
 
 # Include configs from 3 locations:
 #  - /usr/share/sway/config.d
