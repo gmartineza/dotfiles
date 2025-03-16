@@ -12,20 +12,19 @@ vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.cursorline = true
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 5
+vim.opt.hlsearch = false
 
 -- [[ Basic Keymaps ]]
 -- Heressy
-vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<C-s>", "<cmd>write<CR>")
-
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-vim.keymap.set("n", "<C-c>", "<cmd>nohlsearch<CR>")
+vim.keymap.set("i", "<C-c>", "<Esc>")
 
 -- prime's stuff
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+Y]])
-vim.keymap.set({"n", "v"}, "<leader>d", "\"_d")
+vim.keymap.set({"n", "v"},  "<leader>y", [["+y]])
+vim.keymap.set("n",         "<leader>Y", [["+Y]])
+vim.keymap.set({"n", "v"},  "<leader>d", [["_d]])
+vim.keymap.set("x",         "<leader>p", [["_dP]])
 
 vim.keymap.set("n", "<leader>e", "<cmd>Explore<CR>")
 vim.keymap.set("n", "<leader>,", "<cmd>e $MYVIMRC<CR>")
@@ -43,30 +42,14 @@ vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
 require("lazy").setup({
-	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
-  {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    ---@type Flash.Config
-    ---@diagnostic disable-next-line
-    opts = {
-      jump = {
-        autojump = true,
-      },
-      modes = {
-        char = {
-          enabled = false,
-        },
-      },
-    },
-    keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-    },
-  },
+  { "tpope/vim-surround" },
 
   {
-    "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    "easymotion/vim-easymotion",
+    keys = {
+      { "s", "<Plug>(easymotion-s2)", mode = "n", noremap = true, silent = true },
+    },
+    lazy = true,
     event = "VeryLazy",
   },
 
