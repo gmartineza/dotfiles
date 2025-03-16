@@ -29,19 +29,18 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<C-c>", "<cmd>nohlsearch<CR>")
 
 -- Heressy
-vim.keymap.set({ "x", "i" }, "<C-c>", "<Esc>")
+vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<C-s>", "<cmd>write<CR>")
 
-vim.keymap.set({ "x", "n" }, "<leader>y", '"+y')
-vim.keymap.set("n", "<leader>p", '"+p')
+vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>Y", [["+Y]])
+vim.keymap.set({"n", "v"}, "<leader>d", "\"_d")
 
 vim.keymap.set("n", "<leader>e", "<cmd>Explore<CR>")
 vim.keymap.set("n", "<leader>,", "<cmd>e $MYVIMRC<CR>")
 
--- Diagnostic keymaps
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
-
-vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+-- vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+-- vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- [[ Basic Autocommands ]]
 -- vim.api.nvim_create_autocmd("TextYankPost", {
@@ -66,7 +65,33 @@ vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
 require("lazy").setup({
-	-- "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
+
+	{
+		"folke/flash.nvim",
+    enabled = true,
+		event = "VeryLazy",
+		---@type Flash.Config
+    ---@diagnostic disable-next-line
+		opts = {
+			jump = {
+				autojump = true,
+			},
+			modes = {
+				char = {
+					enabled = false,
+				},
+			},
+		},
+            keys = {
+                { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+            },
+	},
+
+  {
+    "kylechui/nvim-surround",
+    version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+  },
 	{ -- Fuzzy Finder (files, lsp, etc)
 		"nvim-telescope/telescope.nvim",
     enabled = false,
@@ -151,6 +176,7 @@ require("lazy").setup({
 			},
 		},
 	},
+
 	{
 		-- Main LSP Configuration
 		"neovim/nvim-lspconfig",
@@ -505,35 +531,6 @@ require("lazy").setup({
     config = function ()
       vim.cmd.colorscheme('nord')
     end
-	},
-
-  {
-    "easymotion/vim-easymotion",
-    enabled = true,
-    keys = {
-      { "s", "<Plug>(easymotion-s2)", mode = "n", noremap = true, silent = true },
-    }
-  },
-
-	{
-		"folke/flash.nvim",
-    enabled = false,
-		event = "VeryLazy",
-		---@type Flash.Config
-    ---@diagnostic disable-next-line
-		opts = {
-			jump = {
-				autojump = true,
-			},
-			modes = {
-				char = {
-					enabled = false,
-				},
-			},
-		},
-            keys = {
-                { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-            },
 	},
 })
 
