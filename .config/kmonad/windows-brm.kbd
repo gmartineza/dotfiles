@@ -1,0 +1,75 @@
+(defcfg
+ ;; ** For Linux **
+ ;;input  (device-file "/dev/input/by-id/usb-Dell_Dell_USB_Keyboard-event-kbd")
+ ;;input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+ ;;output (uinput-sink "KMonad hrm")
+ cmp-seq cmp
+
+ ;; ** For Windows **
+ input  (low-level-hook)
+ output (send-event-sink)
+
+ ;; ** For MacOS **
+ ;; input  (iokit-name "my-keyboard-product-string")
+ ;; output (kext)
+
+ fallthrough true
+ )
+
+(defsrc
+    f6
+    esc 1 2 3 4 5
+             g c r
+    capslock h t n
+    ; q j k x b m w v z
+)
+
+(defalias
+    lalt   (tap-hold-next-release 300 ; lalt)
+    lmet   (tap-hold-next-release 300 q lmet)
+    lsft   (tap-hold-next-release 200 j lsft)
+    lctl   (tap-hold-next-release 200 k lctl)
+
+    laltgr (tap-hold-next-release 200 x ralt)
+    raltgr (tap-hold-next-release 170 b ralt)
+
+    rctl   (tap-hold-next-release 200 m rctl)
+    rsft   (tap-hold-next-release 200 w rsft)
+    rmet   (tap-hold-next-release 300 v rmet)
+    ralt   (tap-hold-next-release 300 z lalt)
+
+    ;; hrm:f6->media_only:f6->hrm
+    ;; hrm:media+f6->trans
+    hrm (layer-switch home_row_mods)
+    ext (layer-toggle extend)
+    trns (layer-switch transparent)
+    extkey (tap-hold-next-release 300 caps @ext)
+)
+
+(deflayer home_row_mods
+    @trns
+    _ _ _ _ _ _
+            _ _ _
+    @extkey _ _ _
+    @lalt @lmet @lsft @lctl @laltgr @raltgr @rctl @rsft @rmet @ralt   
+   
+)
+
+(deflayer extend
+    XX
+    PreviousSong  PlayPause NextSong vold volu Mute
+      home       up          end
+    _ down right delete
+    _ _ _ _ _ _ m w v _
+    ;;         g c r
+    ;;capslock h t n
+    ;;; q j k x b m w v z
+)
+
+(deflayer transparent
+    @hrm
+    _ _ _ _ _ _
+    _ _ _
+    _ _ _ _
+    _ _ _ _ _ _ _ _ _ _
+)
