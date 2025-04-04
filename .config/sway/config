@@ -42,11 +42,10 @@ output * bg /usr/share/backgrounds/default.png fill
 ### Idle configuration
 #
 # Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
+# timeout 300 'swaylock -f -c 000000' \
+exec swayidle -w \
+         timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         before-sleep 'swaylock -f -c 000000'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -113,8 +112,8 @@ input "type:keyboard" {
     bindsym $mod+Up focus up
     bindsym $mod+Right focus right
     # Or use alt+tab|alt+shift+tab in tabbed mode
-    bindsym mod1+tab focus left
-    bindsym mod1+Shift+tab focus right
+    # bindsym mod1+tab focus left
+    # bindsym mod1+Shift+tab focus right
 
     # Move the focused window with the same, but add Shift
     bindsym $mod+Shift+$left move left
@@ -175,6 +174,7 @@ input "type:keyboard" {
 
     # Swap focus between the tiling area and the floating area
     bindsym $mod+Shift+f focus mode_toggle
+    bindsym mod1+tab focus mode_toggle
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
@@ -231,6 +231,10 @@ assign [class="Foot"] 2
 assign [class="Visual Studio Code"] 4
 assign [class="Spotify"] 3
 assign [class="Discord"] 3
+
+bar {
+    swaybar_command waybar
+}
 
 # Include configs from 3 locations:
 #  - /usr/share/sway/config.d

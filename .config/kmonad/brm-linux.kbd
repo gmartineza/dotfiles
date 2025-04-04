@@ -1,0 +1,121 @@
+;; -----------------------------------------------------------------------------
+;; KMonad Setup Instructions (Linux)
+;; -----------------------------------------------------------------------------
+;; 1. Install Dependencies:
+;; - Debian/Ubuntu:   sudo apt install libyaml-dev
+;; - Fedora:          sudo dnf install libyaml-devel
+;;
+;; 2. Ensure 'uinput' Module is Loaded:
+;; - Check if loaded:   lsmod | grep uinput
+;; - Load manually:     sudo modprobe uinput
+;; - Load at boot:      echo "uinput" | sudo tee -a /etc/modules
+;;
+;; 3. Install KMonad (Prebuilt Binary):
+;; - Download latest binary:
+;;   wget https://github.com/kmonad/kmonad/releases/latest/download/kmonad -O kmonad
+;; - Make executable and move to /usr/local/bin/:
+;;   chmod +x kmonad && sudo mv kmonad /usr/local/bin/
+;;
+;; 4. Set Up Permissions:
+;; - Allow user access to 'uinput':
+;;   echo 'KERNEL=="uinput", GROUP="input", MODE="0660"' | sudo tee /etc/udev/rules.d/50-kmonad.rules
+;; - Reload rules:
+;;   sudo udevadm control --reload-rules && sudo udevadm trigger
+;; - Add user to 'input' group:
+;;   sudo usermod -aG input $(whoami)
+;; - Reboot: sudo reboot
+;;
+;; 5. Run KMonad:
+;; - Manually: kmonad ~/.config/kmonad/config.kbd
+;;
+;; 6. (Optional) Set Up Systemd Service for Auto-Start:
+;; - Create service file: sudo nano /etc/systemd/system/kmonad.service
+;; - Add the following:
+;;   [Unit]
+;;   Description=KMonad
+;;   After=network.target
+;;
+;;   [Service]
+;;   ExecStart=/usr/local/bin/kmonad /home/YOUR_USERNAME/.config/kmonad/config.kbd
+;;   Restart=always
+;;   User=g
+;;   Group=input
+;;
+;;   [Install]
+;;   WantedBy=default.target
+;;
+;; - Enable and start the service:
+;;   sudo systemctl enable kmonad
+;;   sudo systemctl start kmonad
+;;
+;; 7. Verify Everything Works:
+;; - Check service status: systemctl status kmonad
+;; - Restart if needed: sudo systemctl restart kmonad
+;; -----------------------------------------------------------------------------
+
+(defcfg
+ ;; ** For Linux **
+ ;;input  (device-file "/dev/input/by-id/usb-Dell_Dell_USB_Keyboard-event-kbd")
+ input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+ output (uinput-sink "KMonad hrm")
+ cmp-seq cmp
+
+ ;; ** For Windows **
+ ;;input  (low-level-hook)
+ ;;output (send-event-sink)
+
+ ;; ** For MacOS **
+ ;; input  (iokit-name "my-keyboard-product-string")
+ ;; output (kext)
+
+ fallthrough true
+ )
+
+(defsrc
+    f6
+    y u i o
+    capslock h j k l
+    z x c v b n m , . /
+ )
+
+(defalias
+    lalt   (tap-hold-next-release 200 z lalt)
+    lmet   (tap-hold-next-release 300 x lmet)
+    lsft   (tap-hold-next-release 200 c lsft)
+    lctl   (tap-hold-next-release 200 v lctl)
+
+    laltgr (tap-hold-next-release 300 b ralt)
+    raltgr (tap-hold-next-release 170 n ralt)
+
+    rctl   (tap-hold-next-release 200 m rctl)
+    rsft   (tap-hold-next-release 200 , rsft)
+    rmet   (tap-hold-next-release 300 . rmet)
+    ralt   (tap-hold-next-release 200 / lalt)
+
+    ;; hrm:f6->media_only:f6->hrm
+    ;; hrm:media+f6->trans
+    hrm (layer-switch home_row_mods)
+    ext (tap-hold 200 capslock (layer-toggle extend))
+    trns (layer-switch transparent)
+)
+
+(deflayer home_row_mods
+    @trns
+    _ _ _ _
+    @ext _ _ _ _
+    @lalt      @lmet     @lsft     @lctl @laltgr   @raltgr  @rctl     @rsft     @rmet     @ralt
+)
+
+(deflayer extend
+    _
+    pgup home up end
+    _ pgdn left down right
+    _ _ _ _ _ _ _ _ _ _
+)
+
+(deflayer transparent
+    @hrm
+    _ _ _ _
+    _ _ _ _ _
+    _ _ _ _ _ _ _ _ _ _
+)
