@@ -55,7 +55,7 @@
   prev pp next vold volu mute
      home up   end
   XX left down right
-  @la @lm @ls @lc @lar @rar @rc @rs @rm @ra
+  @la @lm @ls @lc @lar XX XX XX XX XX
 )
 
 (deflayer transparent
