@@ -15,6 +15,7 @@
        u i o
   caps j k l
   z x c v b n m , . /
+  menu
 )
 
 ;; Define aliases similar to the kmonad configuration
@@ -47,6 +48,7 @@
       u i o
   @ek j k l
   @la @lm @ls @lc @lar @rar @rc @rs @rm @ra
+  menu
 )
 
 ;; Extend layer 
@@ -56,6 +58,7 @@
      home up   end
   XX left down right
   @la @lm @ls @lc @lar XX XX XX XX XX
+  XX
 )
 
 (deflayer transparent
@@ -64,4 +67,5 @@
        u i o
   caps j k l
   z x c v b n m , . /
+  pgup
 )
