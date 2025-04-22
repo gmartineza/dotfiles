@@ -16,8 +16,6 @@ vim.g.maplocalleader = " "
 if not vim.g.vscode then
   vim.opt.number = true
   -- vim.opt.breakindent = true
-  vim.opt.tabstop = 4
-  vim.opt.shiftwidth = 4
   vim.opt.cursorline = true
   vim.opt.scrolloff = 5
   vim.opt.wrap = false
@@ -60,8 +58,9 @@ require("lazy").setup({
   { "tpope/vim-surround" },
   { "tpope/vim-repeat" },
   { import = "terminal-plugins", 
-    cond = not vim.g.vscode
-  }
+  enable = false,
+  cond = not vim.g.vscode
+}
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
