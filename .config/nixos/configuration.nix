@@ -43,7 +43,7 @@
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
+  # services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
@@ -91,14 +91,20 @@
     ];
   };
 
+  boot.kernelModules = [ "uinput" ];
+  hardware.uinput.enable = true;
+
+  services.udev.extraRules = ''
+    KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
+  '';
+
+  users.groups.uinput.members = [ "g" ];
+
   # Enable automatic login for the user.
   # services.xserver.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.enable = true;
   # services.xserver.displayManager.autoLogin.user = "g";
   services.displayManager.autoLogin.user = "g";
-
-  # Install firefox.
-  # programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -117,20 +123,30 @@
     wget
     htop
     wl-clipboard
+    stow
+    fzf
+    ripgrep
 
     kanata
-    syncthing
+    alacritty
     
     brave
-    spotify
     parsec-bin
     discord
     code-cursor
   ];
 
+  # Install firefox.
+  # programs.firefox.enable = true;
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
+  };
+
+  programs.bash.shellAliases = {
+    ll = "ls -la";
+    reb = "nixos-rebuild --use-remote-sudo";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
