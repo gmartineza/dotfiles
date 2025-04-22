@@ -1,10 +1,4 @@
-;; Kanata keyboard configuration ported from kmonad (windows-brm.kbd) with Claude 3.7 Sonnet
-
-;; Input/output configuration
 (defcfg
-  ;; Windows configuration
-  windows-altgr add-lctl-release
-  ;;windows-interception-keyboard-only yes
   process-unmapped-keys yes
   log-layer-changes no
 )
@@ -70,4 +64,3 @@
   z x c v b n m , . /
   spc pgup
 )
-
