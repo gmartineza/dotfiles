@@ -1,6 +1,4 @@
 return {
-  "Darazaki/indent-o-matic",
-
   {
     "epwalsh/obsidian.nvim",
     version = "*",  -- recommended, use latest release

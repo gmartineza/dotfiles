@@ -56,11 +56,16 @@ vim.opt.rtp:prepend(lazypath)
 -- [[ Configure and install plugins ]]
 require("lazy").setup({
   { "tpope/vim-surround" },
-  { "tpope/vim-repeat" },
-  { import = "terminal-plugins", 
-  enable = false,
-  cond = not vim.g.vscode
-}
+  -- { "tpope/vim-repeat" },
+  { 
+    "Darazaki/indent-o-matic",
+    cond = not vim.g.vscode
+  },
+  -- {
+  --   import = "terminal-plugins", 
+  --   enable = false,
+  --   cond = not vim.g.vscode
+  -- }
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
