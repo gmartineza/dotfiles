@@ -40,6 +40,7 @@ vim.keymap.set("n",         "<leader>Y", [["+Y]])
 vim.keymap.set("n",         "<leader>p", [["+p]])
 vim.keymap.set("n",         "<leader>P", [["+P]])
 vim.keymap.set({"n", "v"},  "<leader>d", [["_d]])
+vim.keymap.set("v",         "<leader>p", [["_dP]])
 
 
 -- [[ Install `lazy.nvim` plugin manager ]]
