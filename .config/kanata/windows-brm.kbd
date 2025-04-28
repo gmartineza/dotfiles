@@ -1,22 +1,17 @@
-;; Kanata keyboard configuration ported from kmonad (windows-brm.kbd) with Claude 3.7 Sonnet
-
-;; Input/output configuration
 (defcfg
-  ;; Windows configuration
-  windows-altgr add-lctl-release
-  ;;windows-interception-keyboard-only yes
   process-unmapped-keys yes
   log-layer-changes no
+  windows-altgr add-lctl-release
 )
 
 ;; Source key layout
 (defsrc
   f6
   esc 1 2 3 4 5
-     q e u i o p
-  caps a j k l ;
-  lsft   z x c v b n m , . /
-  lctl spc menu
+  q    u i o p
+  caps j k l ;
+  z x c v b n m , . /
+  spc menu
 )
 
 ;; Define aliases similar to the kmonad configuration
@@ -39,43 +34,33 @@
   ext (layer-toggle extend)
   trns (layer-switch transparent)
   mn (layer-switch main)
-  gm (layer-switch square_gaming)
 )
 
 ;; Main layer with home row mods
 (deflayer main
-  @trns
+  f6
   esc 1 2 3 4 5
-  q    e u i o p
-  @ext a j k l ;
-  lsft   @la @lm @ls @lc @lar @rar @rc @rs @rm @ra
-  lctl spc menu
+  q   u i o p
+  @ext j k l ;
+  @la @lm @ls @lc @lar @rar @rc @rs @rm @ra
+  spc menu
 )
 
 ;; Extend layer 
 (deflayer extend
-  XX
+  @trns
   prev pp next vold volu mute
-  caps XX home up   end del
-  XX   XX left down right bspc
-  lsft @la @lm @ls @lc @lar XX XX XX XX XX
-  lctl enter XX
+  caps home up   end del
+  XX   left down right bspc
+  @la @lm @ls @lc @lar @rar @rc @rs @rm @ra
+  enter XX
 )
 
 (deflayer transparent
-  @gm
-  esc 1 2 3 4 5
-  q    e u i o p
-  caps a j k l ;
-  lsft   z x c v b n m , . /
-  lctl spc pgup
-)
-
-(deflayer square_gaming
   @mn
   esc 1 2 3 4 5
-     q a u i o p
-  lsft e j k l ;
-  lctl   z x c v b n m , . /
-  caps  spc pgup
+  q    u i o p
+  caps j k l ;
+  z x c v b n m , . /
+  spc pgdn
 )

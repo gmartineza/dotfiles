@@ -37,7 +37,7 @@
 
 ;; Main layer with home row mods
 (deflayer main
-  @trns
+  f6
   esc 1 2 3 4 5
   q   u i o p
   @ext j k l ;
@@ -47,11 +47,11 @@
 
 ;; Extend layer 
 (deflayer extend
-  XX
+  @trns
   prev pp next vold volu mute
   caps home up   end del
   XX   left down right bspc
-  @la @lm @ls @lc @lar XX XX XX XX XX
+  @la @lm @ls @lc @lar @rar @rc @rs @rm @ra
   enter XX
 )
 
@@ -61,5 +61,5 @@
   q    u i o p
   caps j k l ;
   z x c v b n m , . /
-  spc pgup
+  spc pgdn
 )
