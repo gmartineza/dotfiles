@@ -27,6 +27,7 @@ vim.opt.undofile = true
 vim.opt.relativenumber = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.path:append('**')
 
 -- [[ Basic Keymaps ]]
 -- Heressy
@@ -62,11 +63,11 @@ require("lazy").setup({
     "Darazaki/indent-o-matic",
     cond = not vim.g.vscode
   },
-  -- {
-  --   import = "terminal-plugins", 
-  --   enable = false,
-  --   cond = not vim.g.vscode
-  -- }
+  {
+    import = "terminal-plugins",
+    enable = true,
+    cond = not vim.g.vscode
+  }
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
