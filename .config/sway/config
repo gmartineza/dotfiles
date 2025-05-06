@@ -27,11 +27,15 @@ set $rofi_cmd rofi \
 # TODO: add window with the next release of rofi-wayland
 set $menu $rofi_cmd -show combi -combi-modes drun#run -modes combi
 
+set $ide cursor
+set $browser brave
+set $file_manager dolphin
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # Requires: desktop-backgrounds-compat, swaybg
-output * bg /usr/share/backgrounds/default.png fill
+# output * bg /usr/share/backgrounds/default.png fill
 #
 # Example configuration:
 #
@@ -45,7 +49,7 @@ output * bg /usr/share/backgrounds/default.png fill
 # timeout 300 'swaylock -f -c 000000' \
 exec swayidle -w \
          timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep 'swaylock -f -c 000000'
+         before-sleep 'swaylock -f -c 010101'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -215,9 +219,17 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-bindsym $mod+b exec firefox
-bindsym $mod+e exec thunar
-bindsym $mod+Shift+Return exec code
+bindsym $mod+b exec $browser
+bindsym $mod+e exec $file_manager
+bindsym $mod+Shift+Return exec $ide
+
+bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym --locked XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+
 bindsym $mod+Shift+F3 exec systemctl suspend
 bindsym $mod+Shift+F4 exec systemctl poweroff
 bindsym $mod+Shift+F5 exec systemctl reboot
@@ -227,8 +239,7 @@ default_border pixel 2
 smart_borders on
 
 assign [class="Firefox"] 1
-assign [class="Foot"] 2
-assign [class="Visual Studio Code"] 4
+assign [class="Foot"] 4
 assign [class="Spotify"] 3
 assign [class="Discord"] 3
 

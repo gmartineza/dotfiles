@@ -7,6 +7,7 @@
 {
   imports =
     [ #/etc/nixos/hardware-configuration.nix# Include the results of the hardware scan.
+      ./wm.nix
     ];
 
   # Bootloader.
@@ -87,10 +88,10 @@
     isNormalUser = true;
     description = "g";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kdePackages.kate
+    # packages = with pkgs; [
+    #   kdePackages.kate
     #  thunderbird
-    ];
+    # ];
   };
 
   # Enable the uinput module
@@ -129,19 +130,17 @@
   };
 
   # Enable automatic login for the user.
-  # services.xserver.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.enable = true;
-  # services.xserver.displayManager.autoLogin.user = "g";
   services.displayManager.autoLogin.user = "g";
+  services.displayManager.autoLogin.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # Automatic cleanup
-  nix.gc.automatic = true;
-  nix.gc.dates = "daily";
-  nix.gc.options = "--delete-older-than 10d";
-  nix.settings.auto-optimise-store = true;
+  # nix.gc.automatic = true;
+  # nix.gc.dates = "daily";
+  # nix.gc.options = "--delete-older-than 10d";
+  # nix.settings.auto-optimise-store = true;
 
   # List packages or programs installed in system profile. To search, run:
   # $ nix search wget
@@ -154,17 +153,11 @@
     stow
     fzf
     ripgrep
-
-    alacritty
     
     brave
-    parsec-bin
     discord
     code-cursor
   ];
-
-  # Install firefox.
-  # programs.firefox.enable = true;
 
   programs.neovim = {
     enable = true;
