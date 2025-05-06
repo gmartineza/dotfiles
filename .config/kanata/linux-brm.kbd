@@ -43,9 +43,9 @@
 (deflayer extend
   f6
   prev pp next vold volu mute
-       home   up     end    pgup    t       `       [       \       S-9     S-0
-	XX   left   down   right  pgdn    g       S-`     '       ]       -       =
-       lmet   del    bspc   lctl    ralt    ralt    rctl    rsft    rmet    lalt
+       home   up     end    pgup   t       `       [       \       S-9     S-0
+	XX   left   down   right  pgdn   caps    S-`     '       ]       -       =
+       del    lsft   bspc   lctl   ralt    ralt    rctl    rsft    rmet    lalt
   enter menu
 )
 
