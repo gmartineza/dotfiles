@@ -32,7 +32,7 @@
 )
 
 (deflayer main
-  @trs
+  f6
   esc 1 2 3 4 5
        q w e r t y u i o p
   @ext a s d f g h j k l ;
@@ -40,12 +40,15 @@
   spc menu
 )
 
+;; [ = _ \  -->  -   ]   S-' \   S-\
+;; ] / - `  -->  =   [   '   `   S-`
+
 (deflayer extend
-  f6
+  @trs
   prev pp next vold volu mute
-       home   up     end    pgup   t       `       [       \       S-9     S-0
-	XX   left   down   right  pgdn   caps    S-`     '       ]       -       =
-       del    lsft   bspc   lctl   ralt    ralt    rctl    rsft    rmet    lalt
+     -   ]   S-' \   t    pgup home up   end   caps
+  XX =   [   '   `   g    pgdn left down right ;
+     @la @lm @ls @lc @lar @rar bspc @rs  del   @ra
   enter menu
 )
 
