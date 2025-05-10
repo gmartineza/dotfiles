@@ -1,8 +1,14 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
 # Read `man 5 sway` for a complete reference.
+
+# Set up environment variables for GUI agents
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+
+exec /run/wrappers/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg
+
+# Start nm-applet and polkit agent
+exec /run/current-system/sw/libexec/polkit-gnome-authentication-agent-1
+exec nm-applet
 
 ### Variables
 #
@@ -28,8 +34,7 @@ set $rofi_cmd rofi \
 set $menu $rofi_cmd -show combi -combi-modes drun#run -modes combi
 
 set $ide cursor
-set $browser brave
-set $file_manager dolphin
+set $file_manager pcmanfm
 
 ### Output configuration
 #
@@ -67,9 +72,9 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
 }
 
 input "type:keyboard" {
-    xkb_layout us,latam
+    xkb_layout latam,us
     xkb_model pc105
-    xkb_variant dvorak-alt-intl,
+    xkb_variant ,dvorak-alt-intl
     xkb_options grp:win_space_toggle
 }
 
@@ -81,11 +86,10 @@ input "type:keyboard" {
 # Basics:
 #
     # Start a terminal
-    bindsym $mod+Return exec $term
+    bindsym $mod+t exec $term
 
     # Kill focused window
-    bindsym $mod+q kill
-    bindsym Mod1+F4 kill
+    bindsym $mod+c kill
 
     # Start your launcher
     bindsym $mod+d exec $menu
@@ -162,12 +166,12 @@ input "type:keyboard" {
     # You can "split" the current object of your focus with
     # $mod+v or $mod+Shift+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+Shift+v splith
-    bindsym $mod+v splitv
+    bindsym $mod+v splith
+    bindsym $mod+Shift+v splitv
 
     # Switch the current container between different layout styles
     # bindsym $mod+s layout stacking
-    bindsym $mod+t layout tabbed
+    bindsym $mod+Shift+t layout tabbed
     bindsym $mod+w layout toggle split
 
     # Make the current focus fullscreen
@@ -219,8 +223,8 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-bindsym $mod+b exec $browser
-bindsym $mod+e exec $file_manager
+bindsym $mod+b exec brave
+bindsym $mod+e exec pcmanfm-qt
 bindsym $mod+Shift+Return exec $ide
 
 bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
@@ -238,10 +242,7 @@ bindsym $mod+Shift+s exec flameshot gui
 default_border pixel 2
 smart_borders on
 
-assign [class="Firefox"] 1
-assign [class="Foot"] 4
-assign [class="Spotify"] 3
-assign [class="Discord"] 3
+assign [app_id="brave-browser"] 1
 
 bar {
     swaybar_command waybar
@@ -268,4 +269,3 @@ bar {
 # important to make the magic work. And if you want to learn the secret behind
 # the trick, it's all in the `wordexp(3)`.
 #
-include '$(/usr/libexec/sway/layered-include "/usr/share/sway/config.d/*.conf" "/etc/sway/config.d/*.conf" "${XDG_CONFIG_HOME:-$HOME/.config}/sway/config.d/*.conf")'
