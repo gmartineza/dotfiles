@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ #/etc/nixos/hardware-configuration.nix# Include the results of the hardware scan.
+    [ 
+      /etc/nixos/hardware-configuration.nix
       ./wm.nix
     ];
 
@@ -49,20 +50,21 @@
   # services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  # services.displayManager.sddm.enable = true;
+  # services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
-    layout = "latam";
-    variant = "";
+    layout = "us,latam";
+    variant = "dvorak-alt-intl,";
+    options = "grp:win_space_toggle";
   };
 
   # Configure console keymap
-  console.keyMap = "la-latin1";
+  # console.keyMap = "la-latin1";
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  # services.printing.enable = true;
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
@@ -88,10 +90,6 @@
     isNormalUser = true;
     description = "g";
     extraGroups = [ "networkmanager" "wheel" ];
-    # packages = with pkgs; [
-    #   kdePackages.kate
-    #  thunderbird
-    # ];
   };
 
   # Enable the uinput module
@@ -130,8 +128,8 @@
   };
 
   # Enable automatic login for the user.
-  services.displayManager.autoLogin.user = "g";
-  services.displayManager.autoLogin.enable = true;
+  # services.displayManager.autoLogin.user = "g";
+  # services.displayManager.autoLogin.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -145,6 +143,8 @@
   # List packages or programs installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    syncthing
+    blueman
     git
     git-credential-oauth
     wget
@@ -153,6 +153,8 @@
     stow
     fzf
     ripgrep
+    lxqt.pcmanfm-qt
+    ranger
     
     brave
     discord
@@ -162,6 +164,8 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;
+    vimAlias = true;
+    viAlias = true;
   };
 
   programs.bash.shellAliases = {
