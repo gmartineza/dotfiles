@@ -19,8 +19,12 @@ if not vim.g.vscode then
   vim.opt.cursorline = true
   vim.opt.scrolloff = 5
   vim.opt.wrap = false
-  vim.keymap.set("n", "<leader>e", "<cmd>Explore<CR>")
+  vim.opt.syntax = enable
+  vim.keymap.set("n", "<leader>e", "<cmd>Ex<CR>")
   vim.keymap.set("n", "<leader>,", "<cmd>e $MYVIMRC<CR>")
+  vim.keymap.set("n", "<leader>ff", ":find ")
+  vim.keymap.set("n", "<leader>f.", ":cd %:h<CR>:find ")
+  vim.keymap.set("n", "<leader>fb", ":buffer ")
 end
 
 vim.opt.undofile = true
