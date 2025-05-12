@@ -143,6 +143,8 @@
   # List packages or programs installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    parsec-bin
+    libreoffice
     syncthing
     blueman
     git
