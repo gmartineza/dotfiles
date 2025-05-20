@@ -1,0 +1,60 @@
+(defcfg
+  process-unmapped-keys yes
+  log-layer-changes no
+  windows-altgr add-lctl-release
+)
+
+(defsrc
+  f6
+  - =
+       q w e r t  y u i o p [ ] \
+  caps a s d f g  h j k l ; ' 
+  lsft nubs z x c v b  n m , . /
+  spc menu
+)
+
+(defalias
+  ;; Home row modifiers
+  la  (tap-hold-release 300 300 q lalt)
+  lm  (tap-hold-release 300 300 x lmet)
+  ls  (tap-hold-release 200 200 m lsft)
+  lc  (tap-hold-release 200 200 c lctl)
+  lar (tap-hold-release 200 200 v ralt)
+  rar (tap-hold-release 200 200 k ralt)
+  rc  (tap-hold-release 200 200 p rctl)
+  rs  (tap-hold-release 200 200 . rsft)
+  rm  (tap-hold-release 300 300 / rmet)
+  ra  (tap-hold-release 300 300 , lalt)
+
+  ;; Layer toggles
+  ext (layer-toggle extend)
+  trs (layer-switch transparent)
+  mn (layer-switch main)
+)
+
+(deflayer main
+  @trs
+  ' \
+       b l d w z  - f o u j ; ] = 
+  @ext n r t s g  y h a e i [
+  @la @la @lm @ls @lc @lar q @rar @rc @rs @rm @ra
+  spc menu
+)
+
+(deflayer extend
+  f6
+  ' \
+       vold volu pp    next prev pgup home up   end     caps ; ] =
+  XX   n   nubs S-nubs s g pgdn left down right i [
+  @la  @la @lm @ls  @lc    @lar q @rar bspc @rs  del   @ra
+  enter menu
+)
+
+(deflayer transparent
+  @mn
+  - =
+       q w e r t  y u i o p [ ] \
+  caps a s d f g  h j k l ; ' 
+  lsft  nubs z x c v b  n m , . /
+  spc pgdn
+)
