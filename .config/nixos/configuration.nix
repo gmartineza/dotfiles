@@ -138,10 +138,10 @@
   nixpkgs.config.allowUnfree = true;
 
   # Automatic cleanup
-  nix.gc.automatic = true;
-  nix.gc.dates = "daily";
-  nix.gc.options = "--delete-older-than 10d";
-  nix.settings.auto-optimise-store = true;
+  # nix.gc.automatic = true;
+  # nix.gc.dates = "daily";
+  # nix.gc.options = "--delete-older-than 10d";
+  # nix.settings.auto-optimise-store = true;
 
   # List packages or programs installed in system profile. To search, run:
   # $ nix search wget
