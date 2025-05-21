@@ -19,19 +19,22 @@ if not vim.g.vscode then
   vim.opt.cursorline = true
   vim.opt.scrolloff = 5
   vim.opt.wrap = false
-  vim.opt.syntax = enable
+  vim.opt.syntax = "ON"
+  vim.opt.clipboard = { "unnamed", "unnamedplus" }
+  vim.opt.path:append('**')
+
   vim.keymap.set("n", "<leader>e", "<cmd>Ex<CR>")
   vim.keymap.set("n", "<leader>,", "<cmd>e $MYVIMRC<CR>")
   vim.keymap.set("n", "<leader>ff", ":find ")
   vim.keymap.set("n", "<leader>f.", ":cd %:h<CR>:find ")
   vim.keymap.set("n", "<leader>fb", ":buffer ")
+  vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 end
 
 vim.opt.undofile = true
 vim.opt.relativenumber = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.path:append('**')
 vim.opt.swapfile = false
 
 -- [[ Basic Keymaps ]]
@@ -39,14 +42,14 @@ vim.opt.swapfile = false
 vim.keymap.set("n", "<C-s>", "<cmd>write<CR>")
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<C-c>", "<cmd>nohl<CR>")
-
+vim.keymap.set("n", "<Esc>", "<cmd>nohl<CR>")
 -- prime's stuff
-vim.keymap.set({"n", "v"},  "<leader>y", [["+y]])
-vim.keymap.set("n",         "<leader>Y", [["+Y]])
-vim.keymap.set("n",         "<leader>p", [["+p]])
-vim.keymap.set("n",         "<leader>P", [["+P]])
+-- vim.keymap.set({"n", "v"},  "<leader>y", [["+y]])
+-- vim.keymap.set("n",         "<leader>Y", [["+Y]])
+-- vim.keymap.set("n",         "<leader>p", [["+p]])
+-- vim.keymap.set("n",         "<leader>P", [["+P]])
 vim.keymap.set({"n", "v"},  "<leader>d", [["_d]])
--- vim.keymap.set("v",         "<leader>p", [["_dP]])
+vim.keymap.set("v",         "<leader>p", [["_dP]])
 
 
 -- [[ Install `lazy.nvim` plugin manager ]]
@@ -63,13 +66,42 @@ vim.opt.rtp:prepend(lazypath)
 -- [[ Configure and install plugins ]]
 require("lazy").setup({
   {
-    "tpope/vim-surround",
-    dependencies = {"tpope/vim-repeat"},
+    {
+      "Mofiqul/dracula.nvim",
+      lazy = false,
+      priority = 1000,
+      config = function()
+        vim.cmd([[colorscheme dracula]])
+      end,
+    },
+  },
+  {
+    "kylechui/nvim-surround",
+    version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+  },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    ---@type Flash.Config
+    ---@diagnostic disable-next-line
+    opts = {
+      jump = {
+        autojump = true,
+      },
+      modes = {
+        char = {
+          enabled = false,
+        },
+      },
+    },
+    keys = {
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+    },
   },
   {
     import = "plugins",
-    enable = true,
-    cond = not vim.g.vscode
+    enabled = false,
   },
 })
 
