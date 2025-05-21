@@ -1,6 +1,7 @@
 return {
   {
     'stevearc/oil.nvim',
+    enabled = true,
     ---@module 'oil'
     ---@type oil.SetupOpts
     opts = {
@@ -10,7 +11,7 @@ return {
       }
     },
     config = function()
-      vim.keymap.set("n", "<leader>e", "<cmd>Oil<CR>")
+      vim.keymap.set("n", "-", "<cmd>Oil<CR>")
     end,
     lazy = false,
   }
