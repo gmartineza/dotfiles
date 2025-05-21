@@ -6,9 +6,7 @@
 
 {
   imports =
-    [ 
-      /etc/nixos/hardware-configuration.nix
-      ./wm.nix
+    [ /etc/nixos/hardware-configuration.nix# Include the results of the hardware scan.
     ];
 
   # Bootloader.
@@ -50,21 +48,20 @@
   # services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  # services.displayManager.sddm.enable = true;
-  # services.desktopManager.plasma6.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
-    layout = "us,latam";
-    variant = "dvorak-alt-intl,";
-    options = "grp:win_space_toggle";
+    layout = "latam";
+    variant = "";
   };
 
   # Configure console keymap
-  # console.keyMap = "la-latin1";
+  console.keyMap = "la-latin1";
 
   # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  services.printing.enable = true;
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
@@ -90,6 +87,10 @@
     isNormalUser = true;
     description = "g";
     extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [
+      kdePackages.kate
+    #  thunderbird
+    ];
   };
 
   # Enable the uinput module
@@ -128,25 +129,23 @@
   };
 
   # Enable automatic login for the user.
-  # services.displayManager.autoLogin.user = "g";
-  # services.displayManager.autoLogin.enable = true;
+  # services.xserver.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.enable = true;
+  # services.xserver.displayManager.autoLogin.user = "g";
+  services.displayManager.autoLogin.user = "g";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # Automatic cleanup
-  # nix.gc.automatic = true;
-  # nix.gc.dates = "daily";
-  # nix.gc.options = "--delete-older-than 10d";
-  # nix.settings.auto-optimise-store = true;
+  nix.gc.automatic = true;
+  nix.gc.dates = "daily";
+  nix.gc.options = "--delete-older-than 10d";
+  nix.settings.auto-optimise-store = true;
 
   # List packages or programs installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    parsec-bin
-    libreoffice
-    syncthing
-    blueman
     git
     git-credential-oauth
     wget
@@ -155,19 +154,23 @@
     stow
     fzf
     ripgrep
-    lxqt.pcmanfm-qt
-    ranger
+
+    foot
     
+    syncthing
     brave
+    parsec-bin
     discord
     code-cursor
   ];
 
+  # Install firefox.
+  # programs.firefox.enable = true;
+
   programs.neovim = {
     enable = true;
-    defaultEditor = true;
-    vimAlias = true;
     viAlias = true;
+    defaultEditor = true;
   };
 
   programs.bash.shellAliases = {
