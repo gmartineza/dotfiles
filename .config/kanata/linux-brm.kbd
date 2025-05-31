@@ -5,58 +5,62 @@
 
 (defsrc
   f6
-  esc 1 2 3 4 5
-        q w e r t y u i o p
-	caps  a s d f g h j k l ;
-        z x c v b n m , . /
+  - =
+       q w e r t  y u i o p [ ] \
+  caps a s d f g  h j k l ; ' 
+  nubs z x c v b  n m , . /
   spc menu
 )
 
 (defalias
   ;; Home row modifiers
-  la  (tap-hold-release 300 300 z lalt)
+  la  (tap-hold-release 300 300 q lalt)
   lm  (tap-hold-release 300 300 x lmet)
-  ls  (tap-hold-release 200 200 c lsft)
-  lc  (tap-hold-release 200 200 v lctl)
-  lar (tap-hold-release 200 200 b ralt)
-  rar (tap-hold-release 200 200 n ralt)
-  rc  (tap-hold-release 200 200 m rctl)
-  rs  (tap-hold-release 200 200 , rsft)
-  rm  (tap-hold-release 300 300 . rmet)
-  ra  (tap-hold-release 300 300 / lalt)
+  ls  (tap-hold-release 200 200 m lsft)
+  lc  (tap-hold-release 200 200 c lctl)
+  lar (tap-hold-release 200 200 v ralt)
+  rar (tap-hold-release 200 200 k ralt)
+  rc  (tap-hold-release 200 200 p rctl)
+  rs  (tap-hold-release 200 200 . rsft)
+  rm  (tap-hold-release 300 300 / rmet)
+  ra  (tap-hold-release 300 300 , lalt)
 
   ;; Layer toggles
   ext (layer-toggle extend)
+  sext (layer-switch extend)
   trs (layer-switch transparent)
   mn (layer-switch main)
 )
 
+;; _ ¿
+;; { } _
+;; ñ
+;; ´
+
 (deflayer main
-  f6
-  esc 1 2 3 4 5
-       q w e r t y u i o p
-  @ext a s d f g h j k l ;
-       @la @lm @ls @lc @lar @rar @rc @rs @rm @ra 
+  @trs
+  ' \
+       b l d w z  - f o u j [ ] = 
+  @ext n r t s g  y h a e i ;
+  @la @lm @ls @lc @lar q @rar @rc @rs @rm @ra
   spc menu
 )
 
-;; [ = _ \  -->  -   ]   S-' \   S-\
-;; ] / - `  -->  =   [   '   `   S-`
-
 (deflayer extend
-  @trs
-  prev pp next vold volu mute
-     -   ]   S-' \   t    pgup home up   end   caps
-  XX =   [   '   `   g    pgdn left down right ;
-     @la @lm @ls @lc @lar @rar bspc @rs  del   @ra
+  f6
+  ' \
+       vold volu pp    next prev pgup home up   end     j [ ] =
+  @mn  n   nubs S-nubs @sext g pgdn left down right i ;
+  @la @lm @ls  @lc    @lar q @rar bspc @rs  del   @ra
   enter menu
 )
 
 (deflayer transparent
   @mn
-  esc 1 2 3 4 5
-        q w e r t y u i o p
-	caps  a s d f g h j k l ;
-        z x c v b n m , . /
+  - =
+       q w e r t  y u i o p [ ] \
+  lctrl a s d f g  h j k l ; ' 
+  nubs z x c v b  n m , . /
   spc pgdn
 )
+
