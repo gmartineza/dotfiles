@@ -32,11 +32,6 @@
   mn (layer-switch main)
 )
 
-;; _ ¿
-;; { } _
-;; ñ
-;; ´
-
 (deflayer main
   @trs
   ' \
@@ -59,7 +54,7 @@
   @mn
   - =
        q w e r t  y u i o p [ ] \
-  lctrl a s d f g  h j k l ; ' 
+  caps a s d f g  h j k l ; ' 
   nubs z x c v b  n m , . /
   spc pgdn
 )
