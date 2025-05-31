@@ -25,11 +25,11 @@ if not vim.g.vscode then
 
   vim.keymap.set("n", "<leader>e", "<cmd>Ex<CR>")
   vim.keymap.set("n", "<leader>,", "<cmd>e $MYVIMRC<CR>")
-  vim.keymap.set("n", "<leader>sf", ":find ")
-  vim.keymap.set("n", "<leader>s.", ":cd %:h<CR>:find ")
-  vim.keymap.set("n", "<leader>sb", ":buffer ")
-  vim.keymap.set("n", "<tab>", "<cmd>bn<CR>")
-  vim.keymap.set("n", "<S-tab>", "<cmd>bp<CR>")
+  -- vim.keymap.set("n", "<leader>sf", ":find ")
+  -- vim.keymap.set("n", "<leader>s.", ":cd %:h<CR>:find ")
+  -- vim.keymap.set("n", "<leader>sb", ":buffer ")
+  vim.keymap.set("n", "<leader><tab>", "<cmd>bn<CR>")
+  vim.keymap.set("n", "<leader><S-tab>", "<cmd>bp<CR>")
   vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 end
 
@@ -39,8 +39,9 @@ vim.opt.smartcase = true
 vim.opt.swapfile = false
 
 -- [[ Keymaps ]]
-vim.keymap.set("n", "<C-s>", "<cmd>w<CR>")
 vim.keymap.set("i", "<C-c>", "<Esc>")
+vim.keymap.set("n", "<C-s>", "<cmd>w<CR>")
+vim.keymap.set("i", "<C-s>", "<Esc><cmd>w<CR>")
 vim.keymap.set("n", "<C-c>", "<cmd>nohl<CR>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohl<CR>")
 vim.keymap.set({"n", "v"},  "<leader>d", [["_d]])
@@ -62,18 +63,6 @@ require("lazy").setup({
   {
     "tpope/vim-surround",
     dependencies = "tpope/vim-repeat",
-  },
-  {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    ---@type Flash.Config
-    ---@diagnostic disable-next-line
-    opts = { jump = { autojump = true, },
-      modes = { char = { enabled = false, }, },
-    },
-    keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, noremap = true },
-    },
   },
   {
     import = "plugins",
