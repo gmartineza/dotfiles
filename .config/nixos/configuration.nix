@@ -188,6 +188,20 @@
 
   # List services that you want to enable:
 
+  services.power-profiles-daemon.enable = false;
+
+  services.tlp = {
+    enable = true;
+    settings = {
+    CPU_SCALING_GOVERNOR_ON_AC = "ondemand";
+    CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+    CPU_BOOST_ON_AC = 1;
+    CPU_BOOST_ON_BAT = 0;
+    };
+  };
+
+    services.syncthing.enable = true;
+
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
