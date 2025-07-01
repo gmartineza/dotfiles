@@ -157,6 +157,7 @@
 
     foot
     
+    obsidian
     syncthing
     brave
     parsec-bin

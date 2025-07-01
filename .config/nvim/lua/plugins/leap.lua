@@ -1,9 +1,10 @@
-useleap = true
+useleap = false
 return
 {
   {
     "folke/flash.nvim",
-    enabled = not useleap,
+    -- enabled = not useleap,
+    enabled = false,
     event = "VeryLazy",
     ---@type Flash.Config
     ---@diagnostic disable-next-line

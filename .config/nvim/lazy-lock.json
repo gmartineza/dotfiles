@@ -1,8 +1,8 @@
 {
   "dracula.nvim": { "branch": "main", "commit": "96c9d19ce81b26053055ad6f688277d655b3f7d2" },
   "flash.nvim": { "branch": "main", "commit": "3c942666f115e2811e959eabbdd361a025db8b63" },
-  "fzf": { "branch": "master", "commit": "15d6c17390ba4d795989bcc65c0afaf91caaf41d" },
-  "fzf.vim": { "branch": "master", "commit": "3ed6ac56d03fff0389cd5b30dfd1e1f940fe91d0" },
+  "fzf": { "branch": "master", "commit": "4e3f9854e67f70f17eba8fd6c480cbe9ca1a6cee" },
+  "fzf.vim": { "branch": "master", "commit": "3cb44a8ba588e1ada409af495bdc6a4d2d37d5da" },
   "indent-o-matic": { "branch": "master", "commit": "4d11e98f523d3c4500b1dc33f0d1a248a4f69719" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
   "leap.nvim": { "branch": "main", "commit": "08ca7ec9e859856251d56c22ea107f82f563ff3c" },

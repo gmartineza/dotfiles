@@ -19,7 +19,7 @@ if not vim.g.vscode then
   vim.opt.cursorline = true
   vim.opt.scrolloff = 5
   vim.opt.wrap = false
-  vim.opt.clipboard = { "unnamed", "unnamedplus" }
+  -- vim.opt.clipboard = { "unnamed", "unnamedplus" }
   vim.opt.path:append('**')
   vim.opt.undofile = true
 
@@ -44,8 +44,15 @@ vim.keymap.set("n", "<C-s>", "<cmd>w<CR>")
 vim.keymap.set("i", "<C-s>", "<Esc><cmd>w<CR>")
 vim.keymap.set("n", "<C-c>", "<cmd>nohl<CR>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohl<CR>")
+-- vim.keymap.set({"n", "v"},  "<leader>d", [["_d]])
+-- -- vim.keymap.set("v",         "<leader>p", [["_dP]])
+-- -- prime's stuffMore actions
+vim.keymap.set({"n", "v"},  "<leader>y", [["+y]])
+vim.keymap.set("n",         "<leader>Y", [["+Y]])
+vim.keymap.set("n",         "<leader>p", [["+p]])
+vim.keymap.set("n",         "<leader>P", [["+P]])
 vim.keymap.set({"n", "v"},  "<leader>d", [["_d]])
-vim.keymap.set("v",         "<leader>p", [["_dP]])
+-- vim.keymap.set("v",         "<leader>p", [["_dP]])
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
