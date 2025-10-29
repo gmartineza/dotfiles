@@ -45,9 +45,9 @@
 (deflayer extend
   f6
   ' \
-       vold volu pp    next prev pgup home up   end     j [ ] =
-  @mn  n   nubs S-nubs @sext g pgdn left down right i ;
-  @la @lm @ls  @lc    @lar q @rar bspc @rs  del   @ra
+       mute   volu pp   nubs   prev pgup home up   end   caps [ ] =
+  @mn  prev   vold next S-nubs g    pgdn left down right i    ;
+       @la    @lm  @ls    @lc    @lar q    caps bspc @rs   del  @ra
   enter menu
 )
 
