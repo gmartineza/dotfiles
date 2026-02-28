@@ -75,7 +75,10 @@ vim.keymap.set({"n", "v"},  "<leader>d", [["_d]])
 -- vim.keymap.set("v",         "<leader>p", [["_dP]])
 
 -- leetcode
-vim.keymap.set("n", "<leader>lc", [[<cmd>!cp "%:p" ~/soloDev/leetcode-solutions/<CR>]])
+-- vim.keymap.set("n", "<leader>lc", [[<cmd>!cp "%:p" ~/soloDev/leetcode-solutions/<CR>]])
+
+-- mini.pick
+vim.keymap.set("n", "<leader>f", "<cmd>:Pick files<CR>")
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -103,7 +106,7 @@ require("lazy").setup({
     -- this is equivalent to setup({}) function
   },
   {
-    "ggandor/leap.nvim",
+    url = "https://codeberg.org/andyg/leap.nvim",
     dependencies = {
       "tpope/vim-repeat"
     },
@@ -114,23 +117,24 @@ require("lazy").setup({
     end
   },
   {
-    "kawre/leetcode.nvim",
-    cond = not vim.g.vscode,
-    -- build = ":TSUpdate html", -- if you have `nvim-treesitter` installed
-    dependencies = {
-      {
-        'nvim-mini/mini.pick',
-        version = '*',
-        config = function()
-          require('mini.pick').setup()
-        end
-        },
-        "nvim-lua/plenary.nvim",
-        "MunifTanjim/nui.nvim",
-      },
-      opts = {
-      },
-    }    
+    'nvim-mini/mini.pick',
+    version = '*',
+    config = function()
+      require('mini.pick').setup()
+    end
+  },
+  -- {
+  --   "kawre/leetcode.nvim",
+  --   cond = not vim.g.vscode,
+  --   -- build = ":TSUpdate html", -- if you have `nvim-treesitter` installed
+  --   dependencies = {
+  --       "nvim-mini/mini.pick"
+  --       "nvim-lua/plenary.nvim",
+  --       "MunifTanjim/nui.nvim",
+  --     },
+  --     opts = {
+  --     },
+  --   }    
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
