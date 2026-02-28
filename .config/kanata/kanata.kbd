@@ -5,8 +5,8 @@
 )
 
 (defsrc
-  f6
-  - =
+  f6 f7
+  1 3 - =
        q w e r t  y u i o p [ ] \
   caps a s d f g  h j k l ; ' 
   nubs z x c v b  n m , . /
@@ -17,12 +17,12 @@
   ;; Home row modifiers
   la  (tap-hold-release 300 300 q lalt)
   lm  (tap-hold-release 300 300 x lmet)
-  ls  (tap-hold-release 200 200 m lsft)
-  lc  (tap-hold-release 200 200 c lctl)
+  lc  (tap-hold-release 200 200 m lctl)
+  ls  (tap-hold-release 200 200 c lsft)
   lar (tap-hold-release 200 200 v ralt)
   rar (tap-hold-release 200 200 k ralt)
-  rc  (tap-hold-release 200 200 p rctl)
-  rs  (tap-hold-release 200 200 . rsft)
+  rs  (tap-hold-release 200 200 p rsft)
+  rc  (tap-hold-release 200 200 . rctl)
   rm  (tap-hold-release 300 300 / rmet)
   ra  (tap-hold-release 300 300 , lalt)
 
@@ -31,31 +31,52 @@
   sext (layer-switch extend)
   trs (layer-switch transparent)
   mn (layer-switch main)
+  gm (layer-switch gaming)
 )
 
 (deflayer main
-  @trs
-  ' \
+  @trs @gm
+  1 3 ' \
        b l d w z  - f o u j [ ] = 
   @ext n r t s g  y h a e i ;
-  @la @lm @ls @lc @lar q @rar @rc @rs @rm @ra
+  @la @lm @lc @ls @lar q @rar @rs @rc @rm @ra
   spc menu
 )
 
 (deflayer extend
-  f6
-  ' \
-       mute   volu pp   nubs   prev pgup home up   end   caps [ ] =
-  @mn  prev   vold next S-nubs g    pgdn left down right i    ;
-       @la    @lm  @ls    @lc    @lar q    caps bspc @rs   del  @ra
+  f6 f7
+  1 3 ' \
+  ;;     mute   volu pp   nubs   prev pgup home up   end   caps [ ] =
+  ;;@mn  prev   vold next S-nubs g    pgdn left down right i    ;
+  ;;     @la    @lm  @lc    @ls    @lar q    caps bspc @rs   del  @ra
+  ;;enter menu
+       home   up   end   pgup z  '    pp   volu mute  caps [ ] =
+  @mn  left   down right pgdn g  y    prev vold next  i    ;
+  @la  del    lctl bspc  lalt q  lalt rsft rctl rmet  lalt
   enter menu
 )
 
 (deflayer transparent
-  @mn
-  - =
+  @mn @gm
+  1 3 - =
        q w e r t  y u i o p [ ] \
   caps a s d f g  h j k l ; ' 
+  nubs z x c v b  n m , . /
+  spc pgdn
+)
+
+;; 3 -> 1 -> a -> e -> r -> mb5 && 3, ctrl -> caps, 2 -> mb4
+;; 1      | 3
+;; qwer   | qwae
+;; CAPasd | CTL1sd
+;; a -> e -> r -> a && caps -> ctrl && 3 -> tab -> ??
+
+
+(deflayer gaming
+  @trs @mn
+  3 r - =
+       q w a e t  y u i o p [ ] caps
+  lctl 1 s d f g  h j k l ; ' 
   nubs z x c v b  n m , . /
   spc pgdn
 )
