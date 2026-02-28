@@ -26,16 +26,20 @@ vim.g.maplocalleader = " "
         "when": "!activeEditorGroupEmpty"
     },
     {
-        "key": "alt+t",
-        "command": "workbench.action.terminal.toggleTerminal"
+        "key":     "alt+t",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when":    "terminalFocus || filesExplorerFocus"
     },
     {
-        "key": "alt+b",
-        "command": "workbench.action.toggleSidebarVisibility"
+        "key":     "alt+t",
+        "command": "workbench.action.terminal.focus",
+        "when":    "!terminalFocus"
     },
 ]
 
-Also add to "terminal.integrated.commandsToSkipShell": "workbench.action.toggleSidebarVisibility" and "workbench.action.terminal.toggleTerminal"
+
+Also add to "terminal.integrated.commandsToSkipShell": "workbench.action.focusActiveEditorGroup"
+and remove m, j, b, w from keys handled by neovim in normal mode ("vscode-neovim.ctrlKeysForNormalMode")
 
 --]]
 -- [[ Setting options ]]
@@ -60,7 +64,7 @@ vim.keymap.set("n", "<C-s>", "<cmd>w<CR>")
 vim.keymap.set("i", "<C-s>", "<Esc><cmd>w<CR>")
 vim.keymap.set("n", "<C-c>", "<cmd>nohl<CR>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohl<CR>")
--- vim.keymap.set({"n", "v"},  "<leader>d", [["_d]])
+vim.keymap.set({"n", "v"},  "<leader>d", [["_d]])
 -- vim.keymap.set("v",         "<leader>p", [["_dP]])
 -- -- prime's stuff
 vim.keymap.set({"n", "v"},  "<leader>y", [["+y]])
@@ -69,6 +73,9 @@ vim.keymap.set("n",         "<leader>p", [["+p]])
 vim.keymap.set("n",         "<leader>P", [["+P]])
 vim.keymap.set({"n", "v"},  "<leader>d", [["_d]])
 -- vim.keymap.set("v",         "<leader>p", [["_dP]])
+
+-- leetcode
+vim.keymap.set("n", "<leader>lc", [[<cmd>!cp "%:p" ~/soloDev/leetcode-solutions/<CR>]])
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -105,7 +112,25 @@ require("lazy").setup({
       vim.keymap.set({'n', 'x', 'o'}, 'X', '<Plug>(leap-backward)')
       vim.keymap.set({'n', 'x', 'o'}, 'gx', '<Plug>(leap-from-window)')
     end
-  }
+  },
+  {
+    "kawre/leetcode.nvim",
+    cond = not vim.g.vscode,
+    -- build = ":TSUpdate html", -- if you have `nvim-treesitter` installed
+    dependencies = {
+      {
+        'nvim-mini/mini.pick',
+        version = '*',
+        config = function()
+          require('mini.pick').setup()
+        end
+        },
+        "nvim-lua/plenary.nvim",
+        "MunifTanjim/nui.nvim",
+      },
+      opts = {
+      },
+    }    
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
