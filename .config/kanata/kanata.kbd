@@ -6,7 +6,7 @@
 
 (defsrc
   f6 f7
-  1 3 - =
+  1 - =
        q w e r t  y u i o p [ ] \
   caps a s d f g  h j k l ; ' 
   nubs z x c v b  n m , . /
@@ -36,7 +36,7 @@
 
 (deflayer main
   @trs @gm
-  1 3 ' \
+  1 ' \
        b l d w z  - f o u j [ ] = 
   @ext n r t s g  y h a e i ;
   @la @lm @lc @ls @lar q @rar @rs @rc @rm @ra
@@ -45,7 +45,7 @@
 
 (deflayer extend
   f6 f7
-  1 3 ' \
+  1 ' \
   ;;     mute   volu pp   nubs   prev pgup home up   end   caps [ ] =
   ;;@mn  prev   vold next S-nubs g    pgdn left down right i    ;
   ;;     @la    @lm  @lc    @ls    @lar q    caps bspc @rs   del  @ra
@@ -58,24 +58,20 @@
 
 (deflayer transparent
   @mn @gm
-  1 3 - =
+  1 - =
        q w e r t  y u i o p [ ] \
   caps a s d f g  h j k l ; ' 
   nubs z x c v b  n m , . /
   spc pgdn
 )
 
-;; 3 -> 1 -> a -> e -> r -> mb5 && 3, ctrl -> caps, 2 -> mb4
-;; 1      | 3
-;; qwer   | qwae
-;; CAPasd | CTL1sd
-;; a -> e -> r -> a && caps -> ctrl && 3 -> tab -> ??
+;; a e r ->>, ctrl -> caps, 3 -> 1 -> a
 
 
 (deflayer gaming
   @trs @mn
-  3 r - =
-       q w a e t  y u i o p [ ] caps
+  3 - =
+       q w a e r t  y u i o p [ ]
   lctl 1 s d f g  h j k l ; ' 
   nubs z x c v b  n m , . /
   spc pgdn
