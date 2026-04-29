@@ -28,16 +28,21 @@
 
   ;; Layer toggles
   ext (layer-toggle extend)
-  sext (layer-switch extend)
   trs (layer-switch transparent)
   mn (layer-switch main)
-  gm (layer-switch gaming)
+
+  ;; Layer + mod toggles
+  b_alt (tap-hold-release 200 200 b (multi lalt (layer-toggle extend)))
+  l_met (tap-hold-release 200 200 l (multi lmet (layer-toggle extend)))
+  d_ctl (tap-hold-release 200 200 d (multi lctl (layer-toggle extend)))
+  w_sft (tap-hold-release 200 200 w (multi lsft (layer-toggle extend)))
 )
 
 (deflayer main
-  @trs @gm
+  @trs f7
   1 ' \
-       b l d w z  - f o u j [ ] = 
+  ;; b l d w z  - f o u j [ ] = 
+  @b_alt @l_met @d_ctl @w_sft z  - f o u j [ ] =
   @ext n r t s g  y h a e i ;
   @la @lm @lc @ls @lar q @rar @rs @rc @rm @ra
   spc menu
@@ -46,29 +51,17 @@
 (deflayer extend
   f6 f7
   1 ' \
-       mute   volu pp   nubs   '    pgup home up   end   caps [ ] =
-  @mn  prev   vold next S-nubs g    pgdn left down right i    ;
-       lalt   lmet lctl lsft   ralt q    ralt bspc rctl  del  lalt
+       mute   volu pp   C-ins   '    pgup home up   end   esc [ ] =
+  @mn  prev   vold next S-ins g    pgdn left down right alt    ;
+       lalt   lmet lctl lsft   ralt nubs    ralt bspc caps  del  lalt
   enter menu
 )
 
 (deflayer transparent
-  @mn @gm
+  @mn next
   1 - =
        q w e r t  y u i o p [ ] \
   caps a s d f g  h j k l ; ' 
-  nubs z x c v b  n m , . /
-  spc pgdn
-)
-
-;; a e r ->>, ctrl -> caps, 3 -> 1 -> a
-
-
-(deflayer gaming
-  @trs @mn
-  3 - =
-       q w a e r t  y u i o p [ ]
-  lctl 1 s d f g  h j k l ; ' 
   nubs z x c v b  n m , . /
   spc pgdn
 )
