@@ -2,6 +2,7 @@
   process-unmapped-keys yes
   log-layer-changes no
   windows-altgr add-lctl-release
+  concurrent-tap-hold yes ;; defchordsv2
 )
 
 (defsrc
@@ -13,8 +14,13 @@
   spc menu
 )
 
+(defchordsv2
+  (i o) bspc 50 first-release (transparent) ;; o+u = Backspace
+  (o p) del  50 first-release (transparent) ;; u+j = Delete
+)
+
 (defalias
-  ;; Home row modifiers
+  ;; Bottom row modifiers
   la  (tap-hold-release 300 300 q lalt)
   lm  (tap-hold-release 300 300 x lmet)
   lc  (tap-hold-release 200 200 m lctl)
@@ -26,33 +32,43 @@
   rm  (tap-hold-release 300 300 / rmet)
   ra  (tap-hold-release 300 300 , lalt)
 
+  ;; Home row mods
+  ;; la  (tap-hold-release 300 300 n lalt)
+  ;; lm  (tap-hold-release 300 300 r lmet)
+  ;; lc  (tap-hold-release 200 200 t lctl)
+  ;; ls  (tap-hold-release 200 200 s lsft)
+  ;; lar (tap-hold-release 200 200 g ralt)
+  ;; rar (tap-hold-release 200 200 y ralt)
+  ;; rs  (tap-hold-release 200 200 h rsft)
+  ;; rc  (tap-hold-release 200 200 a rctl)
+  ;; rm  (tap-hold-release 300 300 e rmet)
+  ;; ra  (tap-hold-release 300 300 i lalt)
+
   ;; Layer toggles
   ext (layer-toggle extend)
   trs (layer-switch transparent)
   mn (layer-switch main)
 
   ;; Layer + mod toggles
-  b_alt (tap-hold-release 200 200 b (multi lalt (layer-toggle extend)))
-  l_met (tap-hold-release 200 200 l (multi lmet (layer-toggle extend)))
-  d_ctl (tap-hold-release 200 200 d (multi lctl (layer-toggle extend)))
-  w_sft (tap-hold-release 200 200 w (multi lsft (layer-toggle extend)))
+  spc_e (tap-hold-release 200 200 spc (layer-toggle extend))
 )
 
 (deflayer main
   @trs f7
   1 ' \
-  ;; b l d w z  - f o u j [ ] = 
-  @b_alt @l_met @d_ctl @w_sft z  - f o u j [ ] =
+  b l d w z  - f o u j [ ] = 
   @ext n r t s g  y h a e i ;
+  ;;@ext @la @lm @lc @ls @lar @rar @rs @rc @rm @ra ;
   @la @lm @lc @ls @lar q @rar @rs @rc @rm @ra
-  spc menu
+  ;;q x m c v q k p . / ,
+  @spc_e menu
 )
 
 (deflayer extend
   f6 f7
   1 ' \
        mute   volu pp   C-ins   '    pgup home up   end   esc [ ] =
-  @mn  prev   vold next S-ins g    pgdn left down right alt    ;
+  @mn  prev   vold next S-ins XX pgdn left down right alt    ;
        lalt   lmet lctl lsft   ralt nubs    ralt bspc caps  del  lalt
   enter menu
 )
