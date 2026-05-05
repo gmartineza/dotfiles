@@ -75,7 +75,7 @@ vim.keymap.set({"n", "v"},  "<leader>d", [["_d]])
 -- vim.keymap.set("v",         "<leader>p", [["_dP]])
 
 -- leetcode
-vim.keymap.set("n", "<leader>lc", [[<cmd>!cp "%:p" ~/soloDev/leetcode-solutions/<CR>]])
+-- vim.keymap.set("n", "<leader>lc", [[<cmd>!cp "%:p" ~/soloDev/leetcode-solutions/<CR>]])
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -89,49 +89,7 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
-require("lazy").setup({
-  {
-    "tpope/vim-surround",
-    dependencies = "tpope/vim-repeat",
-  },
-  {
-    "windwp/nvim-autopairs",
-    enabled = true,
-    event = "InsertEnter",
-    config = true
-    -- use opts = {} for passing setup options
-    -- this is equivalent to setup({}) function
-  },
-  {
-    "ggandor/leap.nvim",
-    dependencies = {
-      "tpope/vim-repeat"
-    },
-    config = function()
-      vim.keymap.set({'n', 'x', 'o'}, 'x', '<Plug>(leap-forward)')
-      vim.keymap.set({'n', 'x', 'o'}, 'X', '<Plug>(leap-backward)')
-      vim.keymap.set({'n', 'x', 'o'}, 'gx', '<Plug>(leap-from-window)')
-    end
-  },
-  {
-    "kawre/leetcode.nvim",
-    cond = not vim.g.vscode,
-    -- build = ":TSUpdate html", -- if you have `nvim-treesitter` installed
-    dependencies = {
-      {
-        'nvim-mini/mini.pick',
-        version = '*',
-        config = function()
-          require('mini.pick').setup()
-        end
-        },
-        "nvim-lua/plenary.nvim",
-        "MunifTanjim/nui.nvim",
-      },
-      opts = {
-      },
-    }    
-})
+require("lazy").setup("plugins")
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
