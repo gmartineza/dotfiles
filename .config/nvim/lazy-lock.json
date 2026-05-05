@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "blink.cmp": { "branch": "main", "commit": "78336bc89ee5365633bcf754d93df01678b5c08f" },
   "easy-dotnet.nvim": { "branch": "main", "commit": "cccd08c1e86f4952cbab1e27a2bd54c7251b28de" },
   "fzf-lua": { "branch": "main", "commit": "cf4c30892644f01ebfb1e248eeca9e259856f9dc" },
@@ -6,4 +7,12 @@
   "leap.nvim": { "branch": "main", "commit": "e7ca7b92f996bcbc34beee8b244ea5ef6692b478" },
   "plenary.nvim": { "branch": "master", "commit": "74b06c6c75e4eeb3108ec01852001636d85a932b" },
   "vim-repeat": { "branch": "master", "commit": "65846025c15494983dafe5e3b46c8f88ab2e9635" }
+=======
+  "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
+  "leap.nvim": { "branch": "main", "commit": "b81866399072af08195ebfbcfea9d3dcab970972" },
+  "mini.pick": { "branch": "main", "commit": "6b7974543b17cf2e294993fc3d8545a342258232" },
+  "nvim-autopairs": { "branch": "master", "commit": "59bce2eef357189c3305e25bc6dd2d138c1683f5" },
+  "vim-repeat": { "branch": "master", "commit": "65846025c15494983dafe5e3b46c8f88ab2e9635" },
+  "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" }
+>>>>>>> d18c2865426d29a0b9175c87927fd7a8964d1adc
 }

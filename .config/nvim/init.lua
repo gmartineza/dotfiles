@@ -43,25 +43,25 @@ and remove m, j, b, w from keys handled by neovim in normal mode ("vscode-neovim
 
 --]]
 -- [[ Setting options ]]
-vim.opt.number = true
-vim.opt.scrolloff = 5
-vim.opt.wrap = false
-vim.opt.tabstop=4
-vim.opt.shiftwidth=4
+-- vim.opt.number = true
+-- vim.opt.scrolloff = 5
+-- vim.opt.wrap = false
+-- vim.opt.tabstop=4
+-- vim.opt.shiftwidth=4
 -- vim.opt.clipboard = { "unnamed", "unnamedplus" }
-vim.opt.path:append('**')
-vim.opt.undofile = true
-vim.opt.relativenumber = true
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.swapfile = false
+-- vim.opt.path:append('**')
+-- vim.opt.undofile = true
+-- vim.opt.relativenumber = true
+-- vim.opt.ignorecase = true
+-- vim.opt.smartcase = true
+-- vim.opt.swapfile = false
 
 -- [[ Keymaps ]]
-vim.keymap.set("n", "<leader>e", "<cmd>Ex<CR>")
-vim.keymap.set("n", "<leader>,", "<cmd>e $MYVIMRC<CR>")
-vim.keymap.set("i", "<C-c>", "<Esc>")
-vim.keymap.set("n", "<C-s>", "<cmd>w<CR>")
-vim.keymap.set("i", "<C-s>", "<Esc><cmd>w<CR>")
+-- vim.keymap.set("n", "<leader>e", "<cmd>Ex<CR>")
+-- vim.keymap.set("n", "<leader>,", "<cmd>e $MYVIMRC<CR>")
+-- vim.keymap.set("i", "<C-c>", "<Esc>")
+-- vim.keymap.set("n", "<C-s>", "<cmd>w<CR>")
+-- vim.keymap.set("i", "<C-s>", "<Esc><cmd>w<CR>")
 vim.keymap.set("n", "<C-c>", "<cmd>nohl<CR>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohl<CR>")
 vim.keymap.set({"n", "v"},  "<leader>d", [["_d]])
@@ -76,6 +76,12 @@ vim.keymap.set({"n", "v"},  "<leader>d", [["_d]])
 
 -- leetcode
 -- vim.keymap.set("n", "<leader>lc", [[<cmd>!cp "%:p" ~/soloDev/leetcode-solutions/<CR>]])
+<<<<<<< HEAD
+=======
+
+-- mini.pick
+-- vim.keymap.set("n", "<leader>f", "<cmd>:Pick files<CR>")
+>>>>>>> d18c2865426d29a0b9175c87927fd7a8964d1adc
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -89,7 +95,54 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
+<<<<<<< HEAD
 require("lazy").setup("plugins")
+=======
+require("lazy").setup({
+  {
+    "tpope/vim-surround",
+    dependencies = "tpope/vim-repeat",
+  },
+  -- {
+  --   "windwp/nvim-autopairs",
+  --   enabled = true,
+  --   event = "InsertEnter",
+  --   config = true
+  --   -- use opts = {} for passing setup options
+  --   -- this is equivalent to setup({}) function
+  -- },
+  {
+    url = "https://codeberg.org/andyg/leap.nvim",
+    dependencies = {
+      "tpope/vim-repeat"
+    },
+    config = function()
+      vim.keymap.set({'n', 'x', 'o'}, 'x', '<Plug>(leap-forward)')
+      vim.keymap.set({'n', 'x', 'o'}, 'X', '<Plug>(leap-backward)')
+      -- vim.keymap.set({'n', 'x', 'o'}, 'gx', '<Plug>(leap-from-window)')
+    end
+  },
+  -- {
+  --   'nvim-mini/mini.pick',
+  --   version = '*',
+  --   config = function()
+  --     require('mini.pick').setup()
+  --   end
+  -- },
+  -- {
+  --   "kawre/leetcode.nvim",
+  --   cond = not vim.g.vscode,
+  --   -- build = ":TSUpdate html", -- if you have `nvim-treesitter` installed
+  --   dependencies = {
+  --       "nvim-mini/mini.pick"
+  --       "nvim-lua/plenary.nvim",
+  --       "MunifTanjim/nui.nvim",
+  --     },
+  --     opts = {
+  --     },
+  --   }    
+})
+>>>>>>> d18c2865426d29a0b9175c87927fd7a8964d1adc
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
