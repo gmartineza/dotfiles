@@ -7,19 +7,20 @@
 
 (defsrc
   f6 f7
-  1 - =
+  - =
        q w e r t  y u i o p [ ] \
-  caps a s d f g  h j k l ; ' 
+  a s d f g  h j k l ; ' 
   nubs z x c v b  n m , . /
   spc menu
 )
 
 (defchordsv2
-  (q w) tab  50 first-release (transparent)
-  (w e) esc  50 first-release (transparent)
+  ;; (q w) esc  25 all-released (transparent)
+  ;; (w e) tab  25 all-released (transparent)
+  (w r) ret  40 all-released (transparent)
 
-  (i o) bspc 50 first-release (transparent)
-  (o p) del  50 first-release (transparent)
+  (i o) bspc 25 all-released (transparent)
+  ;; (o p) del  25 all-released (transparent)
 )
 
 (defalias
@@ -46,27 +47,27 @@
 
 (deflayer main
   @trs f7
-  1 ' \
-  b l d w z  - f o u j [ ] = 
-  @ext n r t s g  y h a e i ;
+  ' \
+      b l d w z  - f o u j [ ] = 
+      n r t s g  y h a e i ;
   @la @lm @lc @ls @lar q @rar @rs @rc @rm @ra
   @spc_e menu
 )
 
 (deflayer extend
   f6 f7
-  1 ' \
-       mute   volu pp   C-ins XX   pgup home up   end   menu  [ ] =
-  @mn  prev   vold next S-ins XX   pgdn left down right enter ;
-  lalt lmet   lctl lsft ralt  nubs nubs rsft rctl rmet  lalt
+  ' \
+       mute   volu pp   C-ins XX   pgup home up   end    esc  [ ] =
+       prev   vold next S-ins XX   pgdn left down right  A-tab ;
+  lalt lmet   lctl lsft ralt  nubs S-nubs bspc rctl del  menu
   enter menu
 )
 
 (deflayer transparent
   @mn next
-  1 - =
+  - =
        q w e r t  y u i o p [ ] \
-  caps a s d f g  h j k l ; ' 
+       a s d f g  h j k l ; ' 
   nubs z x c v b  n m , . /
   spc pgdn
 )
