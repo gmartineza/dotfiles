@@ -1,6 +1,7 @@
 return {
 	"saghen/blink.cmp",
 	version = "1.*",
+	enabled = true,
 	config = function()
 		require("blink.cmp").setup {
 			fuzzy = { implementation = "prefer_rust_with_warning" },

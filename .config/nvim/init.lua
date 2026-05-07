@@ -43,25 +43,25 @@ and remove m, j, b, w from keys handled by neovim in normal mode ("vscode-neovim
 
 --]]
 -- [[ Setting options ]]
--- vim.opt.number = true
--- vim.opt.scrolloff = 5
--- vim.opt.wrap = false
--- vim.opt.tabstop=4
--- vim.opt.shiftwidth=4
+vim.opt.number = true
+vim.opt.scrolloff = 5
+vim.opt.wrap = false
+vim.opt.tabstop=4
+vim.opt.shiftwidth=4
 -- vim.opt.clipboard = { "unnamed", "unnamedplus" }
--- vim.opt.path:append('**')
--- vim.opt.undofile = true
--- vim.opt.relativenumber = true
--- vim.opt.ignorecase = true
--- vim.opt.smartcase = true
--- vim.opt.swapfile = false
+vim.opt.path:append('**')
+vim.opt.undofile = true
+vim.opt.relativenumber = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.swapfile = false
 
 -- [[ Keymaps ]]
--- vim.keymap.set("n", "<leader>e", "<cmd>Ex<CR>")
--- vim.keymap.set("n", "<leader>,", "<cmd>e $MYVIMRC<CR>")
--- vim.keymap.set("i", "<C-c>", "<Esc>")
--- vim.keymap.set("n", "<C-s>", "<cmd>w<CR>")
--- vim.keymap.set("i", "<C-s>", "<Esc><cmd>w<CR>")
+vim.keymap.set("n", "<leader>e", "<cmd>Ex<CR>")
+vim.keymap.set("n", "<leader>,", "<cmd>e $MYVIMRC<CR>")
+vim.keymap.set("i", "<C-c>", "<Esc>")
+vim.keymap.set("n", "<C-s>", "<cmd>w<CR>")
+vim.keymap.set("i", "<C-s>", "<Esc><cmd>w<CR>")
 vim.keymap.set("n", "<C-c>", "<cmd>nohl<CR>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohl<CR>")
 vim.keymap.set({"n", "v"},  "<leader>d", [["_d]])
