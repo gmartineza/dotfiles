@@ -72,10 +72,8 @@ vim.keymap.set("n",         "<leader>Y", [["+Y]])
 vim.keymap.set("n",         "<leader>p", [["+p]])
 vim.keymap.set("n",         "<leader>P", [["+P]])
 vim.keymap.set({"n", "v"},  "<leader>d", [["_d]])
--- vim.keymap.set("v",         "<leader>p", [["_dP]])
+vim.keymap.set("n",         "<leader>u", "<cmd>let @+ = expand('%:p')<cr>")
 
--- leetcode
--- vim.keymap.set("n", "<leader>lc", [[<cmd>!cp "%:p" ~/soloDev/leetcode-solutions/<CR>]])
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

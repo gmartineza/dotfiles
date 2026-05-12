@@ -1,7 +1,7 @@
 return {
   {
     "tpope/vim-surround",
-    enabled = false,
+    enabled = true,
     dependencies = "tpope/vim-repeat",
   },
 }
