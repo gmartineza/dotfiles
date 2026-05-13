@@ -15,9 +15,10 @@
 )
 
 (defchordsv2
-  (d f) ret  25 all-released (transparent)
-
-  (i o) bspc 25 all-released (transparent)
+  (w s) tab  90 first-release (transparent)
+  (e d) esc  90 first-release (transparent)
+  (i k) ret  90 first-release (transparent)
+  (o l) [    90 first-release (transparent)
 )
 
 (defalias
@@ -54,8 +55,8 @@
 (deflayer extend
   f6 f7
   ' \
-       mute   volu pp   C-ins S-A-tab pgup home up   end   esc [ ] =
-       prev   vold next S-ins A-tab   pgdn left down right tab ;
+       mute   volu pp   C-ins lrld pgup home up   end   A-S-tab [ ] =
+       prev   vold next S-ins XX   pgdn left down right A-tab ;
   lalt lmet   lctl lsft ralt  nubs caps bspc spc  del   menu
   enter menu
 )
