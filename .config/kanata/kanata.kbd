@@ -55,8 +55,8 @@
 (deflayer extend
   f6 f7
   ' \
-       mute   volu pp   C-ins lrld pgup home up   end   A-S-tab [ ] =
-       prev   vold next S-ins XX   pgdn left down right A-tab ;
+       mute   volu pp   C-ins A-f4 pgup home up   end   A-S-tab [ ] =
+       prev   vold next S-ins lrld   pgdn left down right A-tab ;
   lalt lmet   lctl lsft ralt  nubs caps bspc spc  del   menu
   enter menu
 )
