@@ -15,10 +15,10 @@
 )
 
 (defchordsv2
-  (w s) tab  90 first-release (transparent)
-  (e d) esc  90 first-release (transparent)
-  (i k) ret  90 first-release (transparent)
-  (o l) [    90 first-release (transparent)
+  (w s) [    90 first-release (transparent)
+  (e d) ret  90 first-release (transparent)
+  (i k) esc  90 first-release (transparent)
+  (o l) tab  90 first-release (transparent)
 )
 
 (defalias
