@@ -9,7 +9,7 @@
   f6 f7
   1 - =
        q w e r t  y u i o p [ ] \
-  caps a s d f g  h j k l ; ' 
+       a s d f g  h j k l ; ' 
   nubs z x c v b  n m , . /
   spc menu
 )
@@ -24,16 +24,16 @@
 
 (defalias
   ;; Bottom row modifiers
-  la  (tap-hold-release 300 300 q lalt)
-  lm  (tap-hold-release 300 300 x lmet)
-  lc  (tap-hold-release 200 200 m lctl)
-  ls  (tap-hold-release 200 200 c lsft)
-  lar (tap-hold-release 200 200 v ralt)
-  rar (tap-hold-release 200 200 k ralt)
-  rs  (tap-hold-release 200 200 p rsft)
-  rc  (tap-hold-release 200 200 . rctl)
-  rm  (tap-hold-release 300 300 / rmet)
-  ra  (tap-hold-release 300 300 , lalt)
+  lm  (tap-hold 250 250 n lmet)
+  la  (tap-hold 250 250 r lalt)
+  ls  (tap-hold 250 250 t lsft)
+  lc  (tap-hold 250 250 s lctl)
+  lar (tap-hold 250 250 g ralt)
+  rar (tap-hold 250 250 y ralt)
+  rc  (tap-hold 250 250 h rctl)
+  rs  (tap-hold 250 250 a rsft)
+  ra  (tap-hold 250 250 e lalt)
+  rm  (tap-hold 250 250 i rmet)
 
   ;; Layer toggles
   ext (layer-toggle extend)
@@ -41,32 +41,33 @@
   mn (layer-switch main)
 
   ;; Layer + mod toggles
-  spc_e (tap-hold-release 200 200 spc (layer-toggle extend))
+  spc (tap-hold 250 250 spc (layer-toggle extend))
 )
 
 (deflayer main
   @trs f7
   1 ' \
   b l d w z  - f o u j [ ] = 
-  @ext n r t s g  y h a e i ;
-  @la @lm @lc @ls @lar q @rar @rs @rc @rm @ra
-  @spc_e menu
+  ;;n r t s g  y h a e i ;
+  @lm @la @ls @lc @lar @rar @rc @rs @ra @rm ;
+  q x m c v q k p . / , 
+  @spc menu
 )
 
 (deflayer extend
   f6 f7
   1 ' \
-       mute   volu pp   C-ins XX   pgup home up   end   menu  [ ] =
-  @mn  prev   vold next S-ins XX   pgdn left down right enter ;
-  lalt lmet   lctl lsft ralt  nubs nubs rsft rctl rmet  lalt
-  enter menu
+       vold   volu pp   prev next   pgup home up   end   esc  [ ] =
+       lmet   lalt lsft lctl ralt   pgdn left down right tab ;
+  _    _      _   C-ins S-ins _     nubs bspc spc  del   menu
+  _ menu
 )
 
 (deflayer transparent
   @mn next
   1 - =
        q w e r t  y u i o p [ ] \
-  caps a s d f g  h j k l ; ' 
+       a s d f g  h j k l ; ' 
   nubs z x c v b  n m , . /
   spc pgdn
 )
