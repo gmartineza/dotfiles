@@ -17,7 +17,7 @@
 (defchordsv2
   (w s) tab  50 all-released (transparent)
   (e d) ret  50 all-released (transparent)
-  (r f) ]    50 all-released (transparent)
+  (r f) [    50 all-released (transparent)
 
   (i o) bspc 50 all-released (transparent)
   (o l) esc  50 all-released (transparent)
