@@ -7,7 +7,7 @@
 
 (defsrc
   f6 f7
-  1 - =
+   - =
        q w e r t  y u i o p [ ] \
        a s d f g  h j k l ; ' 
   nubs z x c v b  n m , . /
@@ -19,22 +19,22 @@
   (e d) ret  50 all-released (transparent)
   (r f) [    50 all-released (transparent)
 
-  (i o) bspc 50 all-released (transparent)
+  (i k) bspc 50 all-released (transparent)
   (o l) esc  50 all-released (transparent)
 )
 
 (defalias
   ;; Bottom row modifiers
-  lm  (tap-hold 250 250 n lmet)
-  la  (tap-hold 250 250 r lalt)
-  ls  (tap-hold 250 250 t lsft)
-  lc  (tap-hold 250 250 s lctl)
+  la  (tap-hold 250 250 n lalt)
+  lm  (tap-hold 250 250 r lmet)
+  lc  (tap-hold 250 250 t lctl)
+  ls  (tap-hold-release 250 250 s lsft)
   lar (tap-hold 250 250 g ralt)
   rar (tap-hold 250 250 y ralt)
-  rc  (tap-hold 250 250 h rctl)
-  rs  (tap-hold 250 250 a rsft)
-  ra  (tap-hold 250 250 e lalt)
-  rm  (tap-hold 250 250 i rmet)
+  rs  (tap-hold-release 250 250 h rsft)
+  rc  (tap-hold 250 250 a rctl)
+  rm  (tap-hold 250 250 e rmet)
+  ra  (tap-hold 250 250 i lalt)
 
   ;; Layer toggles
   ext (layer-toggle extend)
@@ -47,26 +47,26 @@
 
 (deflayer main
   @trs f7
-  1 ' \
+   ' \
   b l d w z  - f o u j [ ] = 
   ;;n r t s g  y h a e i ;
-  @lm @la @ls @lc @lar @rar @rc @rs @ra @rm ;
+  @la @lm @lc @ls @lar @rar @rs @rc @rm @ra ;
   q x m c v q k p . / , 
   @spc menu
 )
 
 (deflayer extend
   f6 f7
-  1 ' \
-       vold   volu pp   prev  next  pgup home up   end   esc  [ ] =
-       lmet   lalt lsft lctl  ralt  pgdn left down right tab ;
-  _    _      _   C-ins S-ins lrld  nubs bspc spc  del   menu
+   ' \
+       prev   next pp   _     lrld  pgup home up   end   esc  [ ] =
+       lalt   lmet lctl lsft  ralt  pgdn left down right tab ;
+  _    vold  volu C-ins S-ins _     nubs bspc spc  del   menu
   _ menu
 )
 
 (deflayer transparent
   @mn next
-  1 - =
+   - =
        q w e r t  y u i o p [ ] \
        a s d f g  h j k l ; ' 
   nubs z x c v b  n m , . /
