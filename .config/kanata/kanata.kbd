@@ -36,8 +36,20 @@
   rm  (tap-hold 250 250 e rmet)
   ra  (tap-hold 250 250 i lalt)
 
+
   c (tap-hold 250 250 c (layer-toggle fumbol))
   p (tap-hold 250 250 p (layer-toggle fumbol))
+
+  1  (tap-hold 250 250 1 lalt)
+  2  (tap-hold 250 250 2 lmet)
+  3  (tap-hold 250 250 3 lctl)
+  4  (tap-hold 250 250 4 lsft)
+  5  (tap-hold 250 250 5 ralt)
+  6  (tap-hold 250 250 6 ralt)
+  7  (tap-hold 250 250 7 rsft)
+  8  (tap-hold 250 250 8 rctl)
+  9  (tap-hold 250 250 9 rmet)
+  0  (tap-hold 250 250 0 lalt)
 
   ;; Layer toggles
   ext (layer-toggle extend)
@@ -71,8 +83,8 @@
   _ _
   _ _
      f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 _ _ _
-     1  2  3  4  5  6  7  8  9  0   _
-  _ grv =  [ f11 lsgt f12 ] \  ;  '
+     @1 @2 @3 @4 @5 @6 @7 @8 @9 @0   _
+ _ lsgt = grv f11 _ f12 ] '  \  ;
   _ _
 )
 
