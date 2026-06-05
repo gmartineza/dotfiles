@@ -1,3 +1,8 @@
+;; Goals: reduce finger contorsions, load inbalances, repetitive movements off the home row. Do not interfere with fast typing, do not add mental load nor burden.
+;; 1. Regular mod keys cause load imbalances and contorsions to pinkies and if avoided the whole hand instead.
+;; 2. Bspc, del, ret & the nav clusted cause bad repetitive movements. Tab & esc could also be considered to do so.
+;; 1. Tap-hold on alphas. TBD between home or bottom row mods. Shift on middle finger reduces mental load.
+;; 2. Extend layer. Tap-hold on alphas, space, or dedicating caps to it.
 (defcfg
   process-unmapped-keys yes
   log-layer-changes no
@@ -6,93 +11,56 @@
 )
 
 (defsrc
-  f6 f7
-   - =
-       q w e r t  y u i o p [ ] \
-       a s d f g  h j k l ; ' 
-  nubs z x c v b  n m , . /
+  f6 f7 - =
+          q w e r t  y u i o p \
+          a s d f g  h j k l ; '
+  lsft nubs z x c v  n m , . /
   spc menu
 )
 
-(defchordsv2
-  (w s) tab  50 all-released (transparent)
-  (e d) ret  50 all-released (transparent)
-  (r f) [    50 all-released (transparent)
-
-  (i k) bspc 50 all-released (transparent)
-  (o l) esc  50 all-released (transparent)
-)
-
 (defalias
-  ;; Bottom row modifiers
-  la  (tap-hold 250 250 n lalt)
-  lm  (tap-hold 250 250 r lmet)
-  lc  (tap-hold 250 250 t lctl)
-  ls  (tap-hold-release 250 250 s lsft)
-  lar (tap-hold 250 250 g ralt)
-  rar (tap-hold 250 250 y ralt)
-  rs  (tap-hold-release 250 250 h rsft)
-  rc  (tap-hold 250 250 a rctl)
-  rm  (tap-hold 250 250 e rmet)
-  ra  (tap-hold 250 250 i lalt)
-
-
-  d (tap-hold 250 250 d (layer-toggle fumbol))
-  o (tap-hold 250 250 o (layer-toggle fumbol))
-
-  1  (tap-hold 250 250 1 lalt)
-  2  (tap-hold 250 250 2 lmet)
-  3  (tap-hold 250 250 3 lctl)
-  4  (tap-hold 250 250 4 lsft)
-  5  (tap-hold 250 250 5 ralt)
-  6  (tap-hold 250 250 6 ralt)
-  7  (tap-hold 250 250 7 rsft)
-  8  (tap-hold 250 250 8 rctl)
-  9  (tap-hold 250 250 9 rmet)
-  0  (tap-hold 250 250 0 lalt)
-
   ;; Layer toggles
-  ext (layer-toggle extend)
+  lex  (tap-hold         250 250 n (layer-toggle extend))
+  rex  (tap-hold         250 250 i (layer-toggle extend))
   trs (layer-switch transparent)
-  mn (layer-switch main)
+  mn  (layer-switch main)
 
-  ;; Layer + mod toggles
-  spc (tap-hold-release 250 250 spc (layer-toggle extend))
+  ;; Tap-hold modifiers
+  la  (tap-hold         250 250 r lalt)
+  lc  (tap-hold         250 250 t lctl)
+  ls  (tap-hold-release 250 250 s lsft)
+  lar (tap-hold         250 250 g ralt)
+  rar (tap-hold         250 250 y ralt)
+  rs  (tap-hold-release 250 250 h rsft)
+  rc  (tap-hold         250 250 a rctl)
+  ra  (tap-hold         250 250 e lalt)
+
+  lm  (tap-hold         250 250 x lmet)
+  rm  (tap-hold         250 250 / rmet)
+
+  q   (tap-hold         250 250 q lsft)
 )
 
 (deflayer main
-  @trs f7
-   ' \
-  b l @d w z  - f @o u j [ ] = 
-  ;;n r t s g  y h a e i ;
-  @la @lm @lc @ls @lar @rar @rs @rc @rm @ra ;
-  q x m c v q k p . / , 
-  @spc menu
+  @trs f7 ' \
+     b   l   d   w   z    -    f   o   u   j    =
+    @lex @la @lc @ls @lar @rar @rs @rc @ra @rex ;
+  @q q   @lm m   c   v    k    p   .   @rm ,
+  spc menu
 )
 
 (deflayer extend
-  f6 f7
-   ' \
-       prev   next pp   _     lrld  pgup home up   end   esc  [ ] =
-       lalt   lmet lctl lsft  ralt  pgdn left down right tab ;
-  _    vold  volu C-ins S-ins lsgt  caps bspc spc  del   menu
-  _ menu
-)
-
-(deflayer fumbol
-  _ _
-  _ _
-     f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 _ _ _
-     @1 @2 @3 @4 @5 @6 @7 @8 @9 @0   _
- _ = lsgt grv f11 _ f12 ] '  \  ;
-  _ _
+  f6 f7 pause prnt
+       _    prev next pp    C-ins pgup home up   end   esc  _
+       _    lalt lctl lsft  S-ins pgdn left down right tab  lrld
+  A-f4 A-f4 lmet vold volu  menu  nubs bspc spc  del   caps
+  ret  _
 )
 
 (deflayer transparent
-  @mn next
-   - =
-       q w e r t  y u i o p [ ] \
-       a s d f g  h j k l ; ' 
-  nubs z x c v b  n m , . /
+  @mn next - =
+          q w e r t  y u i o p \
+          a s d f g  h j k l ; '
+  lsft nubs z x c v  n m , . /
   spc pgdn
 )
