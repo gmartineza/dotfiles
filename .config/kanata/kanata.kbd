@@ -13,7 +13,7 @@
 (defsrc
   f6 f7 - =
           q w e r t  y u i o p \
-          a s d f g  h j k l ; '
+  caps    a s d f g  h j k l ; '
   lsft nubs z x c v  n m , . /
   spc menu
 )
@@ -37,41 +37,43 @@
   )
 )
 
+(deftemplate modkey (char mod tapkeys)
+  (switch
+    ((key-timing 3 less-than 140)) $char break
+    () (tap-hold-tap-keys 250 250 $char $mod $tapkeys) break
+  )
+)
+
 (defalias
-  ;; Layer toggles
-  lex (tap-hold 250 250 n (layer-toggle extend))
-  rex (tap-hold              250 250 i (layer-toggle extend))
+  ex (layer-toggle extend)
   trs (layer-switch transparent)
   mn  (layer-switch main)
-
   ;; Tap-hold modifiers
-  la  (tap-hold-tap-keys     250 250 r lalt $lhs)
-  lc  (tap-hold-tap-keys     250 250 t lctl $lhs)
-  ls  (tap-hold-release-keys 250 250 s lsft $lhs)
-  lar (tap-hold-tap-keys     250 250 g ralt $lhs)
-  rar (tap-hold-tap-keys     250 250 y ralt $rhs)
-  rs  (tap-hold-release-keys 250 250 h rsft $rhs)
-  rc  (tap-hold-tap-keys     250 250 a rctl $rhs)
-  ra  (tap-hold-tap-keys     250 250 e lalt $rhs)
-
-  lm  (tap-hold-tap-keys     250 250 x lmet $lhs)
-  rm  (tap-hold-tap-keys     250 250 / rmet $rhs)
-
-  q   (tap-hold              250 250 q lsft)
+  la  (t! modkey r lalt $lhs)
+  ls  (tap-hold-release-keys 50 250 t lsft $lhs)
+  lc  (t! modkey s lctl $lhs)
+  lar (t! modkey g ralt $lhs)
+  rar (t! modkey y ralt $rhs)
+  rc  (t! modkey h rctl $rhs)
+  rs  (tap-hold-release-keys 50 250 a rsft $rhs)
+  ra  (t! modkey e lalt $rhs)
+  lm  (t! modkey x lmet $lhs)
+  rm  (t! modkey / rmet $rhs)
+  q   (tap-hold 250 250 q lsft)
 )
 
 (deflayer main
   @trs f7 ' \
-     b   l   d   w   z    -    f   o   u   j    =
-    @lex @la @lc @ls @lar @rar @rs @rc @ra @rex ;
-  @q q   @lm m   c   v    k    p   .   @rm ,
+      b   l   d   w   z    -    f   o   u   j    =
+  @ex n   @la @ls @lc @lar @rar @rc @rs @ra i ;
+  @q  q   @lm m   c   v    k    p   .   @rm ,
   spc menu
 )
 
 (deflayer extend
   f6 f7 pause prnt
        _    prev next pp    C-ins pgup home up   end   esc  _
-       _    lalt lctl lsft  S-ins pgdn left down right tab  lrld
+  _    _    lalt lctl lsft  S-ins pgdn left down right tab  lrld
   A-f4 A-f4 lmet vold volu  menu  nubs bspc spc  del   caps
   ret  _
 )
@@ -79,7 +81,7 @@
 (deflayer transparent
   @mn next - =
           q w e r t  y u i o p \
-          a s d f g  h j k l ; '
+  caps    a s d f g  h j k l ; '
   lsft nubs z x c v  n m , . /
   spc pgdn
 )
