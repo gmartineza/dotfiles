@@ -18,27 +18,46 @@
   spc menu
 )
 
+(defvar
+
+  lhs (
+  f6 f7
+          q w e r t
+          a s d f g
+  lsft nubs z x c v
+  spc menu
+  )
+
+  rhs (
+  f6 f7 - =
+                     y u i o p \
+                     h j k l ; '
+                     n m , . /
+  spc menu
+  )
+)
+
 (defalias
   ;; Layer toggles
-  lex  (tap-hold         250 250 n (layer-toggle extend))
-  rex  (tap-hold         250 250 i (layer-toggle extend))
+  lex (tap-hold 250 250 n (layer-toggle extend))
+  rex (tap-hold              250 250 i (layer-toggle extend))
   trs (layer-switch transparent)
   mn  (layer-switch main)
 
   ;; Tap-hold modifiers
-  la  (tap-hold         250 250 r lalt)
-  lc  (tap-hold         250 250 t lctl)
-  ls  (tap-hold-release 250 250 s lsft)
-  lar (tap-hold         250 250 g ralt)
-  rar (tap-hold         250 250 y ralt)
-  rs  (tap-hold-release 250 250 h rsft)
-  rc  (tap-hold         250 250 a rctl)
-  ra  (tap-hold         250 250 e lalt)
+  la  (tap-hold-tap-keys     250 250 r lalt $lhs)
+  lc  (tap-hold-tap-keys     250 250 t lctl $lhs)
+  ls  (tap-hold-release-keys 250 250 s lsft $lhs)
+  lar (tap-hold-tap-keys     250 250 g ralt $lhs)
+  rar (tap-hold-tap-keys     250 250 y ralt $rhs)
+  rs  (tap-hold-release-keys 250 250 h rsft $rhs)
+  rc  (tap-hold-tap-keys     250 250 a rctl $rhs)
+  ra  (tap-hold-tap-keys     250 250 e lalt $rhs)
 
-  lm  (tap-hold         250 250 x lmet)
-  rm  (tap-hold         250 250 / rmet)
+  lm  (tap-hold-tap-keys     250 250 x lmet $lhs)
+  rm  (tap-hold-tap-keys     250 250 / rmet $rhs)
 
-  q   (tap-hold         250 250 q lsft)
+  q   (tap-hold              250 250 q lsft)
 )
 
 (deflayer main
