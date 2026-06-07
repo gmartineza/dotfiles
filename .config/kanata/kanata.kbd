@@ -23,7 +23,7 @@
   lhs (
   f6 f7
           q w e r t
-          a s d f g
+          a s     g
   lsft nubs z x c v
   spc menu
   )
@@ -31,7 +31,7 @@
   rhs (
   f6 f7 - =
                      y u i o p \
-                     h j k l ; '
+                     h     l ; '
                      n m , . /
   spc menu
   )
