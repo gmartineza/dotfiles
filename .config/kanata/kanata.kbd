@@ -74,7 +74,7 @@
   f6 f7 pause prnt
        vold pp   volu prev next  pgup home up   end   esc  _
   _    _    lalt lsft lctl _     pgdn left down right tab  lrld
-  _    _    lmet _   S-ins C-ins nubs bspc spc  del   caps
+  _    _    lmet _   C-ins S-ins nubs bspc spc  del   caps
   ret  _
 )
 
