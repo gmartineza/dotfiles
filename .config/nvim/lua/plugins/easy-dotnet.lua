@@ -1,7 +1,7 @@
 return {
   {
     "GustavEikaas/easy-dotnet.nvim",
-    enabled = true,
+    enabled = false,
     cmd = { "Dotnet" },
     dependencies = { "nvim-lua/plenary.nvim", "ibhagwan/fzf-lua" },
     keys = {

@@ -2,80 +2,21 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
---[[ VSCode keybindings.json
-
-[
-    {
-        "key": "ctrl+tab",
-        "command": "workbench.action.nextEditor",
-        "when": "!activeEditorGroupEmpty"
-    },
-    {
-        "key": "ctrl+shift+tab",
-        "command": "workbench.action.previousEditor",
-        "when": "!activeEditorGroupEmpty"
-    },
-    {
-        "key": "ctrl+tab",
-        "command": "-workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup",
-        "when": "!activeEditorGroupEmpty"
-    },
-    {
-        "key": "ctrl+shift+tab",
-        "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup",
-        "when": "!activeEditorGroupEmpty"
-    },
-    {
-        "key":     "alt+t",
-        "command": "workbench.action.focusActiveEditorGroup",
-        "when":    "terminalFocus || filesExplorerFocus"
-    },
-    {
-        "key":     "alt+t",
-        "command": "workbench.action.terminal.focus",
-        "when":    "!terminalFocus"
-    },
-]
-
-
-Also add to "terminal.integrated.commandsToSkipShell": "workbench.action.focusActiveEditorGroup"
-and remove m, j, b, w from keys handled by neovim in normal mode ("vscode-neovim.ctrlKeysForNormalMode")
-
---]]
 -- [[ Setting options ]]
--- vim.opt.number = true
--- vim.opt.scrolloff = 5
--- vim.opt.wrap = false
--- vim.opt.tabstop=4
--- vim.opt.shiftwidth=4
--- vim.opt.clipboard = { "unnamed", "unnamedplus" }
--- vim.opt.path:append('**')
--- vim.opt.undofile = true
--- vim.opt.relativenumber = true
--- vim.opt.ignorecase = true
--- vim.opt.smartcase = true
--- vim.opt.swapfile = false
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.undofile = true
 
 -- [[ Keymaps ]]
--- vim.keymap.set("n", "<leader>e", "<cmd>Ex<CR>")
--- vim.keymap.set("n", "<leader>,", "<cmd>e $MYVIMRC<CR>")
--- vim.keymap.set("i", "<C-c>", "<Esc>")
--- vim.keymap.set("n", "<C-s>", "<cmd>w<CR>")
--- vim.keymap.set("i", "<C-s>", "<Esc><cmd>w<CR>")
-vim.keymap.set("n", "<C-c>", "<cmd>nohl<CR>")
-vim.keymap.set("n", "<Esc>", "<cmd>nohl<CR>")
-vim.keymap.set({"n", "v"},  "<leader>d", [["_d]])
--- vim.keymap.set("v",         "<leader>p", [["_dP]])
--- -- prime's stuff
-vim.keymap.set({"n", "v"},  "<leader>y", [["+y]])
-vim.keymap.set("n",         "<leader>Y", [["+Y]])
-vim.keymap.set("n",         "<leader>p", [["+p]])
-vim.keymap.set("n",         "<leader>P", [["+P]])
-vim.keymap.set({"n", "v"},  "<leader>d", [["_d]])
--- vim.keymap.set("v",         "<leader>p", [["_dP]])
+vim.keymap.set("n", "<leader>,", "<cmd>e $MYVIMRC<CR>")
 
--- leetcode
--- vim.keymap.set("n", "<leader>lc", [[<cmd>!cp "%:p" ~/soloDev/leetcode-solutions/<CR>]])
+vim.keymap.set("i", "<C-c>",     "<Esc>")
+vim.keymap.set("n", "<C-c>",     "<cmd>nohl<CR>")
+vim.keymap.set("n", "<Esc>",     "<cmd>nohl<CR>")
+
+vim.keymap.set({"n", "v"},       "<leader>d", [["_d]])
+vim.keymap.set({"n", "v"},       "<leader>y", [["+y]])
+vim.keymap.set("n",              "<leader>p", [["+p]])
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
