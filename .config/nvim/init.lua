@@ -7,6 +7,8 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 vim.opt.undofile = true
 vim.opt.swapfile = false
 
@@ -16,6 +18,7 @@ vim.keymap.set("n", "<leader>,", "<cmd>e $MYVIMRC<CR>")
 vim.keymap.set("i", "<C-c>",     "<Esc>")
 vim.keymap.set("n", "<C-c>",     "<cmd>nohl<CR>")
 vim.keymap.set("n", "<Esc>",     "<cmd>nohl<CR>")
+vim.keymap.set("n", "<leader>t", "<cmd>tabnew | term<CR>")
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 vim.keymap.set({"n", "v"},       "<leader>d", [["_d]])
