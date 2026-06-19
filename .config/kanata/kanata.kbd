@@ -72,10 +72,10 @@
 
 (deflayer extend
   f6 f7 pause prnt
-       vold pp   volu prev next  pgup home up   end   esc  _
-  _    caps lalt lsft lctl _     pgdn left down right tab  lrld
-  _    _    lmet menu C-ins S-ins nubs bspc spc  del  caps
-  ret  _
+       vold pp   volu next prev   _   home up   end  nubs  _
+  _    ret  lalt lsft lctl _      esc left down right ret  lrld
+  _    _    lmet menu C-ins S-ins tab bspc spc  del  caps
+  _  _
 )
 
 (deflayer transparent
