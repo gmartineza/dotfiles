@@ -5,6 +5,9 @@ vim.g.maplocalleader = " "
 -- [[ Setting options ]]
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.shiftwidth = 4
+vim.opt.smarttab = true
+vim.opt.expandtab = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.undofile = true
@@ -17,10 +20,16 @@ vim.keymap.set("i", "<C-c>",     "<Esc>")
 vim.keymap.set("n", "<C-c>",     "<cmd>nohl<CR>")
 vim.keymap.set("n", "<Esc>",     "<cmd>nohl<CR>")
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+vim.keymap.set("n", "<leader>t",     "<cmd>:tabnew | term<CR>")
 
 vim.keymap.set({"n", "v"},       "<leader>d", [["_d]])
 vim.keymap.set({"n", "v"},       "<leader>y", [["+y]])
 vim.keymap.set("n",              "<leader>p", [["+p]])
+
+-- [[ pwsh > cmd ]]
+if vim.fn.has("win32") == 1 then
+  vim.o.shell = "pwsh.exe"
+end
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
