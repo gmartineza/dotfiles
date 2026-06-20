@@ -49,17 +49,17 @@
   trs (layer-switch transparent)
   mn  (layer-switch main)
   ;; Tap-hold modifiers
-  la  (t! modkey r lalt $lhs)
+  la  (t! modkey                    r lalt $lhs)
   ls  (tap-hold-release-keys 50 250 t lsft $lhs)
-  lc  (t! modkey s lctl $lhs)
-  lar (t! modkey g ralt $lhs)
-  rar (t! modkey y ralt $rhs)
-  rc  (t! modkey h rctl $rhs)
+  lc  (t! modkey                    s lctl $lhs)
+  lar (t! modkey                    g ralt $lhs)
+  rar (t! modkey                    y ralt $rhs)
+  rc  (t! modkey                    h rctl $rhs)
   rs  (tap-hold-release-keys 50 250 a rsft $rhs)
-  ra  (t! modkey e lalt $rhs)
-  lm  (t! modkey x lmet $lhs)
-  rm  (t! modkey / rmet $rhs)
-  q   (tap-hold 250 250 q lsft)
+  ra  (t! modkey                    e lalt $rhs)
+  lm  (t! modkey                    x lmet $lhs)
+  rm  (t! modkey                    / rmet $rhs)
+  q   (tap-hold 250 250             q lsft)
 )
 
 (deflayer main
@@ -72,10 +72,10 @@
 
 (deflayer extend
   f6 f7 pause prnt
-       vold pp   volu prev next  pgup home up   end   esc  _
-  _    caps lalt lsft lctl _     pgdn left down right tab  lrld
-  _    _    lmet menu C-ins S-ins nubs bspc spc  del  caps
-  ret  _
+       vold pp   volu prev next   nubs home up   end   pgup  _
+  _    ret  lalt lsft lctl pause  esc  left down right ret   lrld
+  _    caps lmet menu C-ins S-ins tab  bspc spc  del   pgdn
+  _  _
 )
 
 (deflayer transparent
