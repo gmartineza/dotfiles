@@ -1,13 +1,5 @@
 Remove-PSReadLineKeyHandler -Chord 'Ctrl+v'
 
-# function fuzzycdevd {
-#     $dir = Get-ChildItem -Path "C:\DEV-Gabriel","$HOME\desneaDev" -Directory -Depth 3 -ErrorAction SilentlyContinue |
-#         Select-Object -ExpandProperty FullName | fzf
-#     if (-not $dir) { return }
-#
-#     cd $dir
-# }
-
 function zellisesh {
     $dir = Get-ChildItem -Path "C:\DEV-Gabriel","$HOME\desneaDev" -Directory -Depth 3 -ErrorAction SilentlyContinue |
         Select-Object -ExpandProperty FullName | fzf
