@@ -1,12 +1,12 @@
 Remove-PSReadLineKeyHandler -Chord 'Ctrl+v'
 
-function sessionizer {
-    $dir = Get-ChildItem -Path "C:\DEV-Gabriel","$HOME\desneaDev" -Directory -Depth 3 -ErrorAction SilentlyContinue |
-        Select-Object -ExpandProperty FullName | fzf
-    if (-not $dir) { return }
-    
-    cd $dir
-}
+# function fuzzycdevd {
+#     $dir = Get-ChildItem -Path "C:\DEV-Gabriel","$HOME\desneaDev" -Directory -Depth 3 -ErrorAction SilentlyContinue |
+#         Select-Object -ExpandProperty FullName | fzf
+#     if (-not $dir) { return }
+#
+#     cd $dir
+# }
 
 function zellisesh {
     $dir = Get-ChildItem -Path "C:\DEV-Gabriel","$HOME\desneaDev" -Directory -Depth 3 -ErrorAction SilentlyContinue |
@@ -18,13 +18,14 @@ function zellisesh {
 }
 
 function fuzzycd {
-    $dir = Get-ChildItem -Path "." -Directory -Depth 3 -ErrorAction SilentlyContinue |
-        Select-Object -ExpandProperty FullName | fzf
+    param([string]$from = ".")
+    
+    $dir = Get-ChildItem -Path $from -Directory -Depth 3 -ErrorAction SilentlyContinue |
+        ForEach-Object { $_.FullName } | fzf
     if (-not $dir) { return }
     
-    cd $dir
+    Set-Location $dir
 }
 
-Set-Alias cdd sessionizer
 Set-Alias zdd zellisesh
-Set-Alias zd fuzzycd
+Set-Alias cdd fuzzycd
