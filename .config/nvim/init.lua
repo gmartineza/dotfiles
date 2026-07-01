@@ -18,8 +18,12 @@ vim.keymap.set("n", "<leader>,", "<cmd>e $MYVIMRC<CR>")
 vim.keymap.set("i", "<C-c>",     "<Esc>")
 vim.keymap.set("n", "<C-c>",     "<cmd>nohl<CR>")
 vim.keymap.set("n", "<Esc>",     "<cmd>nohl<CR>")
+
+vim.keymap.set("n", "<leader>c", "<cmd>let @+ = expand('%:p')<CR>")
+
 vim.keymap.set("n", "<leader>t", "<cmd>tabnew | term<CR>")
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
 
 vim.keymap.set({"n", "v"},       "<leader>d", [["_d]])
 vim.keymap.set({"n", "v"},       "<leader>y", [["+y]])
