@@ -15,9 +15,12 @@ vim.opt.shiftwidth = 4
 vim.opt.undofile = true
 vim.opt.swapfile = false
 vim.opt.wrap = false
+vim.opt.termguicolors = true
+vim.opt.cursorline = true
 
 -- [[ Keymaps ]]
 vim.keymap.set("n", "<leader>,", "<cmd>e $MYVIMRC<CR>")
+vim.keymap.set("n", " ", "<noop>")
 
 vim.keymap.set("i", "<C-c>",     "<Esc>")
 vim.keymap.set("n", "<C-c>",     "<cmd>nohl<CR>")
@@ -29,8 +32,8 @@ vim.keymap.set("n", "<leader>t",     "<cmd>:tabnew | term<CR>")
 
 
 vim.keymap.set({"n", "v"},       "<leader>d", [["_d]])
-vim.keymap.set("n",              "<leader>p", [["_dp]])
-vim.keymap.set("n",              "<leader>P", [["_dP]])
+vim.keymap.set({"n", "v"},       "<leader>p", [["_dp]])
+vim.keymap.set({"n", "v"},       "<leader>P", [["_dP]])
 vim.keymap.set({"n", "v"},       "<leader>y", [["+y]])
 vim.keymap.set("n",              "<leader>c", [[<cmd>let @+ = expand("%")<CR>]])
 
