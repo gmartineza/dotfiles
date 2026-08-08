@@ -48,6 +48,7 @@
   ex (layer-toggle extend)
   trs (layer-switch transparent)
   mn  (layer-switch main)
+  gm  (layer-switch gaming)
   ;; Tap-hold modifiers
   la  (t! modkey                    r lalt $lhs)
   ls  (tap-hold-release-keys 50 250 t lsft $lhs)
@@ -63,7 +64,7 @@
 )
 
 (deflayer main
-  @trs f7 ' \
+  @trs @gm ' \
       b   l   d   w   z    -    f   o   u   j    =
   @ex n   @la @ls @lc @lar @rar @rc @rs @ra i ;
   @q  q   @lm m   c   v    k    p   .   @rm ,
@@ -79,9 +80,17 @@
 )
 
 (deflayer transparent
-  @mn next - =
-          q w e r t  y u i o p \
+  @mn _ - =
+           q w e r t  y u i o p \
   caps    a s d f g  h j k l ; '
+  lsft nubs z x c v  n m , . /
+  spc pgdn
+)
+
+(deflayer gaming
+  _ @mn - =
+          q d w e r  y u i o p \
+  caps    t a s f g  h j k l ; '
   lsft nubs z x c v  n m , . /
   spc pgdn
 )
