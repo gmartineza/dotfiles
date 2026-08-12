@@ -45,7 +45,6 @@
 )
 
 (defalias
-  ex (layer-toggle extend)
   trs (layer-switch transparent)
   mn  (layer-switch main)
   gm  (layer-switch gaming)
@@ -61,14 +60,26 @@
   lm  (t! modkey                    x lmet $lhs)
   rm  (t! modkey                    / rmet $rhs)
   q   (tap-hold 250 250             q lsft)
+  ;; Space: flowtap-guarded tap-hold. Tap=spc, hold=extend layer, tap-then-hold=repeat spc.
+  ;; Fast-typed space stays space (no key-list primitive: any listed key would force-tap and kill nav).
+  sp  (switch
+        ((key-timing 3 less-than 140)) spc break
+        () (tap-hold-release 250 250 spc (layer-while-held extend)) break
+      )
+)
+
+;; Combo: physical e+d pressed together = enter. Tight window avoids roll misfires.
+;; Disabled on non-main layers so nav/gaming keep those keys.
+(defchordsv2
+  (x c) ret 50 all-released (transparent gaming)
 )
 
 (deflayer main
   @trs @gm ' \
       b   l   d   w   z    -    f   o   u   j    =
-  @ex n   @la @ls @lc @lar @rar @rc @rs @ra i ;
+  caps n   @la @ls @lc @lar @rar @rc @rs @ra i ;
   @q  q   @lm m   c   v    k    p   .   @rm ,
-  spc menu
+  @sp menu
 )
 
 (deflayer extend
