@@ -25,6 +25,7 @@ vim.keymap.set("n", " ", "<noop>")
 vim.keymap.set("i", "<C-c>",     "<Esc>")
 vim.keymap.set("n", "<C-c>",     "<cmd>nohl<CR>")
 vim.keymap.set("n", "<Esc>",     "<cmd>nohl<CR>")
+vim.keymap.set("n", "<C-s>",     "<cmd>write<CR>")
 
 vim.keymap.set("n", "<leader>t", "<cmd>tabnew | term<CR>")
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
