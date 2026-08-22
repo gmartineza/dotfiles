@@ -68,11 +68,10 @@
       )
 )
 
-;; Combo: physical e+d pressed together = enter. Tight window avoids roll misfires.
-;; Disabled on non-main layers so nav/gaming keep those keys.
 (defchordsv2
   (m ,) bspc 50 all-released (transparent gaming)
   (, .) ret  50 all-released (transparent gaming)
+  (z x) ret  50 all-released (transparent gaming)
 )
 
 (deflayer main
