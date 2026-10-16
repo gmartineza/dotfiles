@@ -85,7 +85,7 @@
 (deflayer extend
   f6 f7 pause prnt
        prev vold pp   volu next   nubs home up   end   pgup  _
-  _    caps lalt lsft lctl pause  esc  left down right ret   lrld
+  _    mute lalt lsft lctl pause  esc  left down right ret   lrld
   _    ret  lmet menu C-ins S-ins tab  bspc spc  del   pgdn
   _  _
 )
