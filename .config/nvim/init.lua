@@ -19,7 +19,7 @@ vim.opt.termguicolors = true
 vim.opt.cursorline = true
 
 -- [[ Keymaps ]]
-vim.keymap.set("n", "<leader>,", "<cmd>tabnew $MYVIMRC | tcd %:p:h<CR>")
+vim.keymap.set("n", "<leader>,", "<cmd>tabnew $MYVIMRC | tcd %:p:h<CR>", { desc = "Open nvim config in new tab" })
 vim.keymap.set("n", " ", "<Nop>")
 
 vim.keymap.set("i", "<C-c>",     "<Esc>")
@@ -27,14 +27,14 @@ vim.keymap.set("n", "<C-c>",     "<cmd>nohl<CR>")
 vim.keymap.set("n", "<Esc>",     "<cmd>nohl<CR>")
 vim.keymap.set("n", "<C-s>",     "<cmd>write<CR>")
 
-vim.keymap.set("n", "<leader>t", "<cmd>tabnew | term<CR>")
+vim.keymap.set("n", "<leader>t", "<cmd>tabnew | term<CR>", { desc = "Terminal in new tab" })
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
-vim.keymap.set({"n", "v"},       "<leader>d", [["_d]])
-vim.keymap.set({"n", "v"},       "<leader>p", [["_dp]])
-vim.keymap.set({"n", "v"},       "<leader>P", [["_dP]])
-vim.keymap.set({"n", "v"},       "<leader>y", [["+y]])
-vim.keymap.set("n",              "<leader>c", [[<cmd>let @+ = expand("%")<CR>]])
+vim.keymap.set({"n", "v"},       "<leader>d", [["_d]],  { desc = "Delete without yanking" })
+vim.keymap.set({"n", "v"},       "<leader>p", [["_dp]], { desc = "Replace with paste (after)" })
+vim.keymap.set({"n", "v"},       "<leader>P", [["_dP]], { desc = "Replace with paste (before)" })
+vim.keymap.set({"n", "v"},       "<leader>y", [["+y]],  { desc = "Yank to system clipboard" })
+vim.keymap.set("n",              "<leader>c", [[<cmd>let @+ = expand("%")<CR>]], { desc = "Copy file path" })
 
 -- [[ pwsh > cmd ]]
 if vim.fn.has("win32") == 1 then
