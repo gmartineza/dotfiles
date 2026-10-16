@@ -1,5 +1,7 @@
 return {
   'coder/claudecode.nvim',
+  -- server (and ~/.claude/ide lock file) must exist before claude's /ide runs
+  lazy = false,
   -- claude runs in its own zellij pane (see zellij/layouts/dev.kdl); connect with /ide
   opts = { terminal = { provider = 'none' } },
   keys = {
