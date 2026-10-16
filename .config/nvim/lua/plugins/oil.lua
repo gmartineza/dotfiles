@@ -9,8 +9,7 @@ return {
     show_hidden = false,
     }
   },
-  lazy = false,
   keys = {
-    { '<leader>e', '<cmd>Oil<CR>', desc = 'Open Oil' },
+    { '<leader>o', '<cmd>Oil<CR>', desc = 'Open Oil' },
   },
 }
