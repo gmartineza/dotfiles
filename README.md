@@ -7,19 +7,19 @@ One repo to rule them all: keyboard, shell (multiplexer), editor, AI agent.
 
 | Path | Piece | Role |
 |---|---|---|
-| `.config/kanata/kanata.kbd` | [kanata](https://github.com/jtroo/kanata) | Keyboard layer: Graphite layout, home row mods, extend layer, combos. [Details below](#keyboard-ergonomics-kanata). |
-| `.config/zellij/` | zellij | Multiplexer. `config.kdl` (locked-by-default, Alt-based navigation) and `layouts/dev.kdl` (nvim and claude side by side). |
+| `.config/kanata/kanata.kbd` | [kanata](https://github.com/jtroo/kanata) | Increase comfort, reduce RSI risk. [Details below](#keyboard-ergonomics-kanata). |
+| `.config/zellij/` | [zellij](https://zellij.dev/) | Multiplexer. `config.kdl` (locked-by-default, Alt-based navigation) and `layouts/dev.kdl` (nvim and claude side by side). |
 | `Microsoft.PowerShell_profile.ps1` | pwsh | `zd` project/session picker, `fcd` fuzzy cd. |
-| `.config/nvim/` | Neovim | lazy.nvim, one plugin per file in `lua/plugins/`. Conventions are in the header of `init.lua`. |
+| `.config/nvim/` | [Neovim](https://neovim.io/) | lazy.nvim, one plugin per file in `lua/plugins/`. Conventions are in the header of `init.lua`. |
 | `.config/git/hooks/post-checkout` | git | Warns when a branch switch no longer matches the zellij session name. |
 | `.config/systemd/user/` | systemd | User services for kanata, kmonad and syncthing (Linux). |
 | `link.ps1` | installer | Windows counterpart of `stow .` |
 
 ## Workflow
 
-1. **`zd`** lists existing zellij sessions (newest first), then project folders under the dev roots. Each entry is `Parent/Sub/Repo@branch`, so monorepo work on different branches is distinguishable without remembering branch names. Picking one attaches to the session or creates it from `dev.kdl`.
+1. **`zd`** lists existing zellij sessions (newest first), then project folders under the dev roots. Each entry is `Parent/Sub/Repo@branch`, so monorepo work on different branches is distinguishable. Picking one attaches to the session or creates it from [dev.kdl](.config/zellij/layouts/dev.kdl).
 2. **The session** is nvim on the left and the `claude` CLI on the right. `Alt f` toggles a floating shell for ad-hoc commands, `Alt z` fullscreens the focused pane.
-3. **Claude and nvim talk** through `claudecode.nvim`: run `/ide` in the Claude pane once per session. Claude's edits open as native nvim diffs. Accept with `<leader>ay`, deny with `<leader>an`. `<leader>ab` and `<leader>as` push the buffer or selection to Claude.
+3. **Claude and nvim talk** through `claudecode.nvim`: run `/ide` in the Claude pane once per session. Claude's edits open as native nvim diffs. Accept with `<leader>ay` (agent-yes), deny with `<leader>an`. `<leader>ab` and `<leader>as` push the buffer or selection to Claude.
 4. **Git** inside nvim: gitsigns for hunks (`<leader>h*`), fugitive for status/commit (`<leader>gg`), diffview for diffs and history (`<leader>gd`, `<leader>gh`), `<leader>gb` for branch switching. Switching to a branch the session isn't named after prints a reminder from the `post-checkout` hook.
 
 Press `<leader>` and pause: which-key shows every mapping with its description.
