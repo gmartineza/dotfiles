@@ -15,7 +15,7 @@ return {
             -- fallback: rg can't list dirs, derive them from `rg --files` (respects .gitignore)
             local seen = {}
             dirs = {}
-            for _, f in ipairs(vim.fn.systemlist("rg --files")) do
+            for _, f in ipairs(vim.fn.systemlist({ "rg", "--files" })) do
               local d = vim.fs.dirname(f)
               while d and d ~= "." and not seen[d] do
                 seen[d] = true
