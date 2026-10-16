@@ -5,23 +5,27 @@ function z {
 }
 
 function zellisesh {
-    # sessions (newest first) then dirs; git dirs are named <dir>@<branch>
+    # sessions (newest first) then dirs; label = last 3 path parts (+ @<branch> for git dirs)
+    # session name = label with '/' -> '-'; fzf shows the label, fields are name<TAB>dir<TAB>label
     $sessions = @(zellij ls -n -r 2>$null | ForEach-Object { ($_ -split ' ')[0] })
-    $dirs = @{}
+    $dirs = @{}; $labels = @{}
     Get-ChildItem -Path "C:\DEV-Gabriel","$HOME\desneaDev" -Directory -Depth 3 -ErrorAction SilentlyContinue | ForEach-Object {
-        $name = $_.Name
+        $label = (($_.FullName -split '[\\/]') | Select-Object -Last 3) -join '/'
         if (Test-Path "$($_.FullName)\.git") {
             $b = git -C $_.FullName branch --show-current 2>$null
-            if ($b) { $name = "$name@$($b -replace '/','-')" }
+            if ($b) { $label = "$label@$($b -replace '/','-')" }
         }
+        $name = $label -replace '/','-'
         $dirs[$name] = $_.FullName
+        $labels[$name] = $label
     }
-    $lines = @($sessions | ForEach-Object { "$_`t$($dirs[$_])" }) +
-             @($dirs.Keys | Where-Object { $_ -notin $sessions } | Sort-Object | ForEach-Object { "$_`t$($dirs[$_])" })
-    $pick = $lines | fzf --delimiter "`t" --with-nth 1
+    $row = { param($n) $l = if ($labels[$n]) { $labels[$n] } else { $n }; "$n`t$($dirs[$n])`t$l" }
+    $lines = @($sessions | ForEach-Object { & $row $_ }) +
+             @($dirs.Keys | Where-Object { $_ -notin $sessions } | Sort-Object | ForEach-Object { & $row $_ })
+    $pick = $lines | fzf --delimiter "`t" --with-nth 3
     if (-not $pick) { return }
 
-    $name, $dir = $pick -split "`t"
+    $name, $dir, $null = $pick -split "`t"
     if (-not $dir) { zellij attach $name; return }   # session whose branch/dir no longer matches
     zellij attach --create $name options --default-cwd $dir --default-layout "$HOME\dotfiles\.config\zellij\layouts\dev.kdl"
 }
