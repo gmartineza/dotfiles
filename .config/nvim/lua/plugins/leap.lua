@@ -1,6 +1,6 @@
 return {
   {
-    "ggandor/leap.nvim",
+    url = "https://codeberg.org/andyg/leap.nvim", -- GitHub repo is emptied, moved to Codeberg
     enabled = true,
     dependencies = {
       "tpope/vim-repeat"
