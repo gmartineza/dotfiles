@@ -19,8 +19,8 @@ vim.opt.termguicolors = true
 vim.opt.cursorline = true
 
 -- [[ Keymaps ]]
-vim.keymap.set("n", "<leader>,", "<cmd>e $MYVIMRC<CR>")
-vim.keymap.set("n", " ", "<noop>")
+vim.keymap.set("n", "<leader>,", "<cmd>tabnew $MYVIMRC | tcd %:p:h<CR>")
+vim.keymap.set("n", " ", "<Nop>")
 
 vim.keymap.set("i", "<C-c>",     "<Esc>")
 vim.keymap.set("n", "<C-c>",     "<cmd>nohl<CR>")
