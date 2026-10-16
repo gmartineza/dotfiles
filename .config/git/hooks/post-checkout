@@ -2,7 +2,10 @@
 # post-checkout: $3 = 1 for a branch change (0 for file checkouts)
 [ "$3" = 1 ] && [ -n "$ZELLIJ_SESSION_NAME" ] || exit 0
 b=$(git branch --show-current | tr / -)
+[ -n "$b" ] || exit 0  # detached HEAD (plugin managers etc.)
+top=$(basename "$(git rev-parse --show-toplevel)")
+# only warn for the repo this session is named after: <...>/<repo>@<branch>
 case "$ZELLIJ_SESSION_NAME" in
-  *@"$b") ;;
-  *) echo "!! now on '$b' but zellij session is '$ZELLIJ_SESSION_NAME' - switch back, or run zd" >&2 ;;
+  *"$top"@"$b") ;;
+  *"$top"@*) echo "!! now on '$b' but zellij session is '$ZELLIJ_SESSION_NAME' - switch back, or run zd" >&2 ;;
 esac
