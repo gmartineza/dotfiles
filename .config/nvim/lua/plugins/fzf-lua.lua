@@ -7,6 +7,7 @@ return {
       { "<leader>fg", "<cmd>FzfLua live_grep<CR>",  desc = "Live grep" },
       { "<leader>fc", "<cmd>FzfLua grep_cword<CR>", desc = "Grep word under cursor" },
       { "<leader>f.", "<cmd>FzfLua resume<CR>", desc = "Resume previous Fzf-Lua search" },
+      { "<leader>gb", "<cmd>FzfLua git_branches<CR>", desc = "Switch git branch" },
       { "<leader>fq", "<cmd>FzfLua lgrep_quickfix<CR>", desc = "Live grep quickfix files" },
       { "<leader>fd", function()
           local dirs = "fd --type d"
