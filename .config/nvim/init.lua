@@ -29,8 +29,6 @@ vim.keymap.set("n", "<C-s>",     "<cmd>write<CR>")
 
 vim.keymap.set("n", "<leader>t", "<cmd>tabnew | term<CR>")
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-vim.keymap.set("n", "<leader>t",     "<cmd>:tabnew | term<CR>")
-
 
 vim.keymap.set({"n", "v"},       "<leader>d", [["_d]])
 vim.keymap.set({"n", "v"},       "<leader>p", [["_dp]])
