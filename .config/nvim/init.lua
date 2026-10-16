@@ -1,3 +1,17 @@
+-- [[ Guidelines ]]
+-- Layout:   one plugin per file in lua/plugins/<name>.lua, returning a lazy.nvim spec. Core options and
+--           global keymaps live in this file. Commit lazy-lock.json together with the plugin change.
+-- Keymaps:  every <leader> mapping gets a `desc` (which-key renders it). New <leader> prefixes need a
+--           group label in lua/plugins/which-key.lua. Check which-key for a free key before binding.
+-- Loading:  lazy-load via `keys`, `cmd` or `event`. Use `lazy = false` only when the plugin must run at
+--           startup, and say why in a comment.
+-- Scope:    prefer native Neovim, then an installed plugin, before adding a dependency. Check that a
+--           plugin repo is alive.
+-- Windows:  the shell is pwsh and shellcmdflag is not set for it. Call external tools in list form
+--           (vim.fn.system({ "rg", "--files" })), never as a shell string.
+-- Verify:   `nvim --headless +qa` must exit clean, and try the changed keys for real before committing.
+-- Commits:  Conventional Commits with a scope, e.g. feat(nvim): ...
+
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
