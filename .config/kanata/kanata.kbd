@@ -1,8 +1,3 @@
-;; Goals: reduce finger contorsions, load inbalances, repetitive movements off the home row. Do not interfere with fast typing, do not add mental load nor burden.
-;; 1. Regular mod keys cause load imbalances and contorsions to pinkies and if avoided the whole hand instead.
-;; 2. Bspc, del, ret & the nav clusted cause bad repetitive movements. Tab & esc could also be considered to do so.
-;; 1. Tap-hold on alphas. TBD between home or bottom row mods. Shift on middle finger reduces mental load.
-;; 2. Extend layer. Tap-hold on alphas, space, or dedicating caps to it.
 (defcfg
   process-unmapped-keys yes
   log-layer-changes no
@@ -11,7 +6,7 @@
 )
 
 (defsrc
-  f6 f7 - =
+  f6 - =
           q w e r t  y u i o p \
   caps    a s d f g  h j k l ; '
   lsft nubs z x c v  n m , . /
@@ -21,7 +16,7 @@
 (defvar
 
   lhs (
-  f6 f7
+  f6
           q w e r t
           a s   f g
   lsft nubs z x c v
@@ -29,7 +24,7 @@
   )
 
   rhs (
-  f6 f7 - =
+  f6 - =
                      y u i o p \
                      h j   l ; '
                      n m , . /
@@ -37,6 +32,8 @@
   )
 )
 
+;; Adapted from Kenkyo's flowtap/charmod templates (MIT, https://github.com/argenkiwi/kenkyo).
+;; Change: hold side uses tap-hold-tap-keys with the same-hand key list (chordal hold).
 (deftemplate modkey (char mod tapkeys)
   (switch
     ((key-timing 3 less-than 140)) $char break
@@ -47,7 +44,6 @@
 (defalias
   trs (layer-switch transparent)
   mn  (layer-switch main)
-  gm  (layer-switch gaming)
   ;; Tap-hold modifiers
   la  (t! modkey                    r lalt $lhs)
   ls  (tap-hold-release-keys 50 250 t lsft $lhs)
@@ -69,12 +65,12 @@
 )
 
 (defchordsv2
-  (, .) bspc 50 all-released (transparent gaming)
-  (z x) bspc 50 all-released (transparent gaming)
+  (, .) bspc 50 all-released (transparent)
+  (z x) bspc 50 all-released (transparent)
 )
 
 (deflayer main
-  @trs @gm ' \
+  @trs ' \
       b   l   d   w   z    -    f   o   u   j    =
   caps n   @la @ls @lc @lar @rar @rc @rs @ra i ;
   @q  q   @lm m   c   v    k    p   .   @rm ,
@@ -82,7 +78,7 @@
 )
 
 (deflayer extend
-  f6 f7 pause prnt
+  f6 pause prnt
        prev vold pp   volu next   nubs home up   end   pgup  _
   _    mute lalt lsft lctl pause  esc  left down right ret   lrld
   _    ret  lmet menu C-ins S-ins tab  bspc spc  del   pgdn
@@ -93,14 +89,6 @@
   @mn _ - =
            q w e r t  y u i o p \
   caps    a s d f g  h j k l ; '
-  lsft nubs z x c v  n m , . /
-  spc pgdn
-)
-
-(deflayer gaming
-  _ @mn - =
-          q d w e r  y u i o p \
-  lctl    t a s f g  h j k l ; '
   lsft nubs z x c v  n m , . /
   spc pgdn
 )
