@@ -69,5 +69,13 @@ vim.opt.rtp:prepend(lazypath)
 -- [[ Configure and install plugins ]]
 require("lazy").setup("plugins")
 
+-- [[ Autocommands ]]
+   vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "json", "jsonc" },
+    callback = function()
+      vim.bo.commentstring = "//%s"
+    end,
+  })
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
