@@ -6,7 +6,9 @@ return {
     vim.g.loaded_netrwPlugin = 1
   end,
   lazy = false,
-  opts = {},
+  opts = {
+    git = { show_on_dirs = false, show_on_open_dirs = false },
+  },
   keys = {
     { '<leader>e', '<cmd>NvimTreeToggle<CR>',   desc = 'Toggle file tree' },
     { '<leader>E', '<cmd>NvimTreeFindFile<CR>', desc = 'Reveal file in tree' },
