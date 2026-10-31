@@ -65,9 +65,7 @@
 )
 
 (defchordsv2
-  (z x) ret  50 all-released (transparent)
-  (c v) bspc 50 all-released (transparent)
-  (n m) bspc 50 all-released (transparent)
+  (z x) bspc 50 all-released (transparent)
   (, .) ret  50 all-released (transparent)
 )
 
