@@ -17,7 +17,7 @@ One repo to rule them all: keyboard, shell (multiplexer), editor, AI agent.
 
 ## Workflow
 
-1. **`zd`** fzf-picks a git folder under the dev roots, then a branch (`*` = session already exists). Session is named `Parent-Sub-Repo@branch`: an existing one is re-attached, otherwise the branch is checked out and a session is created from [dev.kdl](.config/zellij/layouts/dev.kdl).
+1. **`zd`** fzf-picks a git folder under the dev roots, then a branch (`*` = session already exists). Session is named `Parent-Sub-Repo@branch`: an existing one is re-attached, otherwise a session is created from [dev.kdl](.config/zellij/layouts/dev.kdl). A branch other than the checked-out one runs in a git worktree at `<repo>.wt/<branch>` (created if missing), so the main folder is never switched.
 2. **The session** is nvim on the left and the `claude` CLI on the right. `Alt f` toggles a floating shell for ad-hoc commands, `Alt z` fullscreens the focused pane.
 3. **Claude and nvim talk** through `claudecode.nvim`: run `/ide` in the Claude pane once per session. Claude's edits open as native nvim diffs. Accept with `<leader>ay` (agent-yes), deny with `<leader>an`. `<leader>ab` and `<leader>as` push the buffer or selection to Claude.
 4. **Git** inside nvim: gitsigns for hunks (`<leader>h*`), fugitive for status/commit (`<leader>gg`), diffview for diffs and history (`<leader>gd`, `<leader>gh`), `<leader>gb` for branch switching. Switching to a branch the session isn't named after prints a reminder from the `post-checkout` hook.

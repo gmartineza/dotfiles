@@ -5,9 +5,9 @@ function z {
 }
 
 function zellisesh {
-    # pick git dir, then branch; session = last 3 path parts + '@' + branch, '/' -> '-'. Existing session is re-attached.
+    # pick git dir, then branch (non-current branches open in a worktree); session = last 3 path parts + '@' + branch, '/' -> '-'. Existing session is re-attached.
     $repos = Get-ChildItem -Path "C:\DEV-Gabriel","$HOME\desneaDev" -Directory -Depth 3 -ErrorAction SilentlyContinue |
-        Where-Object { Test-Path "$($_.FullName)\.git" } | ForEach-Object FullName
+        Where-Object { Test-Path "$($_.FullName)\.git" -PathType Container } | ForEach-Object FullName   # worktrees have a .git file: skip
     $dir = $repos | fzf --prompt 'repo> '
     if (-not $dir) { return }
 
@@ -25,7 +25,17 @@ function zellisesh {
 
     $name = & $sess $b
     if ($name -in $sessions) { zellij attach $name; return }
-    if ($b -ne $cur) { git -C $dir checkout $b; if ($LASTEXITCODE) { return } }
+    if ($b -ne $cur) {
+        # one worktree per branch, so the main dir is never switched
+        $wt = git -C $dir worktree list --porcelain | ForEach-Object {
+            if ($_ -like 'worktree *') { $p = $_.Substring(9) } elseif ($_ -eq "branch refs/heads/$b") { $p }
+        } | Select-Object -First 1
+        if (-not $wt) {
+            $wt = Join-Path (Split-Path $dir) "$(Split-Path $dir -Leaf).wt\$($b -replace '/','-')"
+            git -C $dir worktree add $wt $b; if ($LASTEXITCODE) { return }
+        }
+        $dir = $wt
+    }
     zellij attach --create $name options --default-cwd $dir --default-layout "$HOME\dotfiles\.config\zellij\layouts\dev.kdl"
 }
 
