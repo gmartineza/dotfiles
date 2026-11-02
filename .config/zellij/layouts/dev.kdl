@@ -7,7 +7,9 @@ layout {
     }
     tab {
         pane split_direction="vertical" {
-            pane command="nvim"
+            pane command="nvim" {
+                args "--listen" "\\\\.\\pipe\\nvim-claude"
+            }
             pane command="claude"
         }
     }
