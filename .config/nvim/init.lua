@@ -35,6 +35,11 @@ vim.opt.wrap = true
 vim.opt.linebreak = true
 vim.opt.list = false
 
+-- Per-zellij-session RPC pipe so Claude can open buffers here (see ~/.claude/CLAUDE.md). Matches nvim-claude-$ZELLIJ_SESSION_NAME.
+if vim.env.ZELLIJ_SESSION_NAME then
+  pcall(vim.fn.serverstart, [[\\.\pipe\nvim-claude-]] .. vim.env.ZELLIJ_SESSION_NAME)
+end
+
 -- [[ Keymaps ]]
 vim.keymap.set("n", "<leader>,", "<cmd>tabnew $MYVIMRC | tcd %:p:h<CR>", { desc = "Open nvim config in new tab" })
 vim.keymap.set("n", " ", "<Nop>")
