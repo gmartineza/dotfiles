@@ -28,9 +28,12 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.undofile = true
 vim.opt.swapfile = false
-vim.opt.wrap = false
 vim.opt.termguicolors = true
 vim.opt.cursorline = true
+-- soft wrap without modifying file contents. Toggle with just :set nowrap
+vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.list = false
 
 -- [[ Keymaps ]]
 vim.keymap.set("n", "<leader>,", "<cmd>tabnew $MYVIMRC | tcd %:p:h<CR>", { desc = "Open nvim config in new tab" })
@@ -40,6 +43,7 @@ vim.keymap.set("i", "<C-c>",     "<Esc>")
 vim.keymap.set("n", "<C-c>",     "<cmd>nohl<CR>")
 vim.keymap.set("n", "<Esc>",     "<cmd>nohl<CR>")
 vim.keymap.set("n", "<C-s>",     "<cmd>write<CR>")
+vim.keymap.set("i", "<C-s>",     "<Esc><cmd>write<CR>")
 
 vim.keymap.set("n", "<leader>t", "<cmd>tabnew | term<CR>", { desc = "Terminal in new tab" })
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
