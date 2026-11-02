@@ -5,28 +5,27 @@ function z {
 }
 
 function zellisesh {
-    # sessions (newest first) then dirs; label = last 3 path parts (+ @<branch> for git dirs)
-    # session name = label with '/' -> '-'; fzf shows the label, fields are name<TAB>dir<TAB>label
-    $sessions = @(zellij ls -n -r 2>$null | ForEach-Object { ($_ -split ' ')[0] })
-    $dirs = @{}; $labels = @{}
-    Get-ChildItem -Path "C:\DEV-Gabriel","$HOME\desneaDev" -Directory -Depth 3 -ErrorAction SilentlyContinue | ForEach-Object {
-        $label = (($_.FullName -split '[\\/]') | Select-Object -Last 3) -join '/'
-        if (Test-Path "$($_.FullName)\.git") {
-            $b = git -C $_.FullName branch --show-current 2>$null
-            if ($b) { $label = "$label@$($b -replace '/','-')" }
-        }
-        $name = $label -replace '/','-'
-        $dirs[$name] = $_.FullName
-        $labels[$name] = $label
-    }
-    $row = { param($n) $l = if ($labels[$n]) { $labels[$n] } else { $n }; "$n`t$($dirs[$n])`t$l" }
-    $lines = @($sessions | ForEach-Object { & $row $_ }) +
-             @($dirs.Keys | Where-Object { $_ -notin $sessions } | Sort-Object | ForEach-Object { & $row $_ })
-    $pick = $lines | fzf --delimiter "`t" --with-nth 3
-    if (-not $pick) { return }
+    # pick git dir, then branch; session = last 3 path parts + '@' + branch, '/' -> '-'. Existing session is re-attached.
+    $repos = Get-ChildItem -Path "C:\DEV-Gabriel","$HOME\desneaDev" -Directory -Depth 3 -ErrorAction SilentlyContinue |
+        Where-Object { Test-Path "$($_.FullName)\.git" } | ForEach-Object FullName
+    $dir = $repos | fzf --prompt 'repo> '
+    if (-not $dir) { return }
 
-    $name, $dir, $null = $pick -split "`t"
-    if (-not $dir) { zellij attach $name; return }   # session whose branch/dir no longer matches
+    $sessions = @(zellij ls -n -r 2>$null | ForEach-Object { ($_ -split ' ')[0] })
+    $cur = git -C $dir branch --show-current 2>$null
+    $base = (($dir -split '[\\/]') | Select-Object -Last 3) -join '-'
+    $sess = { param($b) "$base@$($b -replace '/','-')" }
+    $branches = @(git -C $dir branch --format='%(refname:short)' 2>$null)
+    $lines = @($cur) + @($branches | Where-Object { $_ -ne $cur }) | Where-Object { $_ } | ForEach-Object {
+        $mark = if ((& $sess $_) -in $sessions) { '*' } else { ' ' }   # * = session exists
+        "$_`t$mark $_"
+    }
+    $b = ($lines | fzf --delimiter "`t" --with-nth 2 --prompt 'branch> ') -split "`t" | Select-Object -First 1
+    if (-not $b) { return }
+
+    $name = & $sess $b
+    if ($name -in $sessions) { zellij attach $name; return }
+    if ($b -ne $cur) { git -C $dir checkout $b; if ($LASTEXITCODE) { return } }
     zellij attach --create $name options --default-cwd $dir --default-layout "$HOME\dotfiles\.config\zellij\layouts\dev.kdl"
 }
 
@@ -51,6 +50,12 @@ function prompt {
         [System.Environment]::CurrentDirectory = $p.ProviderPath
     }
     "PS $p$('>' * ($nestedPromptLevel + 1)) "
+}
+
+# Reload Path from the registry (keeps session-only entries) so new installs work without restarting. Bound to Alt r in zellij.
+function reload-path {
+    $reg = 'Machine','User' | ForEach-Object { [Environment]::GetEnvironmentVariable('Path', $_) -split ';' }
+    $env:Path = (($reg + ($env:Path -split ';')) | Where-Object { $_ } | Select-Object -Unique) -join ';'
 }
 
 Set-Alias fz  zellisesh
