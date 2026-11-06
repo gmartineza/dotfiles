@@ -33,11 +33,12 @@
 )
 
 ;; Adapted from Kenkyo's flowtap/charmod templates (MIT, https://github.com/argenkiwi/kenkyo).
-;; Change: hold side uses tap-hold-tap-keys with the same-hand key list (chordal hold).
+;; Change: hold side uses tap-hold-release-keys with the same-hand key list (chordal hold).
+;; Release variant: another key pressed+released while held resolves hold immediately (no timeout wait).
 (deftemplate modkey (char mod tapkeys)
   (switch
     ((key-timing 3 less-than 140)) $char break
-    () (tap-hold-tap-keys 250 250 $char $mod $tapkeys) break
+    () (tap-hold-release-keys 250 250 $char $mod $tapkeys) break
   )
 )
 
@@ -45,17 +46,17 @@
   trs (layer-switch transparent)
   mn  (layer-switch main)
   ;; Tap-hold modifiers
+  lm  (t! modkey                    n lmet $lhs)
   la  (t! modkey                    r lalt $lhs)
-  ls  (tap-hold-release-keys 50 250 t lsft $lhs)
-  lc  (t! modkey                    s lctl $lhs)
+  lc  (t! modkey                    t lctl $lhs)
+  ls  (tap-hold-release-keys 50 250 s lsft $lhs)
   lar (t! modkey                    g ralt $lhs)
   rar (tap-hold-release-keys 50 250 y ralt $rhs)
-  rc  (t! modkey                    h rctl $rhs)
-  rs  (tap-hold-release-keys 50 250 a rsft $rhs)
+  rs  (tap-hold-release-keys 50 250 h rsft $rhs)
+  rc  (t! modkey                    a rctl $rhs)
   ra  (t! modkey                    e lalt $rhs)
-  lm  (t! modkey                    x lmet $lhs)
-  rm  (t! modkey                    / rmet $rhs)
-  q   (tap-hold 250 250             q lsft)
+  rm  (t! modkey                    i rmet $rhs)
+  q   (tap-hold-release 250 250     q lsft)
   ;; Space: flowtap-guarded tap-hold. Tap=spc, hold=extend layer, tap-then-hold=repeat spc.
   ;; Fast-typed space stays space (no key-list primitive: any listed key would force-tap and kill nav).
   sp  (switch
@@ -64,16 +65,31 @@
       )
 )
 
+;; Chord outputs skip tap-hold waiting state, so a held mod never resolves (kanata #1615).
+;; Routing through a vkey makes the output go through waiting state: mod+chord resolves hold instantly.
+(defvirtualkeys
+  vesc  esc
+  vbspc bspc
+  vtab  tab
+  vret  ret
+)
+
+(deftemplate vk (name)
+  (multi (on-press press-vkey $name) (on-release release-vkey $name))
+)
+
 (defchordsv2
-  (z x) bspc 50 all-released (transparent)
-  (, .) ret  50 all-released (transparent)
+  (w e) (t! vk vesc)  50 all-released (transparent)
+  (i o) (t! vk vbspc) 50 all-released (transparent)
+  (z x) (t! vk vtab)  50 all-released (transparent)
+  (, .) (t! vk vret)  50 all-released (transparent)
 )
 
 (deflayer main
   @trs ' \
-      b   l   d   w   z    -    f   o   u   j    =
-  caps n   @la @ls @lc @lar @rar @rc @rs @ra i ;
-  @q  q   @lm m   c   v    k    p   .   @rm ,
+       b   l   d   w   z    -    f   o   u   j    =
+  caps @lm @la @lc @ls @lar @rar @rs @rc @ra @rm ;
+  @q   q   x   m   c   v    k    p   .   /   ,
   @sp menu
 )
 
