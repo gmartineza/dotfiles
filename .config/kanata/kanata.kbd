@@ -74,15 +74,17 @@
   vret  ret
 )
 
-(deftemplate vk (name)
-  (multi (on-press press-vkey $name) (on-release release-vkey $name))
+;; Unreachable 2nd case registers $key as a repeat output: OS key-repeat ignores vkey targets.
+(deftemplate vk (name key)
+  (switch
+    () (multi (on-press press-vkey $name) (on-release release-vkey $name)) break
+    () $key break
+  )
 )
 
 (defchordsv2
-  (w e) (t! vk vesc)  50 all-released (transparent)
-  (i o) (t! vk vbspc) 50 all-released (transparent)
-  (z x) (t! vk vtab)  50 all-released (transparent)
-  (, .) (t! vk vret)  50 all-released (transparent)
+  (z x) (t! vk vtab tab) 50 all-released (transparent)
+  (, .) (t! vk vbspc bspc)  50 all-released (transparent)
 )
 
 (deflayer main
@@ -95,9 +97,9 @@
 
 (deflayer extend
   f6 pause prnt
-       prev vold pp   volu next   nubs home up   end   pgup  _
-  _    lmet lalt lsft lctl pause  esc  left down right ret   lrld
-  _    mute _    menu C-ins S-ins tab  bspc spc  del   pgdn
+       prev vold pp   volu next   pgup home up   end   esc  _
+  _    lmet lalt lctl lsft pause  pgdn left down right ret   lrld
+  _    mute _    menu C-ins S-ins tab  bspc spc  del   nubs
   _  _
 )
 
