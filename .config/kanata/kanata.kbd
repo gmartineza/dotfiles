@@ -96,8 +96,8 @@
 (deflayer extend
   f6 pause prnt
        prev vold pp   volu next   nubs home up   end   pgup  _
-  _    mute lalt lsft lctl pause  esc  left down right ret   lrld
-  _    ret  lmet menu C-ins S-ins tab  bspc spc  del   pgdn
+  _    lmet lalt lsft lctl pause  esc  left down right ret   lrld
+  _    mute _    menu C-ins S-ins tab  bspc spc  del   pgdn
   _  _
 )
 
