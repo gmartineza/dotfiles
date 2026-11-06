@@ -59,6 +59,11 @@ vim.keymap.set({"n", "v"},       "<leader>P", [["_dP]], { desc = "Replace with p
 vim.keymap.set({"n", "v"},       "<leader>y", [["+y]],  { desc = "Yank to system clipboard" })
 vim.keymap.set("n",              "<leader>c", [[<cmd>let @+ = expand("%")<CR>]], { desc = "Copy file path" })
 
+vim.keymap.set("n", "<C-h>",     "<C-w><C-h>")
+vim.keymap.set("n", "<C-j>",     "<C-w><C-j>")
+vim.keymap.set("n", "<C-k>",     "<C-w><C-k>")
+vim.keymap.set("n", "<C-l>",     "<C-w><C-l>")
+
 -- [[ pwsh > cmd ]]
 if vim.fn.has("win32") == 1 then
   vim.o.shell = "pwsh.exe"
