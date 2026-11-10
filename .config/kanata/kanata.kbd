@@ -46,7 +46,7 @@
   trs (layer-switch transparent)
   mn  (layer-switch main)
   ;; Tap-hold modifiers
-  lm  (t! modkey                    n lmet $lhs)
+  lm  (t! modkey                    x lmet $lhs)
   la  (t! modkey                    r lalt $lhs)
   lc  (t! modkey                    s lctl $lhs)
   ls  (tap-hold-release-keys 50 250 t lsft $lhs)
@@ -55,7 +55,7 @@
   rs  (tap-hold-release-keys 50 250 a rsft $rhs)
   rc  (t! modkey                    h rctl $rhs)
   ra  (t! modkey                    e lalt $rhs)
-  rm  (t! modkey                    i rmet $rhs)
+  rm  (t! modkey                    / rmet $rhs)
   q   (tap-hold-release 250 250     q lsft)
   ;; Space: flowtap-guarded tap-hold. Tap=spc, hold=extend layer, tap-then-hold=repeat spc.
   ;; Fast-typed space stays space (no key-list primitive: any listed key would force-tap and kill nav).
@@ -83,15 +83,15 @@
 )
 
 (defchordsv2
-  (z x) (t! vk vtab tab) 50 all-released (transparent)
-  (, .) (t! vk vbspc bspc)  50 all-released (transparent)
+  (x c) (t! vk vtab tab) 50 all-released (transparent)
+  (m ,) (t! vk vbspc bspc)  50 all-released (transparent)
 )
 
 (deflayer main
   @trs ' \
        b   l   d   w   z    -    f   o   u   j    =
-  caps @lm @la @ls @lc @lar @rar @rc @rs @ra @rm ;
-  @q   q   x   m   c   v    k    p   .   /   ,
+  caps n   @la @ls @lc @lar @rar @rc @rs @ra i ;
+  @q   q   @lm m   c   v    k    p   .   @rm   ,
   @sp menu
 )
 
