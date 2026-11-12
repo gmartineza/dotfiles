@@ -6,11 +6,11 @@
 )
 
 (defsrc
-  f6 - =
+  f6 f7 - =
           q w e r t  y u i o p \
   caps    a s d f g  h j k l ; '
   lsft nubs z x c v  n m , . /
-  spc menu
+  spc ralt menu
 )
 
 (defvar
@@ -45,6 +45,7 @@
 (defalias
   trs (layer-switch transparent)
   mn  (layer-switch main)
+  kb  (layer-switch kbm) ;; kbm layer: ralt->f13, menu->f14 (RL ignores ralt/menu)
   ;; Tap-hold modifiers
   lm  (t! modkey                    x lmet $lhs)
   la  (t! modkey                    r lalt $lhs)
@@ -88,25 +89,33 @@
 )
 
 (deflayer main
-  @trs ' \
+  @trs @kb ' \
        b   l   d   w   z    -    f   o   u   j    =
   caps n   @la @ls @lc @lar @rar @rc @rs @ra i ;
   @q   q   @lm m   c   v    k    p   .   @rm   ,
-  @sp menu
+  @sp ralt menu
 )
 
 (deflayer extend
-  f6 pause prnt
+  f6 f7 pause prnt
        prev vold pp   volu next   pgup home up   end   esc  _
   _    lmet lalt lsft lctl pause  pgdn left down right ret   lrld
   _    mute _    menu C-ins S-ins tab  bspc spc  del   nubs
-  _  _
+  _  _  _
 )
 
 (deflayer transparent
-  @mn - =
-           q w e r t  y u i o p \
+  @mn f7 - =
+          q w e r t  y u i o p \
   caps    a s d f g  h j k l ; '
   lsft nubs z x c v  n m , . /
-  spc pgdn
+  spc ralt menu
+)
+
+(deflayer kbm
+  @mn @mn - =
+          q w e r t  y u i o p \
+  caps    a s d f g  h j k l ; '
+  lsft nubs z x c v  n m , . /
+  spc pgdn pgup
 )
