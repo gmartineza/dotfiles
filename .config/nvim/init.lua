@@ -34,6 +34,7 @@ vim.opt.cursorline = true
 vim.opt.wrap = true
 vim.opt.linebreak = true
 vim.opt.list = false
+vim.opt.signcolumn = yes
 
 -- Per-zellij-session RPC pipe so Claude can open buffers here (see ~/.claude/CLAUDE.md). Matches nvim-claude-$ZELLIJ_SESSION_NAME.
 if vim.env.ZELLIJ_SESSION_NAME then
