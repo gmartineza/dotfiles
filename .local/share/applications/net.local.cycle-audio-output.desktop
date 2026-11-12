@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=/home/g/.local/bin/cycle-audio-output
+Name=Cycle Audio Output
+NoDisplay=true
+StartupNotify=false
+Type=Application
+X-KDE-GlobalAccel-CommandShortcut=true

@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# 1. Gather all audio sink names
+mapfile -t sinks < <(pactl -f json list sinks | jq -r '.[].name')
+
+if [ "${#sinks[@]}" -le 1 ]; then
+    exit 0
+fi
+
+# 2. Get current default sink and find next index
+current_sink=$(pactl get-default-sink)
+next_sink=""
+
+for i in "${!sinks[@]}"; do
+    if [[ "${sinks[$i]}" == "$current_sink" ]]; then
+        next_index=$(( (i + 1) % ${#sinks[@]} ))
+        next_sink="${sinks[$next_index]}"
+        break
+    fi
+done
+
+# Fallback to first sink if current default wasn't found
+if [ -z "$next_sink" ]; then
+    next_sink="${sinks[0]}"
+fi
+
+# 3. Switch default sink
+pactl set-default-sink "$next_sink"
+
+# 4. Immediately move all active playing streams to the new sink
+pactl list short sink-inputs | while read -r stream _; do
+    pactl move-sink-input "$stream" "$next_sink" 2>/dev/null || true
+done
