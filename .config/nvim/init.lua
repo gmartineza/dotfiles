@@ -104,6 +104,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     -- native completion, since blink.cmp is disabled
     vim.lsp.completion.enable(true, args.data.client_id, args.buf, { autotrigger = true })
+
+    -- fzf-lua pickers on the native 0.11 keys (grn, gra, K stay default)
+    local function map(lhs, cmd, desc)
+      vim.keymap.set("n", lhs, "<cmd>FzfLua " .. cmd .. "<CR>", { buffer = args.buf, desc = desc })
+    end
+    map("gd",  "lsp_definitions",          "Definitions")
+    map("grr", "lsp_references",           "References")
+    map("gri", "lsp_implementations",      "Implementations")
+    map("grt", "lsp_typedefs",             "Type definitions")
+    map("gO",  "lsp_document_symbols",     "Document symbols")
+    map("gW",  "lsp_live_workspace_symbols", "Workspace symbols")
+    map("grc", "lsp_incoming_calls",       "Incoming calls")
+    map("grC", "lsp_outgoing_calls",       "Outgoing calls")
   end,
 })
 
