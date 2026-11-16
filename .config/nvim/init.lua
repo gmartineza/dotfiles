@@ -84,6 +84,37 @@ vim.opt.rtp:prepend(lazypath)
 -- [[ Configure and install plugins ]]
 require("lazy").setup("plugins")
 
+-- [[ LSP ]]
+-- Server: `dotnet tool install -g csharp-ls`. Defaults kept: K hover, grn rename, gra action, grr refs, <C-]> definition.
+vim.lsp.config("csharp_ls", {
+  cmd = { "csharp-ls" },
+  filetypes = { "cs" },
+  -- root_markers does not glob; prefer the solution over a project over .git
+  root_dir = function(bufnr, on_dir)
+    on_dir(
+      vim.fs.root(bufnr, function(name) return name:match("%.slnx?$") ~= nil end)
+        or vim.fs.root(bufnr, function(name) return name:match("%.csproj$") ~= nil end)
+        or vim.fs.root(bufnr, ".git")
+    )
+  end,
+})
+vim.lsp.enable("csharp_ls")
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    -- native completion, since blink.cmp is disabled
+    vim.lsp.completion.enable(true, args.data.client_id, args.buf, { autotrigger = true })
+  end,
+})
+
+-- [[ Diagnostics ]]
+-- [d and ]d are built in (0.11+)
+vim.diagnostic.config({
+  virtual_text = true,
+  severity_sort = true,
+  float = { border = "rounded", source = true },
+})
+
 -- [[ Autocommands ]]
    vim.api.nvim_create_autocmd("FileType", {
     pattern = { "json", "jsonc" },
