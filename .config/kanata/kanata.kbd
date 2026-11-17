@@ -101,7 +101,7 @@
        prev vold pp   volu next   pgup home up   end   esc  _
   _    _   lalt lsft lctl pause  pgdn left down right ret   lrld
   _    mute lmet  menu C-ins S-ins tab  bspc spc  del   nubs
-  _  _
+  _  _ _
 )
 
 (deflayer transparent
