@@ -7,10 +7,10 @@
 
 (defsrc
   f6 f7 - =
-          q w e r t  y u i o p \
-  caps    a s d f g  h j k l ; '
-  lsft nubs z x c v  n m , . /
-  spc ralt menu
+          q w e r t  u i o p \
+          a s d f g  j k l ; '
+  lsft nubs z x c v  m , . / rsft
+  lalt spc ralt menu
 )
 
 (defvar
@@ -90,32 +90,32 @@
 
 (deflayer main
   @trs @kb ' \
-       b   l   d   w   z    -    f   o   u   j    =
-  caps n   @la @ls @lc @lar @rar @rc @rs @ra i ;
-  @q   q   @lm m   c   v    k    p   .   @rm   ,
-  @sp ralt menu
+       b   l   d   w   z    -    f   o   u   j
+       n   @la @ls @lc @lar @rar @rc @rs @ra i
+  @q   q   @lm m   c   v    k    p   .   @rm ,
+  lsft @sp ret menu
 )
 
 (deflayer extend
   f6 f7 pause prnt
-       prev vold pp   volu next   pgup home up   end   esc  _
-  _    lmet lalt lsft lctl pause  pgdn left down right ret   lrld
+       prev vold pp   volu next   pgup home up   end   esc
+       lmet lalt lsft lctl pause  pgdn left down right ret
   _    mute _    menu C-ins S-ins tab  bspc spc  del   nubs
-  _  _  _
+  lsft _ ret _
 )
 
 (deflayer transparent
   @mn f7 - =
-          q w e r t  y u i o p \
-  caps    a s d f g  h j k l ; '
-  lsft nubs z x c v  n m , . /
-  spc ralt menu
+          q w e r t  u i o p \
+          a s d f g  j k l ; '
+  lsft nubs z x c v  m , . / rsft
+  lalt spc ralt menu
 )
 
 (deflayer kbm
-  @mn @mn - =
-          q w e r t  y u i o p \
-  caps    a s d f g  h j k l ; '
-  lsft nubs z x c v  n m , . /
-  spc pgdn pgup
+  @mn f7 - =
+          q w e r t  u i o p \
+          a s d f g  j k l ; '
+  lsft nubs z x c v  m , . / rsft
+  lalt spc pgdn pgup
 )
