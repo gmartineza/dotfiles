@@ -29,7 +29,6 @@ return {
     "ibhagwan/fzf-lua",
     enabled = true,
     -- :FzfLua only exists once the plugin loads; the LspAttach maps in init.lua call it before any key here fired
-    cmd = "FzfLua",
     keys = {
       { "<leader>ff", "<cmd>FzfLua files<CR>",      desc = "Find files" },
       { "<leader>fg", "<cmd>FzfLua live_grep<CR>",  desc = "Live grep" },
