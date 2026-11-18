@@ -6,6 +6,7 @@ return {
     vim.g.loaded_netrwPlugin = 1
   end,
   lazy = false,
+  enabled = false,
   opts = {
     git = { show_on_dirs = true, show_on_open_dirs = true, timeout = 2000 },
     filters = { dotfiles = false, git_ignored = false, custom = {} },

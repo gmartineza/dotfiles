@@ -30,8 +30,7 @@ vim.opt.undofile = true
 vim.opt.swapfile = false
 vim.opt.termguicolors = true
 vim.opt.cursorline = true
--- soft wrap without modifying file contents. Toggle with just :set nowrap
-vim.opt.wrap = true
+vim.opt.wrap = false
 vim.opt.linebreak = true
 vim.opt.list = false
 vim.opt.signcolumn = yes
@@ -55,7 +54,7 @@ vim.keymap.set("n", "<leader>t", "<cmd>tabnew | term<CR>", { desc = "Terminal in
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 vim.keymap.set({"n", "v"},       "<leader>d", [["_d]],  { desc = "Delete without yanking" })
-vim.keymap.set({"n", "v"},       "<leader>p", [["_dp]], { desc = "Replace with paste (after)" })
+vim.keymap.set({     "v"},       "<leader>p", [["_dp]], { desc = "Replace with paste (after)" })
 vim.keymap.set({"n", "v"},       "<leader>P", [["_dP]], { desc = "Replace with paste (before)" })
 vim.keymap.set({"n", "v"},       "<leader>y", [["+y]],  { desc = "Yank to system clipboard" })
 vim.keymap.set("n",              "<leader>c", [[<cmd>let @+ = expand("%")<CR>]], { desc = "Copy file path" })
@@ -64,11 +63,6 @@ vim.keymap.set("n", "<C-h>",     "<C-w><C-h>")
 vim.keymap.set("n", "<C-j>",     "<C-w><C-j>")
 vim.keymap.set("n", "<C-k>",     "<C-w><C-k>")
 vim.keymap.set("n", "<C-l>",     "<C-w><C-l>")
-
--- [[ pwsh > cmd ]]
-if vim.fn.has("win32") == 1 then
-  vim.o.shell = "pwsh.exe"
-end
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
