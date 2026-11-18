@@ -10,11 +10,20 @@ return {
     },
     {
         "gbprod/nord.nvim",
-        enabled = true,
+        enabled = false,
         name = "nord",
         priority = 1000,
         config = function()
             vim.cmd.colorscheme("nord")
+        end,
+    },
+    {
+        "ellisonleao/gruvbox.nvim",
+        enabled = true,
+        name = "gruvbox",
+        priority = 1000,
+        config = function()
+            vim.cmd.colorscheme("gruvbox")
         end,
     }
 }

@@ -28,6 +28,8 @@ return {
   {
     "ibhagwan/fzf-lua",
     enabled = true,
+    -- :FzfLua only exists once the plugin loads; the LspAttach maps in init.lua call it before any key here fired
+    cmd = "FzfLua",
     keys = {
       { "<leader>ff", "<cmd>FzfLua files<CR>",      desc = "Find files" },
       { "<leader>fg", "<cmd>FzfLua live_grep<CR>",  desc = "Live grep" },
@@ -69,6 +71,7 @@ return {
           })
         end, desc = "Find dir, then files in it" },
     },
-    opts = {},
+    -- csharp-ls needs ~70s to load the solution and answers nothing before that; the default 5000ms sync wait times out
+    opts = { lsp = { async_or_timeout = true } },
   },
 }

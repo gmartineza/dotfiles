@@ -80,16 +80,39 @@ require("lazy").setup("plugins")
 
 -- [[ LSP ]]
 -- Server: `dotnet tool install -g csharp-ls`. Defaults kept: K hover, grn rename, gra action, grr refs, <C-]> definition.
+local csharp_solution = {}
+local function pick_solution(root, bufnr)
+  local proj = vim.fs.root(bufnr, function(name) return name:match("%.csproj$") ~= nil end)
+  if not proj then return end
+  local needle = vim.fs.basename(proj) .. "/"
+  for name, kind in vim.fs.dir(root) do
+    if kind == "file" and name:match("%.slnx?$") then
+      local text = table.concat(vim.fn.readfile(vim.fs.joinpath(root, name)), "\n"):gsub("\\", "/")
+      if text:find(needle, 1, true) then return name end
+    end
+  end
+end
+
 vim.lsp.config("csharp_ls", {
-  cmd = { "csharp-ls" },
+  cmd = function(dispatchers, config)
+    local cmd = { "csharp-ls" }
+    local sln = csharp_solution[config.root_dir]
+    if sln then vim.list_extend(cmd, { "--solution", sln }) end
+    return vim.lsp.rpc.start(cmd, dispatchers, { cwd = config.root_dir })
+  end,
   filetypes = { "cs" },
+  -- csharp-ls registers textDocument/definition dynamically for language "csharp", but nvim sends the filetype "cs"
+  get_language_id = function() return "csharp" end,
   -- root_markers does not glob; prefer the solution over a project over .git
   root_dir = function(bufnr, on_dir)
-    on_dir(
-      vim.fs.root(bufnr, function(name) return name:match("%.slnx?$") ~= nil end)
-        or vim.fs.root(bufnr, function(name) return name:match("%.csproj$") ~= nil end)
-        or vim.fs.root(bufnr, ".git")
-    )
+    local sln_root = vim.fs.root(bufnr, function(name) return name:match("%.slnx?$") ~= nil end)
+    local root = sln_root
+      or vim.fs.root(bufnr, function(name) return name:match("%.csproj$") ~= nil end)
+      or vim.fs.root(bufnr, ".git")
+    if sln_root and csharp_solution[sln_root] == nil then
+      csharp_solution[sln_root] = pick_solution(sln_root, bufnr) or false
+    end
+    on_dir(root)
   end,
 })
 vim.lsp.enable("csharp_ls")
@@ -99,18 +122,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- native completion, since blink.cmp is disabled
     vim.lsp.completion.enable(true, args.data.client_id, args.buf, { autotrigger = true })
 
-    -- fzf-lua pickers on the native 0.11 keys (grn, gra, K stay default)
-    local function map(lhs, cmd, desc)
-      vim.keymap.set("n", lhs, "<cmd>FzfLua " .. cmd .. "<CR>", { buffer = args.buf, desc = desc })
+    -- grn gra grr gri grt gO K are native defaults; add the ones nvim has no default key for
+    local function map(lhs, fn, desc)
+      vim.keymap.set("n", lhs, fn, { buffer = args.buf, desc = desc })
     end
-    map("gd",  "lsp_definitions",          "Definitions")
-    map("grr", "lsp_references",           "References")
-    map("gri", "lsp_implementations",      "Implementations")
-    map("grt", "lsp_typedefs",             "Type definitions")
-    map("gO",  "lsp_document_symbols",     "Document symbols")
-    map("gW",  "lsp_live_workspace_symbols", "Workspace symbols")
-    map("grc", "lsp_incoming_calls",       "Incoming calls")
-    map("grC", "lsp_outgoing_calls",       "Outgoing calls")
+    map("gd",  vim.lsp.buf.definition,       "Definition")
+    map("gW",  function() vim.lsp.buf.workspace_symbol() end, "Workspace symbols")
+    map("grc", vim.lsp.buf.incoming_calls,   "Incoming calls")
+    map("grC", vim.lsp.buf.outgoing_calls,   "Outgoing calls")
   end,
 })
 
