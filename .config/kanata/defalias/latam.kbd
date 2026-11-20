@@ -5,27 +5,25 @@
 
 ;; Symbols
 (defalias
+  ñ  ;
   {  '
+  }  \
+  ´  [      ;; dead key: accents (á é í ó ú), Shift gives ¨
+  ¿  =
+  \  RA--
+  /  S-7
   pl S-8
   pr S-9
-  }  \
-  =  S-0
-  \  RA--
-  +  ]
-  -  /
-  /  S-7
-  ?  S--
-
-  ~  RA-]   ;; dead key: follow with space
-  [  S-'
-  ]  S-\
-  _  S-/
-  `  RA-\   ;; dead key: follow with space
   |  `
+
+  @  RA-q
   <  nubs
-  >  S-nubs
-  :  S-.
-  ;  S-,
+  +  ]
+  =  S-0
+  &  S-6
+  ~  RA-]   ;; dead key: follow with space
+  `  RA-\   ;; dead key: follow with space
+  ^  RA-'   ;; dead key: follow with space
 )
 
 ;; vim: set ft=lisp:
