@@ -1,0 +1,29 @@
+;; NumSym layer: numbers on the top row + aekeynox symbols, homerow mods kept.
+;; Shift(ralt)+number gives the host layout's shifted numbers (LatAm: !"#$%&/()=).
+;;
+;;        1    2    3    4    5     6    7    8    9    0
+;;        {    (    )    }    =     \    +    -    /    ?
+;;   ~    ~    [    ]    _    `     |    <    >    :    ;
+
+(deflayer numsym
+  _ _ _ _
+          1    2    3    4    5     6    7    8    9    0
+          @{   @ns  @nd  @nf  @=    @\   @nk  @nl  @n;  @?
+  @n~ @~  @[   @]   @_   @`         @|   @<   @>   @:   @;
+  _ spc @ent _
+)
+
+;; home row mods
+(defalias
+  ns (t! hrm_ring   @pl $lhs)
+  nd (t! hrm_middle @pr $lhs)
+  nf (t! hrm_index  @}  $lhs)
+  nk (t! hrm_index  @+  $rhs)
+  nl (t! hrm_middle @-  $rhs)
+  n; (t! hrm_ring   @/  $rhs)
+
+  ;; lsft mirrors nubs, like @q on main
+  n~ (tap-hold-release $TAPPING_TERM $TAPPING_TERM @~ lsft)
+)
+
+;; vim: set ft=lisp:

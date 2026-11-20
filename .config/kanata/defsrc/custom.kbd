@@ -1,0 +1,41 @@
+;; Custom geometry: 33-key subset + f6/f7 layer toggles.
+;; - right hand shifted one key to the right (wide-mod): y column unused
+;; - bottom row: lsft and nubs both act as the bottom-left key,
+;;   so the same layout works on ANSI (no nubs) and ISO keyboards
+;;
+;;   f6   f7                                   -    =
+;;        q    w    e    r    t     u    i    o    p    [
+;;        a    s    d    f    g     j    k    l    ;    '
+;;   lsft nubs z    x    c    v     m    ,    .    /    rsft
+;;                  lalt      spc       ralt menu
+
+(defsrc
+  f6 f7 - =
+          q w e r t  u i o p [
+          a s d f g  j k l ; '
+  lsft nubs z x c v  m , . / rsft
+  lalt spc ralt menu
+)
+
+;; Same-hand keys for chordal hold: a homerow mod pressed with one of these
+;; resolves as a tap (see `modkey` in defcfg/flavor_custom.kbd).
+(defvar
+
+  lhs (
+  f6
+          q w e r t
+          a s   f g
+  lsft nubs z x c v
+  spc menu
+  )
+
+  rhs (
+  f6 - =
+                     y u i o p [
+                     h j   l ; '
+                     n m , . /
+  spc menu
+  )
+)
+
+;; vim: set ft=lisp:

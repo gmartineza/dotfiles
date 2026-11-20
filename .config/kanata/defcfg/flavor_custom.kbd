@@ -1,0 +1,41 @@
+;; Custom flavor: thumb layer-taps + flow-tap homerow mods.
+;;  - LeftThumb (lalt): NumSym layer while held, no tap
+;;  - Space: Ext layer when held, Space when tapped
+;;  - RightThumb (ralt): Shift when held, Enter when tapped (same in every layer)
+
+;; Adapted from Kenkyo's flowtap/charmod templates (MIT, https://github.com/argenkiwi/kenkyo).
+;; Change: hold side uses tap-hold-release-keys with the same-hand key list (chordal hold).
+;; Release variant: another key pressed+released while held resolves hold immediately (no timeout wait).
+(deftemplate modkey (char mod tapkeys)
+  (switch
+    ((key-timing 3 less-than $FLOW_TERM)) $char break
+    () (tap-hold-release-keys $TAPPING_TERM $TAPPING_TERM $char $mod $tapkeys) break
+  )
+)
+
+;; Timing variables are defined in the `settings.kbd` file.
+;; `hand` is the same-hand key list: $lhs or $rhs (defsrc/custom.kbd).
+(deftemplate hrm_index (key hand)
+  (t! modkey $key $HM1 $hand)
+)
+(deftemplate hrm_middle (key hand)
+  (t! modkey $key $HM2 $hand)
+)
+(deftemplate hrm_ring (key hand)
+  (t! modkey $key $HM3 $hand)
+)
+
+(defalias
+  ;; Space: flowtap-guarded tap-hold. Tap=spc, hold=Ext layer, tap-then-hold=repeat spc.
+  ;; Fast-typed space stays space (no key-list primitive: any listed key would force-tap and kill nav).
+  nav (switch
+        ((key-timing 3 less-than $FLOW_TERM)) spc break
+        () (tap-hold-release $TAPPING_TERM $TAPPING_TERM spc (layer-while-held extend)) break
+      )
+
+  sym (layer-while-held numsym)
+  ent (tap-hold-press $QUICK_TAP $HOLDING_TERM ret lsft)
+  fun (layer-while-held fkeys)
+)
+
+;; vim: set ft=lisp:

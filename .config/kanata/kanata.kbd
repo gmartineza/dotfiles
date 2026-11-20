@@ -1,121 +1,163 @@
-(defcfg
-  process-unmapped-keys yes
-  log-layer-changes no
-  windows-altgr add-lctl-release
-  concurrent-tap-hold yes ;; defchordsv2
-)
+;;==========================================================================;;
+;;                                                                          ;;
+;;  Pick and choose the features you want for your keyboard:                ;;
+;;  angle mod, dual keys, keyboard layout, navigation layer...              ;;
+;;                                                                          ;;
+;;==========================================================================;;
 
-(defsrc
-  f6 f7 - =
-          q w e r t  y u i o p \
-  caps    a s d f g  h j k l ; '
-  lsft nubs z x c v  n m , . /
-  spc ralt menu
-)
+;; Customized Ækeynox (https://github.com/OneDeadKey/kanata-config-aekeynox).
+;; Custom files: defsrc/custom.kbd, defcfg/flavor_custom.kbd, defalias/latam.kbd,
+;; deflayer/base/custom.kbd, deflayer/{numsym,extend,fkeys}.kbd.
+;; Live reload: Space+G (Ext layer).
 
-(defvar
+;; General settings
+(include defcfg/settings.kbd)
 
-  lhs (
-  f6
-          q w e r t
-          a s   f g
-  lsft nubs z x c v
-  spc menu
-  )
 
-  rhs (
-  f6 - =
-                     y u i o p \
-                     h j   l ; '
-                     n m , . /
-  spc menu
-  )
-)
+;; NOTE:
+;;============================================================================
+;; Every section below must enable ONE and only one `include` statement:
+;;============================================================================
+;;  - do not delete or reorder existing sections
+;;  - enable each feature by un-commenting the related line
+;;    (a commented line starts with ;;)
 
-;; Adapted from Kenkyo's flowtap/charmod templates (MIT, https://github.com/argenkiwi/kenkyo).
-;; Change: hold side uses tap-hold-release-keys with the same-hand key list (chordal hold).
-;; Release variant: another key pressed+released while held resolves hold immediately (no timeout wait).
-(deftemplate modkey (char mod tapkeys)
-  (switch
-    ((key-timing 3 less-than 140)) $char break
-    () (tap-hold-release-keys 250 250 $char $mod $tapkeys) break
-  )
-)
 
-(defalias
-  trs (layer-switch transparent)
-  mn  (layer-switch main)
-  kb  (layer-switch kbm) ;; kbm layer: ralt->f13, menu->f14 (RL ignores ralt/menu)
-  ;; Tap-hold modifiers
-  lm  (t! modkey                    x lmet $lhs)
-  la  (t! modkey                    r lalt $lhs)
-  lc  (t! modkey                    s lctl $lhs)
-  ls  (tap-hold-release-keys 50 250 t lsft $lhs)
-  lar (t! modkey                    g ralt $lhs)
-  rar (tap-hold-release-keys 50 250 y ralt $rhs)
-  rs  (tap-hold-release-keys 50 250 a rsft $rhs)
-  rc  (t! modkey                    h rctl $rhs)
-  ra  (t! modkey                    e lalt $rhs)
-  rm  (t! modkey                    / rmet $rhs)
-  q   (tap-hold-release 250 250     q lsft)
-  ;; Space: flowtap-guarded tap-hold. Tap=spc, hold=extend layer, tap-then-hold=repeat spc.
-  ;; Fast-typed space stays space (no key-list primitive: any listed key would force-tap and kill nav).
-  sp  (switch
-        ((key-timing 3 less-than 140)) spc break
-        () (tap-hold-release 250 250 spc (layer-while-held extend)) break
-      )
-)
+;;-----------------------------------------------------------------------------
+;; Keyboard Geometry
+;;-----------------------------------------------------------------------------
+;; Pick the configuration matching your keyboard:
+;; ISO (a.k.a. 102/105 keys) or ANSI (a.k.a. 101/104 keys).
+;; If the key next to the left Shift is `Z`, your keyboard is ANSI.
 
-;; Chord outputs skip tap-hold waiting state, so a held mod never resolves (kanata #1615).
-;; Routing through a vkey makes the output go through waiting state: mod+chord resolves hold instantly.
-(defvirtualkeys
-  vesc  esc
-  vbspc bspc
-  vtab  tab
-  vret  ret
-)
+;; (include defsrc/iso.kbd)
+;; (include defsrc/ansi.kbd)
+;; custom: geometry and finger assignment both live in defsrc/custom.kbd
 
-;; Unreachable 2nd case registers $key as a repeat output: OS key-repeat ignores vkey targets.
-(deftemplate vk (name key)
-  (switch
-    () (multi (on-press press-vkey $name) (on-release release-vkey $name)) break
-    () $key break
-  )
-)
 
-(defchordsv2
-  (x c) (t! vk vtab tab) 50 all-released (transparent)
-  (m ,) (t! vk vbspc bspc)  50 all-released (transparent)
-)
+;;-----------------------------------------------------------------------------
+;; Finger Assignment (angle-mod)
+;;-----------------------------------------------------------------------------
+;; Angle-mods can be enabled here, i.e. ZXCVB can be shifted to the left.
+;; More details here: https://colemakmods.github.io/ergonomic-mods/angle.html
 
-(deflayer main
-  @trs @kb ' \
-       b   l   d   w   z    -    f   o   u   j    =
-  caps n   @la @ls @lc @lar @rar @rc @rs @ra i ;
-  @q   q   @lm m   c   v    k    p   .   @rm   ,
-  @sp ralt menu
-)
+;; (include defsrc/layout.kbd)                ;; standard finger assignment
+;; (include defsrc/layout_anglemod.kbd)       ;; ZXCVB are shifted to the left
+;; (include defsrc/layout_wide_anglemod.kbd)  ;; angle-mod + right hand shifted by one key
+(include defsrc/custom.kbd)                ;; wide-mod subset, ANSI/ISO bottom-left duplicate, f6/f7 toggles
 
-(deflayer extend
-  f6 f7 pause prnt
-       prev vold pp   volu next   pgup home up   end   esc  _
-  _    _   lalt lsft lctl pause  pgdn left down right ret   lrld
-  _    mute lmet  menu C-ins S-ins tab  bspc spc  del   nubs
-  _  _ _
-)
 
-(deflayer transparent
-  @mn f7 - =
-          q w e r t  y u i o p \
-  caps    a s d f g  h j k l ; '
-  lsft nubs z x c v  n m , . /
-  spc ralt menu
-)
+;;-----------------------------------------------------------------------------
+;; Flavor (dual keys)
+;;-----------------------------------------------------------------------------
+;; Dual keys can be enabled here:
+;;  - `EZ`: no dual keys
+;;    = standard keyboard behavior
+;;  - `TT`: thumb-taps
+;;    - the right thumb key brings the `Symbols` layer
+;;    - a long press on the space bar brings the `Navigation` layer
+;;    - a quick tap on the left/right thumb key makes Backspace/Enter
+;;  - `HRM`: thumb-taps + home row mods
+;;    - the left thumb key becomes Shift
+;;    - SDF/JKL become Meta/Ctrl/Alt when held
 
-(deflayer kbm
-  @mn @mn - =
-          q w e r t  y u i o p \
-  caps    a s d f g  h j k l ; '
-  lsft nubs z x c v  n m , . /
-  spc pgdn pgup
-)
+;; (include defcfg/flavor_ez.kbd)    ;; standard keyboard behavior
+;; (include defcfg/flavor_tt.kbd)    ;; thumb taps
+;; (include defcfg/flavor_hrm.kbd)   ;; thumb taps + home row mods
+(include defcfg/flavor_custom.kbd)   ;; Sym/Space-Ext/Shift-Enter thumbs + flow-tap home row mods
+
+
+;;-----------------------------------------------------------------------------
+;; Host Layout
+;;-----------------------------------------------------------------------------
+;; The whole `Symbols` layer and some `Navigation` shortcuts depend on the host
+;; keyboard layout, i.e. the layout defined in your system settings.
+;; Pick your aliases accordingly below.
+
+;; (include defalias/qwerty.kbd)
+;; (include defalias/qwertz.kbd)
+;; (include defalias/azerty.kbd)
+;; (include defalias/lafayette.kbd)
+;; (include defalias/ergol.kbd)
+;; (include defalias/bepo.kbd)
+(include defalias/latam.kbd)
+
+
+;;-----------------------------------------------------------------------------
+;; `Base` Layer (and layout emulation)
+;;-----------------------------------------------------------------------------
+;; The `Base` layer can be either:
+;;  - the hardware layout (`base.kbd`)
+;;    => your keyboard follows the host layout (= default behavior),
+;;       which is defined in your system settings.
+;;  - an emulated layout (`base/*.kbd`)
+;;    => your keyboard follows this emulated layout instead of the host layout.
+;;    /!\ This works perfectly with ASCII layout such as QWERTY ANSI,
+;;        but has limitations with non-ASCII layouts.
+;;    /!\ Make sure that the expected host layout (e.g. QWERTY, AZERTY)
+;;        has been selected in the previous section.
+
+;; (include deflayer/base.kbd)              ;; no emulation
+;; (include deflayer/base/colemak.kbd)      ;; QWERTY to Colemak
+;; (include deflayer/base/colemak_dh.kbd)   ;; QWERTY to Colemak-DH
+;; (include deflayer/base/dvorak.kbd)       ;; QWERTY to Dvorak
+;; (include deflayer/base/ergol.kbd)        ;; AZERTY to Ergo-L
+;; (include deflayer/base/lafayette.kbd)    ;; AZERTY to QWERTY-Lafayette
+(include deflayer/base/custom.kbd)       ;; custom alpha layout + transparent/kbm toggle layers
+
+
+;; NOTE:
+;; If dual keys are not enabled (see the "Flavor" section above),
+;; the rest of this file can be ignored.
+
+
+;;-----------------------------------------------------------------------------
+;; `Symbols` Layer
+;;-----------------------------------------------------------------------------
+;; Triggered by Sym (right thumb key).
+;;  - by default, brings a Symbols layer
+;;  - with the `altgr` variant, the right thumb key becomes AltGr/Option
+
+;; (include deflayer/symbols.kbd)        ;; programming symbols
+;; (include deflayer/symbols_altgr.kbd)  ;; AltGr/Option layer
+(include deflayer/numsym.kbd)         ;; numbers on top row + symbols, held by LeftThumb
+
+
+;;-----------------------------------------------------------------------------
+;; `NumLock` Layer
+;;-----------------------------------------------------------------------------
+;; Enabled by Nav+[P], disabled by [P] or Sym.
+;; Similar to the `numpad` layer below, but locked, and without any dual key.
+
+;; (include deflayer/numlock.kbd)  ;; custom: disabled
+
+
+;;-----------------------------------------------------------------------------
+;; `Numbers` Layer
+;;-----------------------------------------------------------------------------
+;; Triggered by Sym+Shift.
+
+;; (include deflayer/numpad.kbd)  ;; right-hand numpad, like on the default Navigation layer
+;; (include deflayer/numrow.kbd)  ;; numbers on the home row, Shift+numbers on the top row
+;; custom: disabled, numbers live in numsym
+
+
+;;-----------------------------------------------------------------------------
+;; `Navigation` Layer
+;;-----------------------------------------------------------------------------
+;; Triggered by a long press on the spacebar.
+
+;; (include deflayer/navigation.kbd)      ;; arrows on ESDF, NumPad under the right hand
+;; (include deflayer/navigation_vim.kbd)  ;; arrows on HJKL, advanced keys under the left hand
+(include deflayer/extend.kbd)           ;; media, arrows right, mods left
+
+
+;;-----------------------------------------------------------------------------
+;; `Fun/Media` Layer
+;;-----------------------------------------------------------------------------
+;; Triggered by Nav+Sym.
+
+;; (include deflayer/funmedia.kbd)
+(include deflayer/fkeys.kbd)  ;; F1-F10 top row, F11/F12 inner columns
+
+;; vim: set ft=lisp:

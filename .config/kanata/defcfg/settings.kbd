@@ -1,0 +1,50 @@
+(defcfg
+
+  ;; Allow Kanata to process keys that are not defined in defsrc
+  process-unmapped-keys yes
+  log-layer-changes no
+
+  ;; Fixes the AltGr/Symbols layer on Windows
+  ;; https://github.com/OneDeadKey/arsenik/issues/22
+  windows-altgr cancel-lctl-press
+
+  ;; Works around a regression introduced by Kanata-winIOv2 1.12.0,
+  ;; but requires Kanata 1.13.0 or newer.
+  ;; https://github.com/jtroo/kanata/issues/2115
+  ;; windows-sync-keystates none
+)
+
+;; Timing variables for tap-hold effects.
+;; Keep the default values if unsure.
+(defvar
+
+  ;; Minimum press time (ms) for "tap-preferred" dual keys: Nav and homerow mods.
+  ;; Below this value, these keys just produce Space or a homerow letter.
+  ;; Keep this value high if you struggle with home row mods.
+  TAPPING_TERM 250
+
+  ;; Maximum press time (ms) for "hold-preferred" dual keys: Enter and Backspace.
+  ;; Above this value, these keys just behave as modifiers (Shift and Symbols).
+  ;; Keep this value low if you trigger Enter by mistake.
+  HOLDING_TERM 150
+
+  ;; Maximum time (ms) for a double key press to enable repetitions.
+  QUICK_TAP 200
+
+  ;; Flow-tap (ms): a dual key pressed within this time of recent typing stays a tap.
+  FLOW_TERM 140
+)
+
+;; Homerow-Mods (specific order on macOS)
+(platform (macos) (defvar
+  HM1 lctl  ;; Control  (index)
+  HM2 lmet  ;; Command  (middle)
+  HM3 lalt  ;; Option   (ring)
+))
+(platform (linux win winiov2 wintercept) (defvar
+  HM1 lctl  ;; Control  (index)
+  HM2 lalt  ;; Alt      (middle)
+  HM3 lmet  ;; Meta     (ring)
+))
+
+;; vim: set ft=lisp:

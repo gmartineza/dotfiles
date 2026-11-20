@@ -1,0 +1,31 @@
+;; Latin American QWERTY aliases
+;; Same alias names as qwerty.kbd; values are the US key names that produce
+;; each character on a LatAm host layout (RA = AltGr).
+;; Only the aliases used by the NumSym layer are defined.
+
+;; Symbols
+(defalias
+  {  '
+  pl S-8
+  pr S-9
+  }  \
+  =  S-0
+  \  RA--
+  +  ]
+  -  /
+  /  S-7
+  ?  S--
+
+  ~  RA-]   ;; dead key: follow with space
+  [  S-'
+  ]  S-\
+  _  S-/
+  `  RA-\   ;; dead key: follow with space
+  |  `
+  <  nubs
+  >  S-nubs
+  :  S-.
+  ;  S-,
+)
+
+;; vim: set ft=lisp:

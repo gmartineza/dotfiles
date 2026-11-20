@@ -1,0 +1,13 @@
+;; Ext layer (Space held): media on top, navigation under the right hand,
+;; plain homerow mods under the left hand, Fun layer on the left thumb.
+;; The `lrld` action stands for "live reload".
+
+(deflayer extend
+  f6 f7 pause prnt
+       prev vold pp   volu next   pgup home up   end   esc
+       XX   $HM3 $HM2 $HM1 lrld   pgdn left down right ret
+  _    mute _    menu C-ins S-ins tab  bspc spc  del   nubs
+  @fun _ @ent _
+)
+
+;; vim: set ft=lisp:

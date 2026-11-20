@@ -1,0 +1,100 @@
+;; Ergo‑L aliases
+
+;; Navigation layer
+(platform (macos) (defalias
+  all M-a
+  sav M-s
+  ndo M-z
+  cut M-x
+  cpy M-w
+  pst M-v
+  rdo M-y
+))
+(platform (linux win winiov2 wintercept) (defalias
+  all C-a
+  sav C-s
+  ndo C-z
+  cut C-x
+  cpy C-w
+  pst C-v
+  rdo C-p
+))
+(defalias
+  cls C-t
+
+  0 0
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+  , .
+  . n
+
+  cur S-1
+)
+
+;; Symbols layer
+(defalias
+
+  ^  S-6
+  <  <
+  >  S-<
+  $  S-4
+  %  S-5
+  @  S-0
+  &  S-7
+  *  S-8
+  '  '
+  `  `
+
+  {  S-[
+  pl (macro o h)
+  pr (macro o j)
+  }  S-]
+  =  =
+  \  \
+  +  S-=
+  -  c
+  /  -
+  '' S-'
+
+  ~  S-`
+  [  [
+  ]  ]
+  _  S--
+  #  S-9
+  |  S-\
+  !  S-o
+  ;  S-.
+  :  S-n
+  ?  S-c
+)
+
+;; NumRow layer
+(defalias
+
+  s0 S-0
+  s1 S-1
+  s2 S-2
+  s3 S-3
+  s4 S-4
+  s5 S-5
+  s6 S-6
+  s7 S-7
+  s8 S-8
+  s9 S-9
+  nbs S-spc ;; narrow no-break space
+
+  l1 (macro o @1)  ;; 1dk 1
+  l2 (macro o @2)  ;; 1dk 2
+  l3 (macro o @3)  ;; 1dk 3
+  l4 (macro o @4)  ;; 1dk 4
+  l5 (macro o @5)  ;; 1dk 5
+)
+
+;; vim: set ft=lisp:

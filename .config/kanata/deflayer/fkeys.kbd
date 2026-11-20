@@ -1,0 +1,12 @@
+;; Fun layer (Space + LeftThumb held): F1..F10 on the top row,
+;; F11/F12 on the inner homerow columns, plain homerow mods.
+
+(deflayer fkeys
+  XX XX XX XX
+          f1   f2   f3   f4   f5    f6   f7   f8   f9   f10
+          XX   $HM3 $HM2 $HM1 f11   f12  $HM1 $HM2 $HM3 XX
+  XX  XX  XX   XX   XX   XX         XX   XX   XX   XX   XX
+  _ _ @ent XX
+)
+
+;; vim: set ft=lisp:
