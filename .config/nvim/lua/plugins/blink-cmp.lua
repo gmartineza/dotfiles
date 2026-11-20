@@ -1,8 +1,8 @@
 return {
   'saghen/blink.cmp',
   version = '1.*',
-  -- not InsertEnter: blink registers its LSP capabilities on load, which must happen before servers attach
-  event = 'VimEnter',
+  -- also a dependency of nvim-lspconfig: blink registers its LSP capabilities on load, before servers start
+  event = 'InsertEnter',
   dependencies = {
     {
       'L3MON4D3/LuaSnip',

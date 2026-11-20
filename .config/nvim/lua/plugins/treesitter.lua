@@ -1,12 +1,21 @@
 -- Used to highlight, edit, and navigate code. See `:help nvim-treesitter-intro`
+
+-- tree-sitter CLI defaults to cl.exe on Windows; no MSVC installed, so point it at mingw gcc.
+-- Called only before compiling parsers: the PATH lookups cost ~28ms at startup on Windows.
+local cc_checked = false
+local function set_cc()
+  if cc_checked then return end
+  cc_checked = true
+  if vim.fn.has 'win32' == 1 and vim.fn.executable 'cl' == 0 and vim.fn.executable 'gcc' == 1 then vim.env.CC = 'gcc' end
+end
+
 return {
   'nvim-treesitter/nvim-treesitter',
   branch = 'main',
   lazy = false, -- the main branch does not support lazy-loading
-  build = ':TSUpdate',
-  init = function()
-    -- tree-sitter CLI defaults to cl.exe on Windows; no MSVC installed, so point it at mingw gcc
-    if vim.fn.has 'win32' == 1 and vim.fn.executable 'cl' == 0 and vim.fn.executable 'gcc' == 1 then vim.env.CC = 'gcc' end
+  build = function()
+    set_cc()
+    vim.cmd 'TSUpdate'
   end,
   config = function()
     ---@param buf integer
@@ -41,6 +50,7 @@ return {
           treesitter_try_attach(buf, language)
         elseif vim.tbl_contains(available_parsers, language) then
           -- If a parser is available in `nvim-treesitter`, auto-install it and enable it after the installation is done
+          set_cc()
           require('nvim-treesitter').install(language):await(function() treesitter_try_attach(buf, language) end)
         else
           -- Try to enable treesitter features in case the parser exists but is not available from `nvim-treesitter`

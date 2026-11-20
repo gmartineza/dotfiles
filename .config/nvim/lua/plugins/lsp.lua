@@ -7,6 +7,7 @@ return {
     { 'mason-org/mason.nvim', opts = {} },
     'mason-org/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
+    'saghen/blink.cmp', -- sets vim.lsp.config('*') capabilities on load
   },
   config = function()
     --  This function gets run when an LSP attaches to a particular buffer.
@@ -26,6 +27,17 @@ return {
 
         -- WARN: This is not Goto Definition, this is Goto Declaration.
         map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+        -- Telescope-based LSP pickers; telescope loads on first use
+        local function pick(name)
+          return function() require('telescope.builtin')[name]() end
+        end
+        map('grr', pick 'lsp_references', '[G]oto [R]eferences')
+        map('gri', pick 'lsp_implementations', '[G]oto [I]mplementation')
+        map('grd', pick 'lsp_definitions', '[G]oto [D]efinition')
+        map('gO', pick 'lsp_document_symbols', '(G) [O]pen Document Symbols')
+        map('gW', pick 'lsp_dynamic_workspace_symbols', '(G) Open [W]orkspace Symbols')
+        map('grt', pick 'lsp_type_definitions', '[G]oto [T]ype Definition')
 
         -- Highlight references of the word under your cursor when it rests there for a little while.
         local client = vim.lsp.get_client_by_id(event.data.client_id)
