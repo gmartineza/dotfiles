@@ -7,6 +7,8 @@ end
 return {
   'nvim-telescope/telescope.nvim',
   cmd = 'Telescope',
+  event = 'LspAttach', -- so ui-select covers code action menus (gra) from the first one
+
   keys = {
     { '<leader>sh', builtin 'help_tags', desc = '[S]earch [H]elp' },
     { '<leader>sk', builtin 'keymaps', desc = '[S]earch [K]eymaps' },
