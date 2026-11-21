@@ -2,11 +2,11 @@
 ;; f6: toggle the transparent (plain keyboard) layer, f7: toggle the kbm layer.
 
 (deflayer main
-  @trs @kb ' \
+  @trs @kb ' \ [  ;; ] key (+ on LatAm) types ´ instead
        b   l   d   w   z    -   f   o   u   j
-       n   @hs @hd @hf g    y   @hk @hl @h; i
-  @q   q   x   m   c   v    k   p   .   /   ,
-  @sym @nav @ent menu
+       n   @hs @hd @hf @hg  @hj @hk @hl @h; i
+  @q   q   @hz m   c   v    k   p   .   @h/ ,
+  @fun @nav @sym menu
 )
 
 ;; home row mods
@@ -14,9 +14,13 @@
   hs (t! hrm_ring   r $lhs)
   hd (t! hrm_middle t $lhs)
   hf (t! hrm_index  s $lhs)
+  hg (t! hrm_inner  g $lhs)
+  hj (t! hrm_inner  y $rhs)
   hk (t! hrm_index  h $rhs)
   hl (t! hrm_middle a $rhs)
   h; (t! hrm_ring   e $rhs)
+  hz (t! hrm_bottom x $lhs)
+  h/ (t! hrm_bottom / $rhs)
 
   ;; lsft mirrors nubs (ANSI keyboards have no nubs), Shift when held
   q (tap-hold-release $TAPPING_TERM $TAPPING_TERM q lsft)
@@ -27,7 +31,7 @@
 )
 
 (deflayer transparent
-  @mn f7 - =
+  @mn f7 - = ]
           q w e r t  u i o p [
           a s d f g  j k l ; '
   lsft nubs z x c v  m , . / rsft
@@ -35,7 +39,7 @@
 )
 
 (deflayer kbm
-  @mn f7 - =
+  @mn f7 - = ]
           q w e r t  u i o p [
           a s d f g  j k l ; '
   lsft nubs z x c v  m , . / rsft

@@ -43,8 +43,10 @@
 ))
 (platform (linux win winiov2 wintercept) (defvar
   HM1 lctl  ;; Control  (index)
-  HM2 lalt  ;; Alt      (middle)
-  HM3 lmet  ;; Meta     (ring)
+  HM2 lsft  ;; Shift    (middle)
+  HM3 lalt  ;; Alt      (ring)
+  HM4 ralt  ;; AltGr    (inner column)
+  HM5 lmet  ;; Meta     (bottom row: z and /)
 ))
 
 ;; vim: set ft=lisp:

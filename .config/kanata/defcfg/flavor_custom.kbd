@@ -1,7 +1,9 @@
-;; Custom flavor: thumb layer-taps + flow-tap homerow mods.
-;;  - LeftThumb (lalt): NumSym layer while held, no tap
+;; Custom flavor: thumb layer keys + flow-tap homerow mods.
+;;  - LeftThumb (lalt): Fun layer while held, no tap
 ;;  - Space: Ext layer when held, Space when tapped
-;;  - RightThumb (ralt): Shift when held, Enter when tapped (same in every layer)
+;;  - RightThumb (ralt): NumSym layer while held, no tap
+;;  - Homerow mods (same in every layer): ring=Alt, middle=Shift, index=Ctrl,
+;;    inner column=AltGr, bottom z and /=Meta
 
 ;; Adapted from Kenkyo's flowtap/charmod templates (MIT, https://github.com/argenkiwi/kenkyo).
 ;; Change: hold side uses tap-hold-release-keys with the same-hand key list (chordal hold).
@@ -18,11 +20,18 @@
 (deftemplate hrm_index (key hand)
   (t! modkey $key $HM1 $hand)
 )
+;; Shift skips the flow-tap guard (and resolves after 50ms) so capitals work mid-word.
 (deftemplate hrm_middle (key hand)
-  (t! modkey $key $HM2 $hand)
+  (tap-hold-release-keys 50 $TAPPING_TERM $key $HM2 $hand)
 )
 (deftemplate hrm_ring (key hand)
   (t! modkey $key $HM3 $hand)
+)
+(deftemplate hrm_inner (key hand)
+  (t! modkey $key $HM4 $hand)
+)
+(deftemplate hrm_bottom (key hand)
+  (t! modkey $key $HM5 $hand)
 )
 
 (defalias
@@ -34,7 +43,6 @@
       )
 
   sym (layer-while-held numsym)
-  ent (tap-hold-press $QUICK_TAP $HOLDING_TERM ret lsft)
   fun (layer-while-held fkeys)
 )
 

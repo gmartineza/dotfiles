@@ -3,14 +3,14 @@
 ;; - bottom row: lsft and nubs both act as the bottom-left key,
 ;;   so the same layout works on ANSI (no nubs) and ISO keyboards
 ;;
-;;   f6   f7                                   -    =
+;;   f6   f7                                   -    =    ]
 ;;        q    w    e    r    t     u    i    o    p    [
 ;;        a    s    d    f    g     j    k    l    ;    '
 ;;   lsft nubs z    x    c    v     m    ,    .    /    rsft
 ;;                  lalt      spc       ralt menu
 
 (defsrc
-  f6 f7 - =
+  f6 f7 - = ]
           q w e r t  u i o p [
           a s d f g  j k l ; '
   lsft nubs z x c v  m , . / rsft
@@ -30,9 +30,9 @@
   )
 
   rhs (
-  f6 - =
+  f6 - = ]
                      y u i o p [
-                     h j   l ; '
+                     h j k   ; '
                      n m , . /
   spc menu
   )

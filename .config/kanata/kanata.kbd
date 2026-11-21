@@ -64,7 +64,7 @@
 ;; (include defcfg/flavor_ez.kbd)    ;; standard keyboard behavior
 ;; (include defcfg/flavor_tt.kbd)    ;; thumb taps
 ;; (include defcfg/flavor_hrm.kbd)   ;; thumb taps + home row mods
-(include defcfg/flavor_custom.kbd)   ;; Sym/Space-Ext/Shift-Enter thumbs + flow-tap home row mods
+(include defcfg/flavor_custom.kbd)   ;; Fun/Space-Ext/NumSym thumbs + flow-tap home row mods
 
 
 ;;-----------------------------------------------------------------------------
@@ -120,7 +120,7 @@
 
 ;; (include deflayer/symbols.kbd)        ;; programming symbols
 ;; (include deflayer/symbols_altgr.kbd)  ;; AltGr/Option layer
-(include deflayer/numsym.kbd)         ;; numbers on top row + symbols, held by LeftThumb
+(include deflayer/numsym.kbd)         ;; numbers on top row + symbols, held by RightThumb
 
 
 ;;-----------------------------------------------------------------------------
