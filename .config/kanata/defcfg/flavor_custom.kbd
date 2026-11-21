@@ -1,7 +1,7 @@
 ;; Custom flavor: thumb layer keys + flow-tap homerow mods.
 ;;  - LeftThumb (lalt): Fun layer while held, no tap
 ;;  - Space: Ext layer when held, Space when tapped
-;;  - RightThumb (ralt): NumSym layer while held, no tap
+;;  - RightThumb (ralt): NumSym layer when held, BackSpace when tapped
 ;;  - Homerow mods (same in every layer): ring=Alt, middle=Shift, index=Ctrl,
 ;;    inner column=AltGr, bottom z and /=Meta
 
@@ -42,7 +42,7 @@
         () (tap-hold-release $TAPPING_TERM $TAPPING_TERM spc (layer-while-held extend)) break
       )
 
-  sym (layer-while-held numsym)
+  sym (tap-hold-press $QUICK_TAP $HOLDING_TERM bspc (layer-while-held numsym))
   fun (layer-while-held fkeys)
 )
 
