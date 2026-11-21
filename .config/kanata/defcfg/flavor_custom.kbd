@@ -1,9 +1,9 @@
 ;; Custom flavor: thumb layer keys + flow-tap homerow mods.
-;;  - LeftThumb (lalt): Fun layer while held, no tap
+;;  - LeftThumb (lalt): Fun layer when held, Enter when tapped
 ;;  - Space: Ext layer when held, Space when tapped
 ;;  - RightThumb (ralt): NumSym layer when held, BackSpace when tapped
-;;  - Homerow mods (same in every layer): ring=Alt, middle=Shift, index=Ctrl,
-;;    inner column=AltGr, bottom z and /=Meta
+;;  - Homerow mods (same in every layer), pinky to index: Alt, Gui, Shift, Ctrl;
+;;    inner column=AltGr
 
 ;; Adapted from Kenkyo's flowtap/charmod templates (MIT, https://github.com/argenkiwi/kenkyo).
 ;; Change: hold side uses tap-hold-release-keys with the same-hand key list (chordal hold).
@@ -30,7 +30,7 @@
 (deftemplate hrm_inner (key hand)
   (t! modkey $key $HM4 $hand)
 )
-(deftemplate hrm_bottom (key hand)
+(deftemplate hrm_pinky (key hand)
   (t! modkey $key $HM5 $hand)
 )
 
@@ -43,7 +43,7 @@
       )
 
   sym (tap-hold-press $QUICK_TAP $HOLDING_TERM bspc (layer-while-held numsym))
-  fun (layer-while-held fkeys)
+  fun (tap-hold-press $QUICK_TAP $HOLDING_TERM ret (layer-while-held fkeys))
 )
 
 ;; vim: set ft=lisp:
