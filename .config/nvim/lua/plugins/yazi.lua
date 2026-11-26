@@ -4,9 +4,9 @@ return {
   dependencies = { 'nvim-lua/plenary.nvim' },
   cmd = 'Yazi',
   keys = {
-    { '<leader>ef', '<cmd>Yazi<cr>', mode = { 'n', 'v' }, desc = 'Open yazi at the current file' },
-    { '<leader>ed', '<cmd>Yazi cwd<cr>', desc = "Open the file manager in nvim's working directory" },
-    { '<leader>e.', '<cmd>Yazi toggle<cr>', desc = 'Resume the last yazi session' },
+    { '<leader>e.', '<cmd>Yazi<cr>', mode = { 'n', 'v' }, desc = 'Open yazi at the current file' },
+    { '<leader>ec', '<cmd>Yazi cwd<cr>', desc = "Open the file manager in nvim's working directory" },
+    { '<leader>er', '<cmd>Yazi toggle<cr>', desc = 'Resume the last yazi session' },
   },
   init = function()
     -- mark netrw as loaded so it's not loaded at all.
