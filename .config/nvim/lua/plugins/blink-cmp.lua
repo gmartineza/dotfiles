@@ -13,10 +13,8 @@ return {
   },
   opts = {
     keymap = {
-      -- 'default' (recommended) for mappings similar to built-in completions
-      --   <c-y> to accept ([y]es) the completion.
-      -- See `:help blink-cmp-config-keymap` for defining your own keymap
-      preset = 'default',
+      -- See :h blink-cmp-config-keymap for defining your own keymap
+      preset = 'super-tab',
     },
     appearance = {
       -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
