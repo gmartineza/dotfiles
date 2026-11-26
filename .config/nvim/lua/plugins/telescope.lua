@@ -12,7 +12,7 @@ return {
   keys = {
     { '<leader>sh', builtin 'help_tags', desc = '[S]earch [H]elp' },
     { '<leader>sk', builtin 'keymaps', desc = '[S]earch [K]eymaps' },
-    { '<leader>sf', builtin 'find_files', desc = '[S]earch [F]iles' },
+    { '<leader>sf', builtin ('find_files', function() return { hidden = true } end), desc = '[S]earch [F]iles' },
     { '<leader>ss', builtin 'builtin', desc = '[S]earch [S]elect Telescope' },
     { '<leader>sw', builtin 'grep_string', mode = { 'n', 'v' }, desc = '[S]earch current [W]ord' },
     { '<leader>sg', function() require('telescope').extensions.live_grep_args.live_grep_args() end, desc = '[S]earch by [G]rep (rg args)' },
@@ -21,6 +21,7 @@ return {
     { '<leader>s.', builtin 'oldfiles', desc = '[S]earch Recent Files ("." for repeat)' },
     { '<leader>sc', builtin 'commands', desc = '[S]earch [C]ommands' },
     { '<leader><leader>', builtin 'buffers', desc = '[ ] Find existing buffers' },
+    { '<leader>sb', builtin 'buffers', desc = '[S]earch existing buffers' },
     -- Override default behavior and theme when searching
     {
       '<leader>/',
