@@ -1,11 +1,20 @@
 -- Useful plugin to show you pending keybinds.
--- No `triggers` override: the default <auto> triggers cover every mapped prefix (<leader>, g, ], ys, ...)
 return {
   'folke/which-key.nvim',
   event = 'VeryLazy',
   opts = {
     -- Delay between pressing a key and opening which-key (milliseconds)
     delay = 0,
+    -- Only <leader> and gr (LSP) open the popup (no g, ], ys, ...)
+    triggers = { { '<leader>', mode = { 'n', 'v' } }, { 'gr', mode = 'n' } },
+    -- Hide <leader>y / <leader>p so they run without a popup
+    filter = function(mapping)
+      local lhs = vim.keycode(mapping.lhs)
+      for _, k in ipairs { 'y', 'p' } do
+        if vim.startswith(lhs, vim.keycode('<leader>' .. k)) then return false end
+      end
+      return true
+    end,
     icons = { mappings = vim.g.have_nerd_font },
     -- Document existing key chains
     spec = {
