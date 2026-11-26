@@ -53,13 +53,10 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" }
 
 vim.keymap.set({"n", "v"},       "<leader>d", [["_d]],  { desc = "Delete without yanking" })
 vim.keymap.set({     "v"},       "<leader>p", [["_dp]], { desc = "Replace with paste (after)" })
-vim.keymap.set({"n", "v"},       "<leader>P", [["_dP]], { desc = "Replace with paste (before)" })
 vim.keymap.set({"n", "v"},       "<leader>y", [["+y]],  { desc = "Yank to system clipboard" })
 vim.keymap.set("n",              "<leader>c", [[<cmd>let @+ = expand("%")<CR>]], { desc = "Copy file path" })
-vim.keymap.set("n",              "<leader>n", "<cmd>cnext<CR>zz", { desc = "Quickfix: next" })
-vim.keymap.set("n",              "<leader>p", "<cmd>cprev<CR>zz", { desc = "Quickfix: previous" })
-vim.keymap.set("n",              "<leader>N", "<cmd>clast<CR>zz", { desc = "Quickfix: Next" })
-vim.keymap.set("n",              "<leader>P", "<cmd>cfirst<CR>zz", { desc = "Quickfix: Previous" })
+vim.keymap.set("n",              "<leader>N", "<cmd>cnext<CR>zz", { desc = "Quickfix: next" })
+vim.keymap.set("n",              "<leader>P", "<cmd>cprevious<CR>zz", { desc = "Quickfix: previous" })
 
 -- [[ Autocommands ]]
    vim.api.nvim_create_autocmd("FileType", {
